@@ -146,4 +146,13 @@ public class Employee {
         this.immediateSupervisor = immediateSupervisor;
     }
     
+    // Empty methods based on Class Diagram
+    public void createEmployee(){}
+    public void updateEmplyee(){}
+    public void displayEmployee(){}
+    public void deleteEmplyee(){}
+    public void viewAttendance(){}
+    public void viewPayslip(){}
+    
+    
 }
