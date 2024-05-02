@@ -1,0 +1,31 @@
+# IDE-specific files and directories
+.idea/
+.classpath
+.project
+*.iml
+
+# Build tool configuration and cache files
+/.mvn/
+/build/
+/out/
+.gradle/
+gradle-wrapper.jar
+/bin/
+
+# Temporary files and directories
+*~
+*.swp
+
+# Logs and backup files
+*.log
+*.bak
+
+# Dependency directories
+/lib/
+/node_modules/
+
+# Personal configuration files
+.env
+*.properties
+
+target/
