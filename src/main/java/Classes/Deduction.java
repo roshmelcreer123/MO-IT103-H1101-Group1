@@ -1,7 +1,7 @@
 package Classes;
 /**
  * @author Oliver
- * Last Updated: May 05, 2024 | 15:42
+ * Last Updated: May 05, 2024 | 17:09
  */
 
 public class Deduction {
