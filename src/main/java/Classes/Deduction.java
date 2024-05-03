@@ -130,6 +130,5 @@ public class Deduction {
         this.taxRates = taxRates;
     }
     
-    
-            
+              
 }
