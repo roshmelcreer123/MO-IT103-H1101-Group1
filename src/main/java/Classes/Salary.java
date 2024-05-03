@@ -1,7 +1,7 @@
 package Classes;
 /**
  * @author Oliver
- * Last Updated: May 5, 2024 | 15:41
+ * Last Updated: May 5, 2024 | 17:08
  */
 public class Salary {
     
@@ -96,5 +96,18 @@ public class Salary {
     public void setHourlyRate(double hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
+    
+    // Empty Methods based on Diagram
+    
+    public void createDeductions(){}
+    public void updateDeductions(){}
+    public void readDeductions(){}
+    public void deleteDeductions(){}
+    public void calculatePhilhealthDeduction(){}
+    public void calculatePagibigContribution(){}
+    public void calculateTotalDeductions(){}
+    public void readPhilhealthRates(){}
+    public void readPagibigRates(){}
+    public void readTaxBrackets(){}
     
 }
