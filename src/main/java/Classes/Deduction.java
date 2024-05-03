@@ -1,9 +1,9 @@
 package Classes;
 /**
- *
  * @author Oliver
- * Last Updated: May 05, 2024
+ * Last Updated: May 05, 2024 | 15:42
  */
+
 public class Deduction {
     
     //  Deduction Attributes
@@ -130,5 +130,4 @@ public class Deduction {
         this.taxRates = taxRates;
     }
     
-              
 }
