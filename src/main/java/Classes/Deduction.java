@@ -1,7 +1,7 @@
 package Classes;
 /**
  * @author Oliver
- * Last Updated: May 05, 2024 | 15:42
+ * Last Updated: May 05, 2024 | 17:09
  */
 
 public class Deduction {
@@ -130,4 +130,13 @@ public class Deduction {
         this.taxRates = taxRates;
     }
     
+    //  Empty Methods based on Diagram
+    
+    public void updateBasicSalary(){}
+    public void updateAllowance(){}
+    public void updateGrossSemiMonthlyRate(){}
+    public void calculateDeductions(){}
+    public void calculateNetSalary(){}
+    public void generatePayslip(){}
+        
 }
