@@ -5,7 +5,7 @@ import java.util.Date;
  * Class for handling leave requests.
  */
 public class LeaveRequest {
-
+    
     // Attributes
     private String leaveID;
     private String employeeNumber;
@@ -90,4 +90,6 @@ public class LeaveRequest {
     public void notifyEmployee() {
         System.out.println("Notifying employee: " + employeeNumber + " about leave status: " + leaveStatus);
     }
+
+    
 }
