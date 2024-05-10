@@ -4,6 +4,10 @@
  */
 package main;
 
+import Jframes.*;
+
+
+
 /**
  *
  * @author User
@@ -11,7 +15,8 @@ package main;
 public class main {
     
     public static void main(String[] args) {
-        System.out.print("Enter your school name: ");
+      
+        new Login().setVisible(true);
     }
     
 }
