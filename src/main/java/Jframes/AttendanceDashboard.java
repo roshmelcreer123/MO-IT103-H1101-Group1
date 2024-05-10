@@ -156,7 +156,7 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jFormattedTextField2.setForeground(new java.awt.Color(51, 51, 51));
         jFormattedTextField2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBackground(new java.awt.Color(102, 102, 102));
         jPanel5.setBorder(new javax.swing.border.MatteBorder(null));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
