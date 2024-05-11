@@ -97,7 +97,7 @@ public class SalaryDashboard extends javax.swing.JFrame {
         jButton2.setText("Dashboard");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                dashboardButton(evt);
             }
         });
 
@@ -518,9 +518,16 @@ public class SalaryDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
+        
+        // Create an instance of the Dashboard frame
+        Dashboard dashboard = new Dashboard();
+        // Set the visibility of the Dashboard frame to true
+        dashboard.setVisible(true);
+        // Close the Login frame
+        this.dispose(); // Assuming this is the Login frame
+        
+    }//GEN-LAST:event_dashboardButton
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.exit(0);

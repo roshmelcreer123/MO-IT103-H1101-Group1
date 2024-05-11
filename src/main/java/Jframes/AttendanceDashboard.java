@@ -56,6 +56,7 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Attendance Dashboard");
@@ -71,7 +72,7 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jButton2.setText("Dashboard");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                dashboardButton(evt);
             }
         });
 
@@ -351,10 +352,10 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         jButton6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton6.setText("Request Overtime");
+        jButton6.setText("Request Leave");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                requestLeaveButton(evt);
             }
         });
 
@@ -362,7 +363,15 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jButton7.setText("View Overtime Request History");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                viewOvertimeHistory(evt);
+            }
+        });
+
+        jButton8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton8.setText("Request Overtime");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestOvertimeButton(evt);
             }
         });
 
@@ -391,13 +400,14 @@ public class AttendanceDashboard extends javax.swing.JFrame {
                                     .addComponent(jLabel4))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8)))
-                        .addGap(166, 166, 166))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
-                .addComponent(jButton6)
-                .addGap(18, 18, 18)
-                .addComponent(jButton7)
-                .addGap(76, 76, 76))
+                        .addGap(166, 166, 166))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton7)
+                        .addContainerGap())))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,9 +429,10 @@ public class AttendanceDashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -459,9 +470,16 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
+        
+        // Create an instance of the Dashboard frame
+        Dashboard dashboard = new Dashboard();
+        // Set the visibility of the Dashboard frame to true
+        dashboard.setVisible(true);
+        // Close the Attendance Dashboard frame
+        this.dispose(); // Assuming this is the Login frame
+        
+    }//GEN-LAST:event_dashboardButton
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.exit(0);
@@ -483,13 +501,34 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void requestLeaveButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestLeaveButton
+       
+        // Create an instance of the All Leaves frame
+        leaveRequestDashboard LeaveRequestDashboard = new leaveRequestDashboard();
+        // Set the visibility of the All Leaves frame to true
+        LeaveRequestDashboard.setVisible(true);
+        // Close the AttendanceDashboard frame
+        this.dispose(); // Assuming this is the Login frame
+        
+    }//GEN-LAST:event_requestLeaveButton
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void viewOvertimeHistory(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOvertimeHistory
+        
+        // Create an instance of the Overtime History frame
+        OvertimeRequestHistory overtimeRequestHistory = new OvertimeRequestHistory();
+        // Set the visibility of the Overtime History frame to true
+        overtimeRequestHistory.setVisible(true);
+        // Close the AttendanceDashboard frame
+        this.dispose(); // Assuming this is the Login frame
+        
+    }//GEN-LAST:event_viewOvertimeHistory
+
+    private void requestOvertimeButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestOvertimeButton
+        
+        // Treats the OvertimeRequest Frame as a modal instead of a single page
+        new OvertimeRequest().setVisible(true);
+        
+    }//GEN-LAST:event_requestOvertimeButton
 
     /**
      * @param args the command line arguments
@@ -534,6 +573,7 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
