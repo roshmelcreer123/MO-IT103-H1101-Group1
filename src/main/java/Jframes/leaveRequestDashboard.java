@@ -32,9 +32,9 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        dashboardButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
@@ -43,9 +43,7 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setBackground(new java.awt.Color(255, 255, 255));
         jTable2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTable2.setForeground(new java.awt.Color(0, 0, 0));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"05/09/2024", "05/10/2024", "Vaction", "Planned vacation", "Sarah Johnson", ""},
@@ -104,33 +102,32 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 240, 60));
 
-        jButton3.setBackground(new java.awt.Color(204, 204, 204));
-        jButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Logout");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3dashboardButton(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
-
-        jButton2.setBackground(new java.awt.Color(204, 204, 204));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Dashboard");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        dashboardButton.setBackground(new java.awt.Color(204, 204, 204));
+        dashboardButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        dashboardButton.setText("Dashboard");
+        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dashboardButton(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        getContentPane().add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Employee Profile.png"))); // NOI18N
-        jLabel3.setText("jLabel3");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
+        logoutButton.setBackground(new java.awt.Color(204, 204, 204));
+        logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtondashboardButton(evt);
+            }
+        });
+        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
+
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Employee Profile.png"))); // NOI18N
+        background.setText("jLabel3");
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestLeave(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestLeave
@@ -141,19 +138,22 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_requestLeave
 
     private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
-        
+
         // Create an instance of the Dashboard frame
-        Dashboard dashboard = new Dashboard();
+        HomeDashboard dashboard = new HomeDashboard();
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
         this.dispose(); // Assuming this is the Login frame
-        
+
     }//GEN-LAST:event_dashboardButton
 
-    private void jButton3dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3dashboardButton
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3dashboardButton
+    private void logoutButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtondashboardButton
+        // Create an instance of LoginNew and display it
+        LogInNew loginNew = new LogInNew();
+        loginNew.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_logoutButtondashboardButton
 
     /**
      * @param args the command line arguments
@@ -192,14 +192,14 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
+    private javax.swing.JButton dashboardButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
+    private javax.swing.JButton logoutButton;
     // End of variables declaration//GEN-END:variables
 }

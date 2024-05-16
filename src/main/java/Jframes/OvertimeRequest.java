@@ -47,9 +47,10 @@ public class OvertimeRequest extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        dashboardButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jButton6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -143,22 +144,31 @@ public class OvertimeRequest extends javax.swing.JFrame {
         jLabel1.setText("Attachment:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, -1, -1));
 
+        dashboardButton.setBackground(new java.awt.Color(204, 204, 204));
+        dashboardButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        dashboardButton.setText("Dashboard");
+        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dashboardButton(evt);
+            }
+        });
+        getContentPane().add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        logoutButton.setBackground(new java.awt.Color(204, 204, 204));
+        logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtondashboardButton(evt);
+            }
+        });
+        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
+
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, -1, -1));
-
-        jButton6.setBackground(new java.awt.Color(0, 206, 209));
-        jButton6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Dashboard");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Employee Profile.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
@@ -179,9 +189,23 @@ public class OvertimeRequest extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
+
+        // Create an instance of the Dashboard frame
+        HomeDashboard dashboard = new HomeDashboard();
+        // Set the visibility of the Dashboard frame to true
+        dashboard.setVisible(true);
+        // Close the leaveRequest Dashboard frame
+        this.dispose(); // Assuming this is the Login frame
+
+    }//GEN-LAST:event_dashboardButton
+
+    private void logoutButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtondashboardButton
+        // Create an instance of LoginNew and display it
+        LogInNew loginNew = new LogInNew();
+        loginNew.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_logoutButtondashboardButton
 
     /**
      * @param args the command line arguments
@@ -219,10 +243,10 @@ public class OvertimeRequest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton dashboardButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
@@ -243,5 +267,6 @@ public class OvertimeRequest extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JSpinner jSpinner4;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JButton logoutButton;
     // End of variables declaration//GEN-END:variables
 }

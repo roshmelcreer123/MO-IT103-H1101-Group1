@@ -2,7 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Jframes;
+package Archived;
+
+import Archived.ProfileDashboard;
+import Archived.SalaryDashboard;
+import Archived.Login;
+import Jframes.AttendanceDashboard;
 
 /**
  *
@@ -773,7 +778,7 @@ public class Dashboard extends javax.swing.JFrame {
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton5))
-                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 265, Short.MAX_VALUE)))
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 279, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()

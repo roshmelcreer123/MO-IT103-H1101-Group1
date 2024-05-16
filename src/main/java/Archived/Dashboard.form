@@ -39,7 +39,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jPanel7" alignment="0" pref="265" max="32767" attributes="0"/>
+                          <Component id="jPanel7" alignment="0" pref="279" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
