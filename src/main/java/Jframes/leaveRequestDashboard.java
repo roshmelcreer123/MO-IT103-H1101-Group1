@@ -26,46 +26,47 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Leave Requests");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        jTable2.setBackground(new java.awt.Color(255, 255, 255));
+        jTable2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTable2.setForeground(new java.awt.Color(0, 0, 0));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "John Doe", "05/09/2024", "05/10/2024", "Vaction", "Planned vacation", "Sarah Johnson", "View, Edit, Delete"},
-                {"1", "John Doe", "05/09/2024", "05/10/2024", "Sick", "Kidney Operation", "Sarah Johnson", "View, Edit, Delete"},
-                {"1", "John Doe", "05/09/2024", "05/10/2024", "Paternal", "Wife Childbirth", "Sarah Johnson", "View, Edit, Delete"},
-                {"1", "John Doe", "05/09/2024", "05/10/2024", "Paternal", "Wife Childbirth", "Sarah Johnson", "View, Edit, Delete"},
-                {"1", "John Doe", "05/09/2024", "05/10/2024", "Personal", "Therapy", "Sarah Johnson", "View, Edit, Delete"},
-                {"1", "John Doe", "05/09/2024", "05/10/2024", "Bereavement", "Grandfather's funeral", "Sarah Johnson", "View, Edit, Delete"},
-                {"1", "John Doe", "05/09/2024", "05/10/2024", "Sick", "Covid", "Sarah Johnson", "View, Edit, Delete"},
-                {"1", "John Doe", "05/09/2024", "05/10/2024", "Vacation", "Planned Vacation", "Sarah Johnson", "View, Edit, Delete"},
-                {"1", "John Doe", "05/09/2024", "05/10/2024", "Sick", "Cold", "Sarah Johnson", "View, Edit, Delete"}
+                {"05/09/2024", "05/10/2024", "Vaction", "Planned vacation", "Sarah Johnson", "View, Edit, Delete"},
+                {"05/09/2024", "05/10/2024", "Sick", "Kidney Operation", "Sarah Johnson", "View, Edit, Delete"},
+                {"05/09/2024", "05/10/2024", "Paternal", "Wife Childbirth", "Sarah Johnson", "View, Edit, Delete"},
+                {"05/09/2024", "05/10/2024", "Paternal", "Wife Childbirth", "Sarah Johnson", "View, Edit, Delete"},
+                {"05/09/2024", "05/10/2024", "Personal", "Therapy", "Sarah Johnson", "View, Edit, Delete"},
+                {"05/09/2024", "05/10/2024", "Bereavement", "Grandfather's funeral", "Sarah Johnson", "View, Edit, Delete"},
+                {"05/09/2024", "05/10/2024", "Sick", "Covid", "Sarah Johnson", "View, Edit, Delete"},
+                {"05/09/2024", "05/10/2024", "Vacation", "Planned Vacation", "Sarah Johnson", "View, Edit, Delete"},
+                {"05/09/2024", "05/10/2024", "Sick", "Cold", "Sarah Johnson", "View, Edit, Delete"}
             },
             new String [] {
-                "Employee Number", "Employee Name", "Start Date of Leave", "End Date of Leave", "Leave Type", "Reason for Leave", "Manager", "Actions"
+                "Start Date of Leave", "End Date of Leave", "Leave Type", "Reason for Leave", "Manager", "Actions"
             }
         ));
         jTable2.setToolTipText("");
+        jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(jTable2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 120, 1000, 440));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 160, 1000, 400));
 
-        jButton1.setBackground(new java.awt.Color(0, 206, 209));
-        jButton1.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(54, 117, 136));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Request Leave");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,11 +74,47 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
                 requestLeave(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 90, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(0, 206, 209));
-        jButton2.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(54, 117, 136));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Leave Request");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel2)
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 240, 60));
+
+        jButton3.setBackground(new java.awt.Color(204, 204, 204));
+        jButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jButton3.setText("Logout");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3dashboardButton(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
+
+        jButton2.setBackground(new java.awt.Color(204, 204, 204));
+        jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Dashboard");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +147,10 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
         this.dispose(); // Assuming this is the Login frame
         
     }//GEN-LAST:event_dashboardButton
+
+    private void jButton3dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3dashboardButton
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3dashboardButton
 
     /**
      * @param args the command line arguments
@@ -150,8 +191,10 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
