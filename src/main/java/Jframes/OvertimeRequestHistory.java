@@ -40,16 +40,16 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
             new Object [][] {
                 {"May 3, 2024", "May 5, 2024", "Approved", "3 Hours", "John Doe", "May 4, 2024", null},
                 {"April 22, 2024", "April 23, 2024", "Declined", "2 Hours", "Jane Smith", "April 23, 2024", "Urgent deadline, declined due to staffing issues."},
-                {"April 15, 2024", "April 17, 2024", "Pending", "4 Hours", "Pending", "Pending", "Family emergency, awaiting approval."},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {"April 15, 2024", "April 17, 2024", "Pending", "4 Hours", "Pending", "Pending", "Family emergency, awaiting approval."}
             },
             new String [] {
                 "Request Date", "Overtime Date", "Status", "Hours Requested", "Approver", "Approval Date", "Comments"
             }
         ));
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(200);
+        }
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Dashboard");
