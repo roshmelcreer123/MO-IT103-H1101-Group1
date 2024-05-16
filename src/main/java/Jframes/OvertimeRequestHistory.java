@@ -40,7 +40,14 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
             new Object [][] {
                 {"May 3, 2024", "May 5, 2024", "Approved", "3 Hours", "John Doe", "May 4, 2024", null},
                 {"April 22, 2024", "April 23, 2024", "Declined", "2 Hours", "Jane Smith", "April 23, 2024", "Urgent deadline, declined due to staffing issues."},
+<<<<<<< HEAD
                 {"April 15, 2024", "April 17, 2024", "Pending", "4 Hours", "Pending", "Pending", "Family emergency, awaiting approval."}
+=======
+                {"April 15, 2024", "April 17, 2024", "Pending", "4 Hours", "Pending", "Pending", "Family emergency, awaiting approval."},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+>>>>>>> 84eb4663ae13033f1337928d6752c6bfeb6c34a4
             },
             new String [] {
                 "Request Date", "Overtime Date", "Status", "Hours Requested", "Approver", "Approval Date", "Comments"

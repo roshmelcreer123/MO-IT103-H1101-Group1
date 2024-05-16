@@ -76,41 +76,87 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+<<<<<<< HEAD
               <Table columnCount="7" rowCount="3">
+=======
+              <Table columnCount="7" rowCount="6">
+>>>>>>> 84eb4663ae13033f1337928d6752c6bfeb6c34a4
                 <Column editable="true" title="Request Date" type="java.lang.Object">
                   <Data value="May 3, 2024"/>
                   <Data value="April 22, 2024"/>
                   <Data value="April 15, 2024"/>
+<<<<<<< HEAD
+=======
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+>>>>>>> 84eb4663ae13033f1337928d6752c6bfeb6c34a4
                 </Column>
                 <Column editable="true" title="Overtime Date" type="java.lang.Object">
                   <Data value="May 5, 2024"/>
                   <Data value="April 23, 2024"/>
                   <Data value="April 17, 2024"/>
+<<<<<<< HEAD
+=======
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+>>>>>>> 84eb4663ae13033f1337928d6752c6bfeb6c34a4
                 </Column>
                 <Column editable="true" title="Status" type="java.lang.Object">
                   <Data value="Approved"/>
                   <Data value="Declined"/>
                   <Data value="Pending"/>
+<<<<<<< HEAD
+=======
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+>>>>>>> 84eb4663ae13033f1337928d6752c6bfeb6c34a4
                 </Column>
                 <Column editable="true" title="Hours Requested" type="java.lang.Object">
                   <Data value="3 Hours"/>
                   <Data value="2 Hours"/>
                   <Data value="4 Hours"/>
+<<<<<<< HEAD
+=======
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+>>>>>>> 84eb4663ae13033f1337928d6752c6bfeb6c34a4
                 </Column>
                 <Column editable="true" title="Approver" type="java.lang.Object">
                   <Data value="John Doe"/>
                   <Data value="Jane Smith"/>
                   <Data value="Pending"/>
+<<<<<<< HEAD
+=======
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+>>>>>>> 84eb4663ae13033f1337928d6752c6bfeb6c34a4
                 </Column>
                 <Column editable="true" title="Approval Date" type="java.lang.Object">
                   <Data value="May 4, 2024"/>
                   <Data value="April 23, 2024"/>
                   <Data value="Pending"/>
+<<<<<<< HEAD
+=======
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+>>>>>>> 84eb4663ae13033f1337928d6752c6bfeb6c34a4
                 </Column>
                 <Column editable="true" title="Comments" type="java.lang.Object">
                   <Data value="null"/>
                   <Data value="Urgent deadline, declined due to staffing issues."/>
                   <Data value="Family emergency, awaiting approval."/>
+<<<<<<< HEAD
+=======
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+>>>>>>> 84eb4663ae13033f1337928d6752c6bfeb6c34a4
                 </Column>
               </Table>
             </Property>
