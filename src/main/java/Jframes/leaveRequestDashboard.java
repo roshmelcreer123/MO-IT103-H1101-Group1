@@ -27,33 +27,6 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        editIcon8 = new javax.swing.JLabel();
-        viewIcon8 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        editIcon7 = new javax.swing.JLabel();
-        viewIcon7 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        editIcon6 = new javax.swing.JLabel();
-        viewIcon6 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        editIcon5 = new javax.swing.JLabel();
-        viewIcon5 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        editIcon4 = new javax.swing.JLabel();
-        viewIcon4 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        editIcon3 = new javax.swing.JLabel();
-        viewIcon3 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        editIcon = new javax.swing.JLabel();
-        viewIcon = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        editIcon1 = new javax.swing.JLabel();
-        viewIcon1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        editIcon2 = new javax.swing.JLabel();
-        viewIcon2 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -67,87 +40,6 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        editIcon8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        getContentPane().add(editIcon8, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 350, -1, -1));
-
-        viewIcon8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        getContentPane().add(viewIcon8, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 350, -1, -1));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, -1, -1));
-
-        editIcon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        getContentPane().add(editIcon7, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 330, -1, -1));
-
-        viewIcon7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        getContentPane().add(viewIcon7, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 330, -1, -1));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 330, -1, -1));
-
-        editIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        getContentPane().add(editIcon6, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 310, -1, -1));
-
-        viewIcon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        getContentPane().add(viewIcon6, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 310, -1, -1));
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 310, -1, -1));
-
-        editIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        getContentPane().add(editIcon5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 290, -1, -1));
-
-        viewIcon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        getContentPane().add(viewIcon5, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 290, -1, -1));
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 290, -1, -1));
-
-        editIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        getContentPane().add(editIcon4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 270, -1, -1));
-
-        viewIcon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        getContentPane().add(viewIcon4, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 270, -1, -1));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 270, -1, -1));
-
-        editIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        getContentPane().add(editIcon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, -1, -1));
-
-        viewIcon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        getContentPane().add(viewIcon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 250, -1, -1));
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 250, -1, -1));
-
-        editIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        getContentPane().add(editIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 190, -1, -1));
-
-        viewIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        getContentPane().add(viewIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 190, -1, -1));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 190, -1, -1));
-
-        editIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        getContentPane().add(editIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 210, -1, -1));
-
-        viewIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        getContentPane().add(viewIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 210, -1, -1));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 210, -1, -1));
-
-        editIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit.png"))); // NOI18N
-        getContentPane().add(editIcon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 230, -1, -1));
-
-        viewIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        getContentPane().add(viewIcon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 230, -1, -1));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 230, -1, -1));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -300,41 +192,14 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel editIcon;
-    private javax.swing.JLabel editIcon1;
-    private javax.swing.JLabel editIcon2;
-    private javax.swing.JLabel editIcon3;
-    private javax.swing.JLabel editIcon4;
-    private javax.swing.JLabel editIcon5;
-    private javax.swing.JLabel editIcon6;
-    private javax.swing.JLabel editIcon7;
-    private javax.swing.JLabel editIcon8;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
-    private javax.swing.JLabel viewIcon;
-    private javax.swing.JLabel viewIcon1;
-    private javax.swing.JLabel viewIcon2;
-    private javax.swing.JLabel viewIcon3;
-    private javax.swing.JLabel viewIcon4;
-    private javax.swing.JLabel viewIcon5;
-    private javax.swing.JLabel viewIcon6;
-    private javax.swing.JLabel viewIcon7;
-    private javax.swing.JLabel viewIcon8;
     // End of variables declaration//GEN-END:variables
 }
