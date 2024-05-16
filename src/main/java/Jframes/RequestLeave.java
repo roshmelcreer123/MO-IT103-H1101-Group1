@@ -4,7 +4,6 @@
  */
 package Jframes;
 
-import Archived.Dashboard;
 
 /**
  *
@@ -51,8 +50,8 @@ public class RequestLeave extends javax.swing.JFrame {
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        dashboardButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
         backgroundPicture = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -262,25 +261,25 @@ public class RequestLeave extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 80, -1, -1));
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 204));
-        jButton4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton4.setText("Dashboard");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        dashboardButton.setBackground(new java.awt.Color(204, 204, 204));
+        dashboardButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        dashboardButton.setText("Dashboard");
+        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4dashboardButton(evt);
+                dashboardButtondashboardButton(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        getContentPane().add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jButton5.setBackground(new java.awt.Color(204, 204, 204));
-        jButton5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton5.setText("Logout");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        logoutButton.setBackground(new java.awt.Color(204, 204, 204));
+        logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5dashboardButton(evt);
+                logoutButtondashboardButton(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
+        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
 
         backgroundPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Employee Profile.png"))); // NOI18N
         getContentPane().add(backgroundPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -312,20 +311,23 @@ public class RequestLeave extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3requestLeave
 
-    private void jButton4dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4dashboardButton
+    private void dashboardButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtondashboardButton
 
         // Create an instance of the Dashboard frame
-        Dashboard dashboard = new Dashboard();
+        HomeDashboard dashboard = new HomeDashboard();
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
-        this.dispose(); // Assuming this is the Login frame
+        this.dispose(); 
 
-    }//GEN-LAST:event_jButton4dashboardButton
+    }//GEN-LAST:event_dashboardButtondashboardButton
 
-    private void jButton5dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5dashboardButton
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5dashboardButton
+    private void logoutButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtondashboardButton
+        // Create an instance of LoginNew and display it
+    LogInNew loginNew = new LogInNew();
+    loginNew.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_logoutButtondashboardButton
 
     /**
      * @param args the command line arguments
@@ -365,11 +367,10 @@ public class RequestLeave extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundPicture;
+    private javax.swing.JButton dashboardButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private com.toedter.calendar.JCalendar jCalendar1;
     private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -390,5 +391,6 @@ public class RequestLeave extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton logoutButton;
     // End of variables declaration//GEN-END:variables
 }

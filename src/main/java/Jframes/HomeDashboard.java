@@ -352,7 +352,7 @@ public class HomeDashboard extends javax.swing.JFrame {
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
-        this.dispose(); // Assuming this is the Login frame
+        this.dispose(); 
         
     }//GEN-LAST:event_dashboardButton
 
