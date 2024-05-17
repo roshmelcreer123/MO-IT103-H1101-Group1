@@ -28,6 +28,7 @@ public class RequestLeave extends javax.swing.JFrame {
     private void initComponents() {
 
         jCalendar1 = new com.toedter.calendar.JCalendar();
+        darkButton2 = new Button.DarkButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -49,13 +50,20 @@ public class RequestLeave extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jButton3 = new javax.swing.JButton();
         dashboardButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         backgroundPicture = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        darkButton2.setText("Go Back");
+        darkButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                darkButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(darkButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 70, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(54, 117, 136));
 
@@ -206,7 +214,7 @@ public class RequestLeave extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(60, Short.MAX_VALUE))))
+                        .addContainerGap(57, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +247,7 @@ public class RequestLeave extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(jCalendar2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -249,17 +257,6 @@ public class RequestLeave extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 1000, 410));
-
-        jButton3.setBackground(new java.awt.Color(54, 117, 136));
-        jButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Go Back");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3requestLeave(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 80, -1, -1));
 
         dashboardButton.setBackground(new java.awt.Color(204, 204, 204));
         dashboardButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -304,13 +301,6 @@ public class RequestLeave extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void jButton3requestLeave(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3requestLeave
-
-        // Treats the RequestLeave Frame as a modal instead of a single page
-        new leaveRequestDashboard().setVisible(true);
-
-    }//GEN-LAST:event_jButton3requestLeave
-
     private void dashboardButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtondashboardButton
 
         // Create an instance of the Dashboard frame
@@ -328,6 +318,11 @@ public class RequestLeave extends javax.swing.JFrame {
     loginNew.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_logoutButtondashboardButton
+
+    private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
+        // Treats the RequestLeave Frame as a modal instead of a single page
+        new leaveRequestDashboard().setVisible(true);
+    }//GEN-LAST:event_darkButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,10 +362,10 @@ public class RequestLeave extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundPicture;
+    private Button.DarkButton darkButton2;
     private javax.swing.JButton dashboardButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private com.toedter.calendar.JCalendar jCalendar1;
     private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JComboBox<String> jComboBox1;

@@ -182,7 +182,6 @@ public class ProfilePage extends javax.swing.JFrame {
 
         editButton.setText("Edit");
         editButton.setToolTipText("");
-        editButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editButtonActionPerformed(evt);
