@@ -46,12 +46,12 @@ public class OvertimeRequest extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel16 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         dashboardButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        darkButton3 = new Button.DarkButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -63,7 +63,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
                 darkButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(darkButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, -1, -1));
+        getContentPane().add(darkButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, -1, -1));
 
         button1.setText("Cancel");
         button1.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +71,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
                 button1ActionPerformed(evt);
             }
         });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 510, -1, -1));
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 500, -1, -1));
 
         darkButton1.setText("Go Back");
         darkButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -81,91 +81,72 @@ public class OvertimeRequest extends javax.swing.JFrame {
         });
         getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Date: ");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel7.setText("Overtime Date:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Request Overtime");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, -1, -1));
-        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 234, -1));
+        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 290, -1));
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setText("Start Time: ");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 206, 209));
         jLabel10.setText("HH:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
-        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, -1, -1));
+        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 206, 209));
         jLabel11.setText("MM:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
         jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
-        getContentPane().add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
+        getContentPane().add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel12.setText("End Time: ");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 206, 209));
         jLabel13.setText("HH:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, -1, -1));
 
         jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
-        getContentPane().add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, -1, -1));
+        getContentPane().add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 206, 209));
         jLabel14.setText("MM:");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
 
         jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
-        getContentPane().add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
+        getContentPane().add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, -1));
 
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel15.setText("Total Hours:");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
 
         jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jFormattedTextField1.setText("0.0");
+        jFormattedTextField1.setText("00.00");
         jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 234, -1));
+        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 120, -1));
 
-        jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel16.setText("Reason:");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, -1, -1));
-
-        jButton5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton5.setText("Attach File");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, 234, -1));
-
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Attachment:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, -1, -1));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
 
         dashboardButton.setBackground(new java.awt.Color(204, 204, 204));
         dashboardButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -188,10 +169,18 @@ public class OvertimeRequest extends javax.swing.JFrame {
         getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
 
         jTextArea2.setColumns(20);
+        jTextArea2.setForeground(new java.awt.Color(153, 153, 153));
         jTextArea2.setRows(5);
+        jTextArea2.setText("Enter a reason for overtime here.");
         jScrollPane2.setViewportView(jTextArea2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, -1, -1));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 310, 140));
+        getContentPane().add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 410, 300));
+
+        darkButton3.setBackground(new java.awt.Color(120, 121, 123));
+        darkButton3.setForeground(new java.awt.Color(0, 0, 0));
+        darkButton3.setText("Attach File");
+        getContentPane().add(darkButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
@@ -203,10 +192,6 @@ public class OvertimeRequest extends javax.swing.JFrame {
     private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField1ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
 
@@ -281,11 +266,11 @@ public class OvertimeRequest extends javax.swing.JFrame {
     private Button.Button button1;
     private Button.DarkButton darkButton1;
     private Button.DarkButton darkButton2;
+    private Button.DarkButton darkButton3;
     private javax.swing.JButton dashboardButton;
-    private javax.swing.JButton jButton5;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
