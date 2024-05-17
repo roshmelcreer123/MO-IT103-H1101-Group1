@@ -40,7 +40,7 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
                 darkButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, -1, -1));
+        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, -1, -1));
 
         otTitleLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         otTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
