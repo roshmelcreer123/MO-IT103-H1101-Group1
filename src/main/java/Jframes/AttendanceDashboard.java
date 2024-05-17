@@ -526,8 +526,12 @@ public class AttendanceDashboard extends javax.swing.JFrame {
 
     private void requestOvertimeButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestOvertimeButton
         
-        // Treats the OvertimeRequest Frame as a modal instead of a single page
-        new OvertimeRequest().setVisible(true);
+        // Create an instance of the OvertimeRequest frame
+        OvertimeRequest overtimeRequest = new OvertimeRequest();
+        // Set the visibility of the OvertimeRequest frame to true
+        overtimeRequest.setVisible(true);
+        // Close the AttendanceDashboard frame
+        this.dispose(); // Assuming this is the Login frame
         
     }//GEN-LAST:event_requestOvertimeButton
 
