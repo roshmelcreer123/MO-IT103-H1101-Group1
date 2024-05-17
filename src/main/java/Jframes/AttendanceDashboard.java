@@ -509,7 +509,7 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         // Set the visibility of the All Leaves frame to true
         LeaveRequestDashboard.setVisible(true);
         // Close the AttendanceDashboard frame
-        this.dispose(); // Assuming this is the Login frame
+        this.dispose(); 
         
     }//GEN-LAST:event_requestLeaveButton
 

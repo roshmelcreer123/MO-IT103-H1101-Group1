@@ -23,20 +23,29 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        darkButton1 = new Button.DarkButton();
         otTitleLabel = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
         dashboardButton = new javax.swing.JButton();
         dataHistoryPanel = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        requestOvertimeButton = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        darkButton1.setText("Request Overtime");
+        darkButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                darkButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, -1, -1));
+
         otTitleLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        otTitleLabel.setForeground(new java.awt.Color(0, 0, 0));
         otTitleLabel.setText("Overtime Request History");
-        getContentPane().add(otTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, -1, -1));
+        getContentPane().add(otTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         logoutButton.setBackground(new java.awt.Color(204, 204, 204));
         logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -77,18 +86,7 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(6).setPreferredWidth(200);
         }
 
-        getContentPane().add(dataHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 900, 470));
-
-        requestOvertimeButton.setBackground(new java.awt.Color(0, 206, 209));
-        requestOvertimeButton.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        requestOvertimeButton.setForeground(new java.awt.Color(255, 255, 255));
-        requestOvertimeButton.setText("Request Overtime");
-        requestOvertimeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                requestOvertimeButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(requestOvertimeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, -1, -1));
+        getContentPane().add(dataHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 910, 410));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Employee Profile.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -3, 1040, 590));
@@ -96,13 +94,6 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void requestOvertimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestOvertimeButtonActionPerformed
-        // Create an instance of OvertimeRequest and display it
-    OvertimeRequest overtimeRequest = new OvertimeRequest();
-    overtimeRequest.setVisible(true);
-    this.dispose();
-    }//GEN-LAST:event_requestOvertimeButtonActionPerformed
 
     private void logoutButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtondashboardButton
         // Create an instance of LoginNew and display it
@@ -121,6 +112,13 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
         this.dispose(); // Assuming this is the Login frame
 
     }//GEN-LAST:event_dashboardButton
+
+    private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
+         // Create an instance of OvertimeRequest and display it
+        OvertimeRequest overtimeRequest = new OvertimeRequest();
+        overtimeRequest.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_darkButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,11 +157,11 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private Button.DarkButton darkButton1;
     private javax.swing.JButton dashboardButton;
     private javax.swing.JScrollPane dataHistoryPanel;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JLabel otTitleLabel;
-    private javax.swing.JButton requestOvertimeButton;
     // End of variables declaration//GEN-END:variables
 }
