@@ -28,9 +28,9 @@ public class ViewLeave extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        darkButton2 = new Button.DarkButton();
+        button1 = new Button.Button();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jCalendar2 = new com.toedter.calendar.JCalendar();
@@ -52,31 +52,21 @@ public class ViewLeave extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        darkButton2.setText("Edit Request");
+        getContentPane().add(darkButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
+
+        button1.setText("Delete Request");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 510, -1, -1));
+
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("View a Leave");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, -1, -1));
-
-        jButton1.setBackground(new java.awt.Color(54, 117, 136));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Edit Request");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 520, -1, -1));
-
-        jButton2.setBackground(new java.awt.Color(0, 206, 209));
-        jButton2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton2.setText("Delete Request");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 520, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Start Date of Leave:");
@@ -189,13 +179,9 @@ public class ViewLeave extends javax.swing.JFrame {
         this.dispose(); // Assuming this is the Login frame
     }//GEN-LAST:event_darkButton1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,9 +222,9 @@ public class ViewLeave extends javax.swing.JFrame {
     private Button.Button Dashboard;
     private Button.Button Logout;
     private javax.swing.JLabel background;
+    private Button.Button button1;
     private Button.DarkButton darkButton1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private Button.DarkButton darkButton2;
     private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
