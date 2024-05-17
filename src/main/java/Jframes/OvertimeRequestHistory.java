@@ -43,9 +43,9 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
         getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 90, -1, -1));
 
         otTitleLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        otTitleLabel.setForeground(new java.awt.Color(0, 0, 0));
-        otTitleLabel.setText("Overtime Request History");
-        getContentPane().add(otTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        otTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        otTitleLabel.setText("Overtime History");
+        getContentPane().add(otTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, -1, -1));
 
         logoutButton.setBackground(new java.awt.Color(204, 204, 204));
         logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -86,10 +86,10 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(6).setPreferredWidth(200);
         }
 
-        getContentPane().add(dataHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 910, 410));
+        getContentPane().add(dataHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 910, 380));
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Employee Profile.png"))); // NOI18N
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -3, 1040, 590));
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
 
         pack();
         setLocationRelativeTo(null);
