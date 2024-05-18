@@ -26,8 +26,6 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -50,6 +48,8 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         button4 = new Button.Button();
         button5 = new Button.Button();
+        button6 = new Button.Button();
+        button7 = new Button.Button();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,29 +57,12 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         setBackground(new java.awt.Color(245, 245, 245));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton2.setText("Dashboard");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dashboardButton(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        logoutButton.setText("Log Out");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, -1));
-
         jLabel20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Employee ID:");
         getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(768, 18, -1, -1));
 
+        jFormattedTextField1.setEditable(false);
         jFormattedTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153)));
         getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(853, 16, 54, -1));
@@ -96,7 +79,7 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(51, 51, 51));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2016", "2015", "2014" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2016", "2015", "2014", "2013", "2012", "2011", "2010" }));
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -110,13 +93,14 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 90, -1));
 
+        button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/working-time.png"))); // NOI18N
         button1.setText("View");
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button1ActionPerformed(evt);
             }
         });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 190, 30));
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 190, 40));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
@@ -190,6 +174,11 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 260, 140, -1));
 
         button3.setText("Time-In");
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 210, 140, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
@@ -223,30 +212,28 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         });
         getContentPane().add(button5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 480, -1, -1));
 
+        button6.setText("Dashboard");
+        button6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, 30));
+
+        button7.setText("Logout");
+        button7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, 30));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AttendanceBackground.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        // Create an instance of LoginNew and display it
-        LogInNew loginNew = new LogInNew();
-        loginNew.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_logoutButtonActionPerformed
-
-    private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
-
-        // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
-        // Set the visibility of the Dashboard frame to true
-        dashboard.setVisible(true);
-        // Close the Attendance Dashboard frame
-        this.dispose(); // Assuming this is the Login frame
-
-    }//GEN-LAST:event_dashboardButton
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
@@ -268,6 +255,28 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_button5ActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button3ActionPerformed
+
+    private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
+        
+        // Create an instance of the Dashboard frame
+        HomeDashboard dashboard = new HomeDashboard();
+        // Set the visibility of the Dashboard frame to true
+        dashboard.setVisible(true);
+        // Close the Attendance Dashboard frame
+        this.dispose(); // Assuming this is the Login frame
+    }//GEN-LAST:event_button6ActionPerformed
+
+    private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+        
+        // Create an instance of LoginNew and display it
+        LogInNew loginNew = new LogInNew();
+        loginNew.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_button7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,7 +319,8 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     private Button.Button button3;
     private Button.Button button4;
     private Button.Button button5;
-    private javax.swing.JButton jButton2;
+    private Button.Button button6;
+    private Button.Button button7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -329,6 +339,5 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JButton logoutButton;
     // End of variables declaration//GEN-END:variables
 }
