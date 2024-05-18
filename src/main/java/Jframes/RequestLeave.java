@@ -48,8 +48,8 @@ public class RequestLeave extends javax.swing.JFrame {
         jCalendar2 = new com.toedter.calendar.JCalendar();
         jLabel1 = new javax.swing.JLabel();
         darkButton2 = new Button.DarkButton();
-        dashboardButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
+        button4 = new Button.Button();
+        button7 = new Button.Button();
         backgroundPicture = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -150,25 +150,21 @@ public class RequestLeave extends javax.swing.JFrame {
         });
         getContentPane().add(darkButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 70, -1, -1));
 
-        dashboardButton.setBackground(new java.awt.Color(204, 204, 204));
-        dashboardButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        dashboardButton.setText("Dashboard");
-        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
+        button4.setText("Dashboard");
+        button4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dashboardButtondashboardButton(evt);
+                button4ActionPerformed(evt);
             }
         });
-        getContentPane().add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        getContentPane().add(button4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
-        logoutButton.setBackground(new java.awt.Color(204, 204, 204));
-        logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+        button7.setText("Logout");
+        button7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtondashboardButton(evt);
+                button7ActionPerformed(evt);
             }
         });
-        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
+        getContentPane().add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, 30));
 
         backgroundPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
         getContentPane().add(backgroundPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
@@ -176,24 +172,6 @@ public class RequestLeave extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void dashboardButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtondashboardButton
-
-        // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
-        // Set the visibility of the Dashboard frame to true
-        dashboard.setVisible(true);
-        // Close the leaveRequest Dashboard frame
-        this.dispose(); 
-
-    }//GEN-LAST:event_dashboardButtondashboardButton
-
-    private void logoutButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtondashboardButton
-        // Create an instance of LoginNew and display it
-            LogInNew loginNew = new LogInNew();
-            loginNew.setVisible(true);
-            this.dispose();
-    }//GEN-LAST:event_logoutButtondashboardButton
 
     private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
         
@@ -217,6 +195,23 @@ public class RequestLeave extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+        // Create an instance of the Dashboard frame
+        HomeDashboard dashboard = new HomeDashboard();
+        // Set the visibility of the Dashboard frame to true
+        dashboard.setVisible(true);
+        // Close the Request Leave frame
+        this.dispose(); // Assuming this is the Login frame
+    }//GEN-LAST:event_button4ActionPerformed
+
+    private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+
+        // Create an instance of LoginNew and display it
+        LogInNew loginNew = new LogInNew();
+        loginNew.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_button7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,9 +252,12 @@ public class RequestLeave extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundPicture;
     private Button.Button button1;
+    private Button.Button button2;
+    private Button.Button button3;
+    private Button.Button button4;
+    private Button.Button button7;
     private Button.DarkButton darkButton2;
     private Button.DarkButton darkButton3;
-    private javax.swing.JButton dashboardButton;
     private com.toedter.calendar.JCalendar jCalendar1;
     private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -278,6 +276,5 @@ public class RequestLeave extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JButton logoutButton;
     // End of variables declaration//GEN-END:variables
 }

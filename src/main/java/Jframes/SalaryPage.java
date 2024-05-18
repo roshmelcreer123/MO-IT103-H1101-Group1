@@ -76,9 +76,9 @@ public class SalaryPage extends javax.swing.JFrame {
         jScrollPane13 = new javax.swing.JScrollPane();
         jTextPane13 = new javax.swing.JTextPane();
         button2 = new Button.Button();
-        button3 = new Button.Button();
         jLabel22 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        button4 = new Button.Button();
         jLabel21 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -322,14 +322,6 @@ public class SalaryPage extends javax.swing.JFrame {
         });
         getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
-        button3.setText("Logout");
-        button3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, 30));
-
         jLabel22.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Employee ID:");
@@ -339,6 +331,14 @@ public class SalaryPage extends javax.swing.JFrame {
         jFormattedTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153)));
         getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(853, 16, 54, -1));
+
+        button4.setText("Logout");
+        button4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/SalaryBackground.png"))); // NOI18N
         getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -360,12 +360,12 @@ public class SalaryPage extends javax.swing.JFrame {
         this.dispose(); // Assuming this is the Login frame
     }//GEN-LAST:event_button2ActionPerformed
 
-    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         // Create an instance of LoginNew and display it
         LogInNew loginNew = new LogInNew();
         loginNew.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_button3ActionPerformed
+    }//GEN-LAST:event_button4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -408,7 +408,7 @@ public class SalaryPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Button.Button button1;
     private Button.Button button2;
-    private Button.Button button3;
+    private Button.Button button4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFormattedTextField jFormattedTextField1;

@@ -50,8 +50,8 @@ public class HomeDashboard extends javax.swing.JFrame {
         overtimeButton = new Button.Button();
         inButton = new Button.Button();
         outButton = new Button.Button();
-        logoutButton = new javax.swing.JButton();
-        dashboardButton = new javax.swing.JButton();
+        button1 = new Button.Button();
+        button2 = new Button.Button();
         backgroundPicture = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -249,7 +249,6 @@ public class HomeDashboard extends javax.swing.JFrame {
 
         profileButton.setText("Profile");
         profileButton.setToolTipText("");
-        profileButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profileButtonActionPerformed(evt);
@@ -259,7 +258,6 @@ public class HomeDashboard extends javax.swing.JFrame {
 
         salaryButton.setText("Salary");
         salaryButton.setToolTipText("");
-        salaryButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         salaryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salaryButtonActionPerformed(evt);
@@ -269,7 +267,6 @@ public class HomeDashboard extends javax.swing.JFrame {
 
         attendanceButton1.setText("Attendance");
         attendanceButton1.setToolTipText("");
-        attendanceButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         attendanceButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 attendanceButton1ActionPerformed(evt);
@@ -279,7 +276,6 @@ public class HomeDashboard extends javax.swing.JFrame {
 
         leaveButton.setText("Leave");
         leaveButton.setToolTipText("");
-        leaveButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         leaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leaveButtonActionPerformed(evt);
@@ -289,7 +285,6 @@ public class HomeDashboard extends javax.swing.JFrame {
 
         overtimeButton.setText("Overtime");
         overtimeButton.setToolTipText("");
-        overtimeButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         overtimeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 overtimeButtonActionPerformed(evt);
@@ -299,7 +294,6 @@ public class HomeDashboard extends javax.swing.JFrame {
 
         inButton.setText("IN");
         inButton.setToolTipText("");
-        inButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         inButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inButtonActionPerformed(evt);
@@ -309,7 +303,6 @@ public class HomeDashboard extends javax.swing.JFrame {
 
         outButton.setText("OUT");
         outButton.setToolTipText("");
-        outButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         outButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 outButtonActionPerformed(evt);
@@ -317,25 +310,21 @@ public class HomeDashboard extends javax.swing.JFrame {
         });
         getContentPane().add(outButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 120, 30));
 
-        logoutButton.setBackground(new java.awt.Color(204, 204, 204));
-        logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+        button1.setText("Logout");
+        button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtondashboardButton(evt);
+                button1ActionPerformed(evt);
             }
         });
-        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
 
-        dashboardButton.setBackground(new java.awt.Color(204, 204, 204));
-        dashboardButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        dashboardButton.setText("Dashboard");
-        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
+        button2.setText("Dashboard");
+        button2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dashboardButton(evt);
+                button2ActionPerformed(evt);
             }
         });
-        getContentPane().add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
         backgroundPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DashboardNoButtons.png"))); // NOI18N
         backgroundPicture.setText("jLabel3");
@@ -344,24 +333,6 @@ public class HomeDashboard extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
-        
-        // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
-        // Set the visibility of the Dashboard frame to true
-        dashboard.setVisible(true);
-        // Close the leaveRequest Dashboard frame
-        this.dispose(); 
-        
-    }//GEN-LAST:event_dashboardButton
-
-    private void logoutButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtondashboardButton
-        // Create an instance of LoginNew and display it
-    LogInNew loginNew = new LogInNew();
-    loginNew.setVisible(true);
-    this.dispose();
-    }//GEN-LAST:event_logoutButtondashboardButton
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         // Create an instance of ProfilePage and display it
@@ -446,6 +417,17 @@ public class HomeDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dateInDataTextField1ActionPerformed
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // Create an instance of LoginNew and display it
+        LogInNew loginNew = new LogInNew();
+        loginNew.setVisible(true);
+        this.dispose(); 
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+
+    }//GEN-LAST:event_button2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -491,9 +473,10 @@ public class HomeDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Button.Button attendanceButton1;
     private javax.swing.JLabel backgroundPicture;
+    private Button.Button button1;
+    private Button.Button button2;
     private javax.swing.JLabel clockInStatusLabel;
     private javax.swing.JLabel clockLabel;
-    private javax.swing.JButton dashboardButton;
     private javax.swing.JTextField dateInDataTextField;
     private javax.swing.JTextField dateInDataTextField1;
     private javax.swing.JLabel dateLabel;
@@ -506,7 +489,6 @@ public class HomeDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel leaveCreditsLabel1;
     private javax.swing.JLabel leaveCreditsLabel2;
     private javax.swing.JTextField leavesAvailableTxtField;
-    private javax.swing.JButton logoutButton;
     private Button.Button outButton;
     private Button.Button overtimeButton;
     private javax.swing.JLabel pendingTasksLabel;

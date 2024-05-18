@@ -27,8 +27,6 @@ public class ProfilePage extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        logoutButton = new javax.swing.JButton();
-        dashboardButton = new javax.swing.JButton();
         employeeProfilePicture = new javax.swing.JLabel();
         employeeDetailsPanel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -59,32 +57,14 @@ public class ProfilePage extends javax.swing.JFrame {
         regularLabel1 = new javax.swing.JLabel();
         regularLabel2 = new javax.swing.JLabel();
         regularLabel3 = new javax.swing.JLabel();
+        button2 = new Button.Button();
+        button1 = new Button.Button();
         employeeProfileBackground = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        logoutButton.setBackground(new java.awt.Color(204, 204, 204));
-        logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtondashboardButton(evt);
-            }
-        });
-        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
-
-        dashboardButton.setBackground(new java.awt.Color(204, 204, 204));
-        dashboardButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        dashboardButton.setText("Dashboard");
-        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dashboardButton(evt);
-            }
-        });
-        getContentPane().add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         employeeProfilePicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Persona210x210.png"))); // NOI18N
         getContentPane().add(employeeProfilePicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 210, 210));
@@ -298,6 +278,22 @@ public class ProfilePage extends javax.swing.JFrame {
         regularLabel3.setText("Position/Role");
         getContentPane().add(regularLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, -1, 20));
 
+        button2.setText("Dashboard");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+
+        button1.setText("Logout");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
+
         employeeProfileBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EmployeeProfileBackground.png"))); // NOI18N
         employeeProfileBackground.setText("jLabel3");
         getContentPane().add(employeeProfileBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
@@ -306,27 +302,25 @@ public class ProfilePage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
-        
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // Create an instance of the Dashboard frame
         HomeDashboard dashboard = new HomeDashboard();
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
-        // Close the leaveRequest Dashboard frame
+        // Close the Profile Page frame
         this.dispose(); // Assuming this is the Login frame
-        
-    }//GEN-LAST:event_dashboardButton
+    }//GEN-LAST:event_button2ActionPerformed
 
-    private void logoutButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtondashboardButton
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // Create an instance of LoginNew and display it
-    LogInNew loginNew = new LogInNew();
-    loginNew.setVisible(true);
-    this.dispose();
-    }//GEN-LAST:event_logoutButtondashboardButton
-
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editButtonActionPerformed
+        LogInNew loginNew = new LogInNew();
+        loginNew.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,7 +361,8 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton dashboardButton;
+    private Button.Button button1;
+    private Button.Button button2;
     private Button.Button editButton;
     private javax.swing.JPanel employeeDetailsPanel;
     private javax.swing.JLabel employeeIDLabel;
@@ -395,7 +390,6 @@ public class ProfilePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JButton logoutButton;
     private javax.swing.JLabel regularLabel;
     private javax.swing.JLabel regularLabel1;
     private javax.swing.JLabel regularLabel2;

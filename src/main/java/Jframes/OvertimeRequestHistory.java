@@ -25,10 +25,10 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
 
         darkButton1 = new Button.DarkButton();
         otTitleLabel = new javax.swing.JLabel();
-        logoutButton = new javax.swing.JButton();
-        dashboardButton = new javax.swing.JButton();
         dataHistoryPanel = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        button2 = new Button.Button();
+        button1 = new Button.Button();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,26 +46,6 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
         otTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
         otTitleLabel.setText("Overtime History");
         getContentPane().add(otTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, -1, -1));
-
-        logoutButton.setBackground(new java.awt.Color(204, 204, 204));
-        logoutButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        logoutButton.setText("Logout");
-        logoutButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutButtondashboardButton(evt);
-            }
-        });
-        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 100, -1));
-
-        dashboardButton.setBackground(new java.awt.Color(204, 204, 204));
-        dashboardButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        dashboardButton.setText("Dashboard");
-        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dashboardButton(evt);
-            }
-        });
-        getContentPane().add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jTable1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -88,6 +68,22 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
 
         getContentPane().add(dataHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 910, 380));
 
+        button2.setText("Dashboard");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+
+        button1.setText("Logout");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
 
@@ -95,30 +91,28 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoutButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtondashboardButton
-        // Create an instance of LoginNew and display it
-    LogInNew loginNew = new LogInNew();
-    loginNew.setVisible(true);
-    this.dispose();
-    }//GEN-LAST:event_logoutButtondashboardButton
-
-    private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
-
-        // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
-        // Set the visibility of the Dashboard frame to true
-        dashboard.setVisible(true);
-        // Close the leaveRequest Dashboard frame
-        this.dispose(); // Assuming this is the Login frame
-
-    }//GEN-LAST:event_dashboardButton
-
     private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
          // Create an instance of OvertimeRequest and display it
         OvertimeRequest overtimeRequest = new OvertimeRequest();
         overtimeRequest.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_darkButton1ActionPerformed
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // Create an instance of the Dashboard frame
+        HomeDashboard dashboard = new HomeDashboard();
+        // Set the visibility of the Dashboard frame to true
+        dashboard.setVisible(true);
+        // Close the Overtime Request frame
+        this.dispose(); // Assuming this is the Login frame
+    }//GEN-LAST:event_button2ActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // Create an instance of LoginNew and display it
+        LogInNew loginNew = new LogInNew();
+        loginNew.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,11 +151,11 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private Button.Button button1;
+    private Button.Button button2;
     private Button.DarkButton darkButton1;
-    private javax.swing.JButton dashboardButton;
     private javax.swing.JScrollPane dataHistoryPanel;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton logoutButton;
     private javax.swing.JLabel otTitleLabel;
     // End of variables declaration//GEN-END:variables
 }
