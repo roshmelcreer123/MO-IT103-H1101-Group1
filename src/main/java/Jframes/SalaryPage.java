@@ -76,8 +76,6 @@ public class SalaryPage extends javax.swing.JFrame {
         jScrollPane13 = new javax.swing.JScrollPane();
         jTextPane13 = new javax.swing.JTextPane();
         button2 = new Button.Button();
-        jLabel22 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         button4 = new Button.Button();
         jLabel21 = new javax.swing.JLabel();
 
@@ -322,16 +320,6 @@ public class SalaryPage extends javax.swing.JFrame {
         });
         getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
-        jLabel22.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("Employee ID:");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(768, 18, -1, -1));
-
-        jFormattedTextField1.setEditable(false);
-        jFormattedTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153)));
-        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(853, 16, 54, -1));
-
         button4.setText("Logout");
         button4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,7 +399,6 @@ public class SalaryPage extends javax.swing.JFrame {
     private Button.Button button4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -426,7 +413,6 @@ public class SalaryPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

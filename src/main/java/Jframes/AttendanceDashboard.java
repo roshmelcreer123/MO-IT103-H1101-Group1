@@ -26,8 +26,6 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel20 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -56,16 +54,6 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         setTitle("Attendance Dashboard");
         setBackground(new java.awt.Color(245, 245, 245));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel20.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Employee ID:");
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(768, 18, -1, -1));
-
-        jFormattedTextField1.setEditable(false);
-        jFormattedTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153)));
-        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(853, 16, 54, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Persona150x150.png"))); // NOI18N
@@ -323,10 +311,8 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     private Button.Button button7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
