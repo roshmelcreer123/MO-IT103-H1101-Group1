@@ -94,7 +94,12 @@ public class RequestLeave extends javax.swing.JFrame {
         });
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 240, -1));
 
-        darkButton3.setText("Edit Request");
+        darkButton3.setText("Save Request");
+        darkButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                darkButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(darkButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
 
         button1.setText("Delete Request");
@@ -213,6 +218,10 @@ public class RequestLeave extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_button7ActionPerformed
 
+    private void darkButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_darkButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -252,8 +261,6 @@ public class RequestLeave extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundPicture;
     private Button.Button button1;
-    private Button.Button button2;
-    private Button.Button button3;
     private Button.Button button4;
     private Button.Button button7;
     private Button.DarkButton darkButton2;

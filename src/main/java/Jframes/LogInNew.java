@@ -33,7 +33,8 @@ public class LogInNew extends javax.swing.JFrame {
         textUser = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         loginButton = new Button.Button();
-        forgotPasswordLabel = new javax.swing.JLabel();
+        loginAsAdmin = new javax.swing.JLabel();
+        forgotPasswordLabel1 = new javax.swing.JLabel();
         LogInBackground = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -68,7 +69,6 @@ public class LogInNew extends javax.swing.JFrame {
 
         loginButton.setText("Login");
         loginButton.setToolTipText("");
-        loginButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
@@ -76,9 +76,18 @@ public class LogInNew extends javax.swing.JFrame {
         });
         getContentPane().add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 380, 120, 40));
 
-        forgotPasswordLabel.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        forgotPasswordLabel.setText("Forgot Password?");
-        getContentPane().add(forgotPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(714, 430, 120, -1));
+        loginAsAdmin.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        loginAsAdmin.setText("Login as Admin");
+        loginAsAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                loginAsAdminMouseClicked(evt);
+            }
+        });
+        getContentPane().add(loginAsAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 430, 100, -1));
+
+        forgotPasswordLabel1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        forgotPasswordLabel1.setText("Forgot Password?");
+        getContentPane().add(forgotPasswordLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 120, -1));
 
         LogInBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogInBackground.png"))); // NOI18N
         LogInBackground.setText("jLabel3");
@@ -96,6 +105,14 @@ public class LogInNew extends javax.swing.JFrame {
         // Close the Login frame
         this.dispose(); // Assuming this is the Login frame
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void loginAsAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginAsAdminMouseClicked
+        
+        // Redirects to Admin Page
+        CreateEmployee createEmployee = new CreateEmployee();
+        createEmployee.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_loginAsAdminMouseClicked
             
     
     /**
@@ -139,9 +156,10 @@ public class LogInNew extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LogInBackground;
     private javax.swing.JLabel enterUsernameLabel1;
-    private javax.swing.JLabel forgotPasswordLabel;
+    private javax.swing.JLabel forgotPasswordLabel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel loginAsAdmin;
     private Button.Button loginButton;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField textUser;
