@@ -15,7 +15,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
      */
     public ViewAllEmployee() {
         initComponents();
-        fetchData();
+        fetchData(); // Calling the fetchData method so whenever a user goes to View All Employees, there would be data in the table
     }
     
     private void fetchData() {
