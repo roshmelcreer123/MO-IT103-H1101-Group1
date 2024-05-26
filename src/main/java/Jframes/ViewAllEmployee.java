@@ -6,6 +6,7 @@ package Jframes;
 
 import Classes.db; // Import the db class
 import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ViewAllEmployee extends javax.swing.JFrame {
@@ -39,6 +40,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
                 // Add rows to the table model
                 while (rs.next()) {
                     model.addRow(new Object[]{
+                        rs.getInt("employeeID"),
                         rs.getString("firstName"),
                         rs.getString("lastName"),
                         rs.getDate("birthday"),
@@ -75,6 +77,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        button1 = new Button.Button();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -86,6 +89,14 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        button1.setText("Update Employee");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 160, -1));
+
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("View All Employees");
@@ -96,13 +107,13 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         jTable2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "First Name", "Last Name", "Birthday", "Address", "Phone Number", "SSS Number", "Philhealth Number", "Tin Number", "Pagibig Number", "Status", "Position", "Immediate Supervisor", "Actions"
+                "Employee ID", "First Name", "Last Name", "Birthday", "Address", "Phone Number", "SSS Number", "Philhealth Number", "Tin Number", "Pagibig Number", "Status", "Position", "Immediate Supervisor", "Actions"
             }
         ));
         jTable2.setToolTipText("");
@@ -169,6 +180,21 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         this.dispose(); // Assuming this is the Login frame
     }//GEN-LAST:event_darkButton1ActionPerformed
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        int selectedRow = jTable2.getSelectedRow();
+        if (selectedRow != -1) {
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            String[] employeeData = new String[model.getColumnCount()];
+            for (int i = 0; i < model.getColumnCount(); i++) {
+                employeeData[i] = model.getValueAt(selectedRow, i).toString();
+            }
+            //UpdateEmployee updateEmployeeFrame = new UpdateEmployee(employeeData);
+            //updateEmployeeFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+        }
+    }//GEN-LAST:event_button1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +234,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
     private Button.Button Dashboard;
     private Button.Button Logout;
     private javax.swing.JLabel background;
+    private Button.Button button1;
     private Button.DarkButton darkButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
