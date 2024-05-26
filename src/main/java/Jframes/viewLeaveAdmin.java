@@ -5,21 +5,22 @@
 package Jframes;
 
 import Classes.db; // Import the db class
-import java.sql.Connection;
 import java.sql.*;
+import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
 
-public class leaveRequestDashboard extends javax.swing.JFrame {
+
+public class viewLeaveAdmin extends javax.swing.JFrame {
 
     /**
      * Creates new form leaveRequestHistory
      */
-    public leaveRequestDashboard() {
+    public viewLeaveAdmin() {
         initComponents();
-        fetchData("1001"); // Calling the fetchData method with the specific employee ID
+        fetchData(); // Calling the fetchData method so whenever a user goes to View All Employees, there would be data in the table
     }
     
-    private void fetchData(String employeeID) {
+    private void fetchData() {
         try {
             // Get the connection from db class
             Connection conn = db.mycon();
@@ -30,7 +31,7 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
                 Statement stmt = conn.createStatement();
 
                 // Execute a query to retrieve data from the employees table
-                String query = "SELECT * FROM leave_requests WHERE employeeID = '" + employeeID + "'";
+                String query = "SELECT * FROM leave_requests";
                 ResultSet rs = stmt.executeQuery(query);
 
                 // Get the table model from jTable2
@@ -127,7 +128,7 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Employee ID", "Employee Name", "Leave Type", "Manager", "Reason", "Start Date", "End Date", "Status", "Date Requested", "Date Approved"
+                "Employee ID", "Employee Name", "Leave Type", "Manager", "Reason for Leave", "Start Date of Leave", "End Date of Leave", "Status", "Date Requested", "Date Approved"
             }
         ));
         jTable2.setToolTipText("");
@@ -146,9 +147,9 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
 
     private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
         // Create an instance of the CreateLeaveRequest frame
-        RequestLeave requestLeave = new RequestLeave();
+        RequestLeaveAdmin requestLeaveAdmin = new RequestLeaveAdmin();
         // Set the visibility of the CreateLeaveRequest frame to true
-        requestLeave.setVisible(true);
+        requestLeaveAdmin.setVisible(true);
         // Close the leaveRequestDashboard Dashboard frame
         this.dispose(); // Assuming this is the Login frame
     }//GEN-LAST:event_darkButton1ActionPerformed
@@ -186,21 +187,27 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(leaveRequestDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewLeaveAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(leaveRequestDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewLeaveAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(leaveRequestDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewLeaveAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(leaveRequestDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewLeaveAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new leaveRequestDashboard().setVisible(true); // Pass the specific employee ID
+                new viewLeaveAdmin().setVisible(true);
             }
         });
     }

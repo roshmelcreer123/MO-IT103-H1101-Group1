@@ -109,14 +109,14 @@ public class LogInNew extends javax.swing.JFrame {
     private void loginAsAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginAsAdminMouseClicked
         
         // Redirects to View All Employees Admin Page
-        ViewAllEmployee viewAllEmployee = new ViewAllEmployee();
-        viewAllEmployee.setVisible(true);
+        viewLeaveAdmin viewLeaveAdmin = new viewLeaveAdmin();
+        viewLeaveAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_loginAsAdminMouseClicked
             
     
     /**
-     * @param args the command line arguments
+//     * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
