@@ -274,7 +274,7 @@ public class CreateEmployee extends javax.swing.JFrame {
 
     private void jCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateEmployeeActionPerformed
         
-        // Create Employee
+        // Getting the data from the form fields
         String lastName = jEmployeeLastName.getText();
         String firstName = jEmployeeFirstName.getText();
         java.util.Date utilDate = jEmployeeBirthday.getDate(); // Get date from jdatepicker
@@ -289,14 +289,15 @@ public class CreateEmployee extends javax.swing.JFrame {
         String position = jPosition.getText();
         String immediateSupervisor = jImmediateSupervisor.getText();
         
-        // SQL Query to insert data into Database
+        // SQL Query to insert data into MYSQL Database
         try{
             
             Statement s = db.mycon().createStatement();
             s.executeUpdate("INSERT INTO employees (lastName,firstName,birthday,address,phoneNumber,sssNumber,philhealthNumber,tinNumber,pagibigNumber,status,position,immediateSupervisor) "
             + "VALUES('"+lastName+"','"+firstName+"','"+birthday+"','"+address+"', '"+phoneNumber+"','"+sssNumber+"',"
                     + "'"+philhealthNumber+"','"+tinNumber+"','"+pagibigNumber+"','"+status+"','"+position+"' ,'"+immediateSupervisor+"')");
-
+            
+            // Dialogue Box to inform user that the employee has been created, this can be changed to something better (Please suggest - Roshmel)
             JOptionPane.showMessageDialog(rootPane, "You have succesfully created an employee");
             
         }
@@ -304,7 +305,7 @@ public class CreateEmployee extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-        // Clear input fields
+        // Clear input fields so user wont need to manually remove each one after inserting data into Database
         jEmployeeLastName.setText("");
         jEmployeeFirstName.setText("");
         jEmployeeBirthday.setDate(null); // Clear the date
