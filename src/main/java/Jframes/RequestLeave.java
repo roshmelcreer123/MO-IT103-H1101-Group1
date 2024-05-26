@@ -35,7 +35,7 @@ public class RequestLeave extends javax.swing.JFrame {
         jEmployeeName = new javax.swing.JTextField();
         jEmployeeID = new javax.swing.JTextField();
         saveRequestButton = new Button.DarkButton();
-        button1 = new Button.Button();
+        clearFieldButton = new Button.Button();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -100,13 +100,13 @@ public class RequestLeave extends javax.swing.JFrame {
         });
         getContentPane().add(saveRequestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
 
-        button1.setText("Delete Request");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        clearFieldButton.setText("Clear Field");
+        clearFieldButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                clearFieldButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 510, -1, -1));
+        getContentPane().add(clearFieldButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 510, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Reason for Leave:");
@@ -187,9 +187,16 @@ public class RequestLeave extends javax.swing.JFrame {
 
     }//GEN-LAST:event_darkButton2ActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button1ActionPerformed
+    private void clearFieldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFieldButtonActionPerformed
+        // Clear input fields so user wont need to manually remove each one after inserting data into Database
+        jEmployeeID.setText("");
+        jEmployeeName.setText("");
+        jLeaveType.setSelectedIndex(-1);
+        jManager.setSelectedIndex(-1);
+        jReason.setText("");
+        jStartDate.setDate(null); // Clear the date
+        jEndDate.setDate(null); // Clear the date
+    }//GEN-LAST:event_clearFieldButtonActionPerformed
 
     private void jEmployeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEmployeeIDActionPerformed
         // TODO add your handling code here:
@@ -303,9 +310,9 @@ public class RequestLeave extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundPicture;
-    private Button.Button button1;
     private Button.Button button4;
     private Button.Button button7;
+    private Button.Button clearFieldButton;
     private Button.DarkButton darkButton2;
     private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JTextField jEmployeeID;

@@ -54,6 +54,11 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         getContentPane().add(btnUserAccounts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 170, 50));
 
         btnLeaveRequest.setText("Leave Request");
+        btnLeaveRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeaveRequestActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnLeaveRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 170, 50));
 
         btnOvertimeRequest.setText("Overtime Request");
@@ -136,6 +141,13 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         update.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnUpdateDashboardActionPerformed
+
+    private void btnLeaveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaveRequestActionPerformed
+        // TODO add your handling code here:
+        viewLeaveAdmin viewLeaveAdmin = new viewLeaveAdmin();
+        viewLeaveAdmin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLeaveRequestActionPerformed
 
     /**
      * @param args the command line arguments

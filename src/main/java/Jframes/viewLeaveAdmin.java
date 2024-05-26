@@ -156,7 +156,7 @@ public class viewLeaveAdmin extends javax.swing.JFrame {
 
     private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
         // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
+        AdminHomeDashboard dashboard = new AdminHomeDashboard();
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
