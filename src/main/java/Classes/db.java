@@ -14,13 +14,15 @@ import java.sql.SQLException;
  */
 public class db {
     
+    
+    // Used to connect to local database, do not touch unless you know what you're doing. This will affect EVERYONE
     public static Connection mycon(){
         
-         String jdbcURL = "jdbc:mysql://localhost:3306/motorph";
-         String username = "root";
-         String password = "";
+         String jdbcURL = "jdbc:mysql://localhost:3306/motorph"; //pointing to localhost and sql dataabse called "motorph"
+         String username = "root"; // default username for apache server, please inform Roshmel if you've changed  it
+         String password = ""; // default password for apache server
            
-         
+         // Try and catch method to connect to Local Host
          try{
             Connection con = DriverManager.getConnection(jdbcURL, username, password);
             System.out.println("Connected to the database");
