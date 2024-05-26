@@ -4,10 +4,10 @@
  */
 package Jframes;
 
-/**
- *
- * @author roshmelcreer
- */
+import Classes.db; // Import the db class
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+
 public class ViewAllEmployee extends javax.swing.JFrame {
 
     /**
@@ -15,6 +15,55 @@ public class ViewAllEmployee extends javax.swing.JFrame {
      */
     public ViewAllEmployee() {
         initComponents();
+        fetchData();
+    }
+    
+    private void fetchData() {
+        try {
+            // Get the connection from db class
+            Connection conn = db.mycon();
+
+            // Check if the connection is successful
+            if (conn != null) {
+                // Create a statement
+                Statement stmt = conn.createStatement();
+
+                // Execute a query to retrieve data from the employees table
+                String query = "SELECT * FROM employees";
+                ResultSet rs = stmt.executeQuery(query);
+
+                // Get the table model from jTable2
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                model.setRowCount(0); // Clear existing data
+
+                // Add rows to the table model
+                while (rs.next()) {
+                    model.addRow(new Object[]{
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getDate("birthday"),
+                        rs.getString("address"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("sssNumber"),
+                        rs.getString("philhealthNumber"),
+                        rs.getString("tinNumber"),
+                        rs.getString("pagibigNumber"),
+                        rs.getString("status"),
+                        rs.getString("position"),
+                        rs.getString("immediateSupervisor")
+                    });
+                }
+
+                // Close the connection
+                rs.close();
+                stmt.close();
+                conn.close();
+            } else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -113,9 +162,9 @@ public class ViewAllEmployee extends javax.swing.JFrame {
 
     private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
         // Create an instance of the CreateLeaveRequest frame
-        RequestLeave requestLeave = new RequestLeave();
+        CreateEmployee createEmployee = new CreateEmployee();
         // Set the visibility of the CreateLeaveRequest frame to true
-        requestLeave.setVisible(true);
+        createEmployee.setVisible(true);
         // Close the leaveRequestDashboard Dashboard frame
         this.dispose(); // Assuming this is the Login frame
     }//GEN-LAST:event_darkButton1ActionPerformed

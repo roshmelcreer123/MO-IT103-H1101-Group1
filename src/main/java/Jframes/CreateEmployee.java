@@ -260,11 +260,9 @@ public class CreateEmployee extends javax.swing.JFrame {
 
     private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
 
-        // Create an instance of the Dashboard frame
-        leaveRequestDashboard leaveDashboard = new leaveRequestDashboard();
-        // Set the visibility of the Dashboard frame to true
-        leaveDashboard.setVisible(true);
-        // Close the leaveRequest Dashboard frame
+         // Redirects to View All Employees Admin Page
+        ViewAllEmployee viewAllEmployee = new ViewAllEmployee();
+        viewAllEmployee.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_darkButton2ActionPerformed
 
