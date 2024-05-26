@@ -51,7 +51,6 @@ public class HomeDashboard extends javax.swing.JFrame {
         inButton = new Button.Button();
         outButton = new Button.Button();
         button1 = new Button.Button();
-        button2 = new Button.Button();
         backgroundPicture = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -318,14 +317,6 @@ public class HomeDashboard extends javax.swing.JFrame {
         });
         getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
 
-        button2.setText("Dashboard");
-        button2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
-
         backgroundPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/DashboardNoButtons.png"))); // NOI18N
         backgroundPicture.setText("jLabel3");
         getContentPane().add(backgroundPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
@@ -424,10 +415,6 @@ public class HomeDashboard extends javax.swing.JFrame {
         this.dispose(); 
     }//GEN-LAST:event_button1ActionPerformed
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-
-    }//GEN-LAST:event_button2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -474,7 +461,6 @@ public class HomeDashboard extends javax.swing.JFrame {
     private Button.Button attendanceButton1;
     private javax.swing.JLabel backgroundPicture;
     private Button.Button button1;
-    private Button.Button button2;
     private javax.swing.JLabel clockInStatusLabel;
     private javax.swing.JLabel clockLabel;
     private javax.swing.JTextField dateInDataTextField;
