@@ -95,7 +95,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
                 button1ActionPerformed(evt);
             }
         });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 160, -1));
+        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 170, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,15 +153,14 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
-        // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
-        // Set the visibility of the Dashboard frame to true
-        dashboard.setVisible(true);
-        // Close the leaveRequest Dashboard frame
-        this.dispose(); // Assuming this is the Login frame
+        
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        adminDashboard.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_DashboardActionPerformed
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed

@@ -109,8 +109,8 @@ public class LogInNew extends javax.swing.JFrame {
     private void loginAsAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginAsAdminMouseClicked
         
         // Redirects to View All Employees Admin Page
-        ViewAllEmployee viewAllEmployee = new ViewAllEmployee();
-        viewAllEmployee.setVisible(true);
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        adminDashboard.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_loginAsAdminMouseClicked
             

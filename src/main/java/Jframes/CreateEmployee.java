@@ -239,15 +239,15 @@ public class CreateEmployee extends javax.swing.JFrame {
         getContentPane().add(backgroundPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
-        // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
-        // Set the visibility of the Dashboard frame to true
-        dashboard.setVisible(true);
-        // Close the Request Leave frame
-        this.dispose(); // Assuming this is the Login frame
+        
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        adminDashboard.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_button4ActionPerformed
 
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
