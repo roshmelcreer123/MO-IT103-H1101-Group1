@@ -4,19 +4,62 @@
  */
 package Jframes;
 
+import java.sql.*;
+import javax.swing.JOptionPane;
+import Classes.db;
+
+
+
 /**
  *
  * @author roshmelcreer
  */
 public class UpdateEmployee extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UpdateEmployee
-     */
-    public UpdateEmployee() {
+    private int employeeID; // declare employeeID as a class-level variable
+    
+    
+    /// Constructor with parameters
+    public UpdateEmployee(int employeeID, String firstName, String lastName, Date birthday, String address, String phoneNumber, String sssNumber, String philhealthNumber, String tinNumber, String pagibigNumber, String status, String position, String immediateSupervisor) {
         initComponents();
-    }
+        this.employeeID = employeeID; // assign the passed employeeID to the class-level variable
 
+        
+        // Set form fields with passed data
+        jEmployeeFirstName.setText(firstName);
+        jEmployeeLastName.setText(lastName);
+        jEmployeeBirthday.setDate(birthday);
+        jEmployeeAddress.setText(address);
+        jPhoneNumber.setText(phoneNumber);
+        jSssNumber.setText(sssNumber);
+        jPhilhealthNumber.setText(philhealthNumber);
+        jTinNumber.setText(tinNumber);
+        jPagibigNumber.setText(pagibigNumber);
+        jStatus.setSelectedItem(status);
+        jPosition.setText(position);
+        jImmediateSupervisor.setText(immediateSupervisor);
+    }
+    
+   
+
+    // Method to clear input fields
+    private void clearFields() {
+        jEmployeeLastName.setText("");
+        jEmployeeFirstName.setText("");
+        jEmployeeBirthday.setDate(null); // Clear the date
+        jEmployeeAddress.setText("");
+        jPhoneNumber.setText("");
+        jSssNumber.setText("");
+        jPhilhealthNumber.setText("");
+        jTinNumber.setText("");
+        jPagibigNumber.setText("");
+        jPosition.setText("");
+        jImmediateSupervisor.setText("");
+        jStatus.setSelectedIndex(-1);
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,7 +98,7 @@ public class UpdateEmployee extends javax.swing.JFrame {
         jTinNumber = new javax.swing.JTextField();
         jPhilhealthNumber = new javax.swing.JTextField();
         jSssNumber = new javax.swing.JTextField();
-        jCreateEmployee = new Button.DarkButton();
+        jUpdateEmployee = new Button.DarkButton();
         button1 = new Button.Button();
         backgroundPicture = new javax.swing.JLabel();
 
@@ -221,13 +264,13 @@ public class UpdateEmployee extends javax.swing.JFrame {
         });
         getContentPane().add(jSssNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 240, -1));
 
-        jCreateEmployee.setText("Update Employee");
-        jCreateEmployee.addActionListener(new java.awt.event.ActionListener() {
+        jUpdateEmployee.setText("Update Employee");
+        jUpdateEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCreateEmployeeActionPerformed(evt);
+                jUpdateEmployeeActionPerformed(evt);
             }
         });
-        getContentPane().add(jCreateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
+        getContentPane().add(jUpdateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 510, -1, -1));
 
         button1.setText("Clear");
         button1.addActionListener(new java.awt.event.ActionListener() {
@@ -263,8 +306,8 @@ public class UpdateEmployee extends javax.swing.JFrame {
     private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
 
         // Redirects to View All Employees Admin Page
-        ViewAllEmployee viewAllEmployee = new ViewAllEmployee();
-        viewAllEmployee.setVisible(true);
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        adminDashboard.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_darkButton2ActionPerformed
 
@@ -304,10 +347,40 @@ public class UpdateEmployee extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jSssNumberActionPerformed
 
-    private void jCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCreateEmployeeActionPerformed
+    private void jUpdateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateEmployeeActionPerformed
+        // Getting the updated data from the form fields
+        String lastName = jEmployeeLastName.getText();
+        String firstName = jEmployeeFirstName.getText();
+        java.util.Date utilDate = jEmployeeBirthday.getDate(); // Get date from jdatepicker
+        Date birthday = new Date(utilDate.getTime()); // Only using date, not exact time in seconds, to insert to SQL DB
+        String address = jEmployeeAddress.getText();
+        String phoneNumber = jPhoneNumber.getText();
+        String sssNumber = jSssNumber.getText();
+        String philhealthNumber = jPhilhealthNumber.getText();
+        String tinNumber = jTinNumber.getText();
+        String pagibigNumber = jPagibigNumber.getText();
+        String status = (String) jStatus.getSelectedItem();
+        String position = jPosition.getText();
+        String immediateSupervisor = jImmediateSupervisor.getText();
 
-        
-    }//GEN-LAST:event_jCreateEmployeeActionPerformed
+        // SQL Query to update data in MYSQL Database
+        try{
+            Statement s = db.mycon().createStatement();
+            s.executeUpdate("UPDATE employees SET lastName='"+lastName+"', firstName='"+firstName+"', birthday='"+birthday+"', address='"+address+"', phoneNumber='"+phoneNumber+"', sssNumber='"+sssNumber+"', philhealthNumber='"+philhealthNumber+"', tinNumber='"+tinNumber+"', pagibigNumber='"+pagibigNumber+"', status='"+status+"', position='"+position+"', immediateSupervisor='"+immediateSupervisor+"' WHERE employeeID="+this.employeeID);
+
+            // Dialogue Box to inform user that the employee has been updated
+            JOptionPane.showMessageDialog(rootPane, "Employee details have been updated successfully");
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        // Redirects to View All Employees Admin Page
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        adminDashboard.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jUpdateEmployeeActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
@@ -343,7 +416,6 @@ public class UpdateEmployee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateEmployee().setVisible(true);
             }
         });
     }
@@ -354,7 +426,6 @@ public class UpdateEmployee extends javax.swing.JFrame {
     private Button.Button button4;
     private Button.Button button7;
     private Button.DarkButton darkButton2;
-    private Button.DarkButton jCreateEmployee;
     private javax.swing.JTextArea jEmployeeAddress;
     private com.toedter.calendar.JDateChooser jEmployeeBirthday;
     private javax.swing.JTextField jEmployeeFirstName;
@@ -381,5 +452,6 @@ public class UpdateEmployee extends javax.swing.JFrame {
     private javax.swing.JTextField jSssNumber;
     private javax.swing.JComboBox<String> jStatus;
     private javax.swing.JTextField jTinNumber;
+    private Button.DarkButton jUpdateEmployee;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,9 +5,13 @@
 package Jframes;
 
 import Classes.db;
-import java.sql.Connection;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,12 +20,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminHomeDashboard extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdminHomeDashboard
-     */
+    private int selectedEmployeeID;
+    private String selectedFirstName, selectedLastName, selectedAddress, selectedPhoneNumber, 
+                   selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber, 
+                   selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor;
+    private java.sql.Date selectedBirthday;  // Changed to java.sql.Date
+    
     public AdminHomeDashboard() {
         initComponents();
         fetchData();
+        addTableListener();
+        addActionListeners();
     }
 
     
@@ -74,47 +83,87 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         }
     }
     
+    private void addTableListener() {
+        jTable1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = jTable1.getSelectedRow();
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                
+                // Assuming the ID is in the first column
+                selectedEmployeeID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+                selectedLastName = model.getValueAt(selectedRow, 1).toString();
+                selectedFirstName = model.getValueAt(selectedRow, 2).toString();
+                selectedBirthday = new java.sql.Date(((java.util.Date) model.getValueAt(selectedRow, 3)).getTime());
+                selectedAddress = model.getValueAt(selectedRow, 4).toString();
+                selectedPhoneNumber = model.getValueAt(selectedRow, 5).toString();
+                selectedSSSNumber = model.getValueAt(selectedRow, 6).toString();
+                selectedPhilhealthNumber = model.getValueAt(selectedRow, 7).toString();
+                selectedTINNumber = model.getValueAt(selectedRow, 8).toString();
+                selectedPagibigNumber = model.getValueAt(selectedRow, 9).toString();
+                selectedStatus = model.getValueAt(selectedRow, 10).toString();
+                selectedPosition = model.getValueAt(selectedRow, 11).toString();
+                selectedImmediateSupervisor = model.getValueAt(selectedRow, 12).toString();
+            }
+        });
+    }
+    private void updateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        UpdateEmployee updateEmployeeForm = new UpdateEmployee(
+                selectedEmployeeID, selectedFirstName, selectedLastName, selectedBirthday, selectedAddress,
+                selectedPhoneNumber, selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber,
+                selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor);
+        updateEmployeeForm.setVisible(true);
+        this.dispose();
+    }
+    
+    private void addActionListeners() {
+        updateEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmployeeButtonActionPerformed(evt);
+            }
+        });
+    }
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        button7 = new Button.Button();
-        btnUserAccounts = new Button.Button();
-        btnLeaveRequest = new Button.Button();
-        btnOvertimeRequest = new Button.Button();
+        deleteEmployee1 = new Button.Button();
+        deleteEmployee = new Button.Button();
+        updateEmployee = new Button.Button();
+        createEmployee = new Button.Button();
+        leaveRequestButton = new Button.Button();
+        overtimeRequestButton = new Button.Button();
+        userAccountsButton = new Button.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        btnViewDashboard = new Button.Button();
-        btnCreateDashboard = new Button.Button();
-        btnUpdateDashboard = new Button.Button();
-        btnDeleteDashboard = new Button.Button();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        button7.setText("Logout");
-        button7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button7ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, 30));
+        deleteEmployee1.setText("View");
+        getContentPane().add(deleteEmployee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 160, -1));
 
-        btnUserAccounts.setText("User Accounts");
-        getContentPane().add(btnUserAccounts, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 170, 50));
+        deleteEmployee.setText("Delete");
+        getContentPane().add(deleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 480, 160, -1));
 
-        btnLeaveRequest.setText("Leave Request");
-        btnLeaveRequest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLeaveRequestActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLeaveRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 170, 50));
+        updateEmployee.setText("Update");
+        getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, 160, -1));
 
-        btnOvertimeRequest.setText("Overtime Request");
-        getContentPane().add(btnOvertimeRequest, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, -1, 50));
+        createEmployee.setText("Create");
+        getContentPane().add(createEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, 160, -1));
+
+        leaveRequestButton.setText("Leave Request");
+        getContentPane().add(leaveRequestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 170, -1));
+
+        overtimeRequestButton.setText("Overtime Request");
+        getContentPane().add(overtimeRequestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 170, -1));
+
+        userAccountsButton.setText("User Accounts");
+        getContentPane().add(userAccountsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, 170, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,33 +206,6 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 720, 280));
 
-        btnViewDashboard.setText("View");
-        btnViewDashboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewDashboardActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnViewDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 470, 170, 40));
-
-        btnCreateDashboard.setText("Create");
-        btnCreateDashboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateDashboardActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCreateDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 470, 170, 40));
-
-        btnUpdateDashboard.setText("Update");
-        btnUpdateDashboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateDashboardActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnUpdateDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, 170, 40));
-
-        btnDeleteDashboard.setText("Delete");
-        getContentPane().add(btnDeleteDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 470, 170, 40));
-
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AdminDashboardBackground.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -214,10 +236,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnViewDashboardActionPerformed
 
     private void btnUpdateDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDashboardActionPerformed
-        // TODO add your handling code here:
-        UpdateEmployee update = new UpdateEmployee();
-        update.setVisible(true);
-        this.dispose();
+        updateEmployeeButtonActionPerformed(evt);
     }//GEN-LAST:event_btnUpdateDashboardActionPerformed
 
     private void btnLeaveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaveRequestActionPerformed
@@ -264,16 +283,15 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
-    private Button.Button btnCreateDashboard;
-    private Button.Button btnDeleteDashboard;
-    private Button.Button btnLeaveRequest;
-    private Button.Button btnOvertimeRequest;
-    private Button.Button btnUpdateDashboard;
-    private Button.Button btnUserAccounts;
-    private Button.Button btnViewDashboard;
-    private Button.Button button7;
+    private Button.Button createEmployee;
+    private Button.Button deleteEmployee;
+    private Button.Button deleteEmployee1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private Button.Button leaveRequestButton;
+    private Button.Button overtimeRequestButton;
+    private Button.Button updateEmployee;
+    private Button.Button userAccountsButton;
     // End of variables declaration//GEN-END:variables
 
     void setVisible() {
