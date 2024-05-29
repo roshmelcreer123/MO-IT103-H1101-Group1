@@ -192,6 +192,8 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Please select a row to update.");
         }
+        
+          
     }//GEN-LAST:event_button1ActionPerformed
 
     /**
