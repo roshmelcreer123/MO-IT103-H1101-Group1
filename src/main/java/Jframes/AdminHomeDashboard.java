@@ -148,12 +148,22 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         getContentPane().add(deleteEmployee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 160, -1));
 
         deleteEmployee.setText("Delete");
+        deleteEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteEmployeeActionPerformed(evt);
+            }
+        });
         getContentPane().add(deleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 480, 160, -1));
 
         updateEmployee.setText("Update");
         getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, 160, -1));
 
         createEmployee.setText("Create");
+        createEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createEmployeeActionPerformed(evt);
+            }
+        });
         getContentPane().add(createEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, 160, -1));
 
         leaveRequestButton.setText("Leave Request");
@@ -245,6 +255,50 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         viewLeaveAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLeaveRequestActionPerformed
+
+    private void deleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployeeActionPerformed
+        // Display confirmation dialog
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this employee?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            try {
+                // Get the connection from db class
+                Connection conn = db.mycon();
+
+                // Check if the connection is successful
+                if (conn != null) {
+                    // Create a statement
+                    Statement stmt = conn.createStatement();
+
+                    // Execute a query to delete the selected employee
+                    String query = "DELETE FROM employees WHERE employeeID = " + selectedEmployeeID;
+                    int rowsAffected = stmt.executeUpdate(query);
+
+                    // Check if deletion was successful
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(null, "Employee deleted successfully");
+                        // Refresh the table
+                        fetchData();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Failed to delete employee");
+                    }
+
+                    // Close the connection
+                    stmt.close();
+                    conn.close();
+                } else {
+                    System.out.println("Failed to make connection!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_deleteEmployeeActionPerformed
+
+    private void createEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEmployeeActionPerformed
+        CreateEmployee createEmployee = new CreateEmployee();
+        createEmployee.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_createEmployeeActionPerformed
 
     /**
      * @param args the command line arguments
