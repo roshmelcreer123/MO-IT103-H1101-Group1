@@ -138,6 +138,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         userAccountsButton = new Button.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnLogout = new Button.Button();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -145,15 +146,30 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         deleteEmployee1.setText("View");
+        deleteEmployee1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteEmployee1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(deleteEmployee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 160, -1));
 
         deleteEmployee.setText("Delete");
         getContentPane().add(deleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 480, 160, -1));
 
         updateEmployee.setText("Update");
+        updateEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmployeeActionPerformed(evt);
+            }
+        });
         getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, 160, -1));
 
         createEmployee.setText("Create");
+        createEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createEmployeeActionPerformed(evt);
+            }
+        });
         getContentPane().add(createEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, 160, -1));
 
         leaveRequestButton.setText("Leave Request");
@@ -206,6 +222,14 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 720, 280));
 
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, 30));
+
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AdminDashboardBackground.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -213,13 +237,13 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
 
         // Create an instance of LoginNew and display it
         LogInNew loginNew = new LogInNew();
         loginNew.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_button7ActionPerformed
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnCreateDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateDashboardActionPerformed
         // TODO add your handling code here:
@@ -245,6 +269,25 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         viewLeaveAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLeaveRequestActionPerformed
+
+    private void createEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEmployeeActionPerformed
+        // TODO add your handling code here:
+        CreateEmployee createEmployee = new CreateEmployee();
+        createEmployee.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_createEmployeeActionPerformed
+
+    private void updateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateEmployeeActionPerformed
+
+    private void deleteEmployee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployee1ActionPerformed
+        // TODO add your handling code here:
+        ViewAllEmployee viewAllEmployee = new ViewAllEmployee();
+        viewAllEmployee.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_deleteEmployee1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,6 +326,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private Button.Button btnLogout;
     private Button.Button createEmployee;
     private Button.Button deleteEmployee;
     private Button.Button deleteEmployee1;

@@ -106,7 +106,6 @@ public class CreateEmployee extends javax.swing.JFrame {
         });
         getContentPane().add(jSssNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 240, -1));
 
-        jPhoneNumber.setText("+63 91234129380");
         jPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPhoneNumberActionPerformed(evt);
@@ -126,7 +125,6 @@ public class CreateEmployee extends javax.swing.JFrame {
         jEmployeeBirthday.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(jEmployeeBirthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 240, -1));
 
-        jEmployeeFirstName.setText("John");
         jEmployeeFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jEmployeeFirstNameActionPerformed(evt);
@@ -187,13 +185,13 @@ public class CreateEmployee extends javax.swing.JFrame {
         });
         getContentPane().add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, 30));
 
-        darkButton2.setText("Go Back");
+        darkButton2.setText("View Employee");
         darkButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 darkButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(darkButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 70, -1, -1));
+        getContentPane().add(darkButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, -1, -1));
 
         button1.setText("Clear");
         button1.addActionListener(new java.awt.event.ActionListener() {
@@ -223,7 +221,6 @@ public class CreateEmployee extends javax.swing.JFrame {
         jLabel5.setText("Last Name:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
 
-        jEmployeeLastName.setText("Doe");
         jEmployeeLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jEmployeeLastNameActionPerformed(evt);
