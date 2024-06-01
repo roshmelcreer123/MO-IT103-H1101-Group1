@@ -145,11 +145,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        deleteEmployee1.setText("View");
-        deleteEmployee1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            }
-        });
+        
         getContentPane().add(deleteEmployee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 160, -1));
 
         deleteEmployee.setText("Delete");
@@ -160,11 +156,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         });
         getContentPane().add(deleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 480, 160, -1));
 
-        updateEmployee.setText("Update");
-        updateEmployee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            }
-        });
+        
         getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, 160, -1));
 
         createEmployee.setText("Create");
@@ -189,6 +181,8 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         userAccountsButton.setText("User Accounts");
         getContentPane().add(userAccountsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, 170, -1));
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -208,24 +202,40 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(7).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(8).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(9).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(10).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(11).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(12).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(13).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(500);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(1000);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(8).setResizable(false);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(9).setResizable(false);
+            jTable1.getColumnModel().getColumn(9).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(10).setResizable(false);
+            jTable1.getColumnModel().getColumn(10).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(11).setResizable(false);
+            jTable1.getColumnModel().getColumn(11).setPreferredWidth(300);
+            jTable1.getColumnModel().getColumn(12).setResizable(false);
+            jTable1.getColumnModel().getColumn(12).setPreferredWidth(600);
+            jTable1.getColumnModel().getColumn(13).setResizable(false);
+            jTable1.getColumnModel().getColumn(13).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(14).setResizable(false);
+            jTable1.getColumnModel().getColumn(14).setPreferredWidth(200);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 720, 280));
