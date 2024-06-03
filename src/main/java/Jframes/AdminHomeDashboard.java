@@ -129,9 +129,9 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        deleteEmployee1 = new Button.Button();
-        deleteEmployee = new Button.Button();
+        viewEmployee = new Button.Button();
         updateEmployee = new Button.Button();
+        deleteEmployee = new Button.Button();
         createEmployee = new Button.Button();
         leaveRequestButton = new Button.Button();
         overtimeRequestButton = new Button.Button();
@@ -145,8 +145,21 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        
-        getContentPane().add(deleteEmployee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 160, -1));
+        viewEmployee.setText("View");
+        viewEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewEmployeeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(viewEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 480, 160, -1));
+
+        updateEmployee.setText("Update");
+        updateEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmployeeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, 160, -1));
 
         deleteEmployee.setText("Delete");
         deleteEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -155,9 +168,6 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
             }
         });
         getContentPane().add(deleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 480, 160, -1));
-
-        
-        getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, 160, -1));
 
         createEmployee.setText("Create");
         createEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -337,6 +347,16 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         LeaveAdmin.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_leaveRequestButtonActionPerformed
+
+    private void updateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeActionPerformed
+        updateEmployeeButtonActionPerformed(evt);
+    }//GEN-LAST:event_updateEmployeeActionPerformed
+
+    private void viewEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEmployeeActionPerformed
+        ViewAllEmployee viewEmployees = new ViewAllEmployee();
+        viewEmployees.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_viewEmployeeActionPerformed
 	
 	
     /**
@@ -379,13 +399,13 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
     private Button.Button btnLogout;
     private Button.Button createEmployee;
     private Button.Button deleteEmployee;
-    private Button.Button deleteEmployee1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private Button.Button leaveRequestButton;
     private Button.Button overtimeRequestButton;
     private Button.Button updateEmployee;
     private Button.Button userAccountsButton;
+    private Button.Button viewEmployee;
     // End of variables declaration//GEN-END:variables
 
     void setVisible() {
