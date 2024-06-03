@@ -33,17 +33,14 @@ public class RequestLeave extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jReason = new javax.swing.JTextArea();
         jEmployeeName = new javax.swing.JTextField();
-        jEmployeeID = new javax.swing.JTextField();
         saveRequestButton = new Button.DarkButton();
         clearFieldButton = new Button.Button();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jRequestDate = new com.toedter.calendar.JCalendar();
         jLabel1 = new javax.swing.JLabel();
         darkButton2 = new Button.DarkButton();
         button4 = new Button.Button();
@@ -54,18 +51,18 @@ public class RequestLeave extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jEndDate.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 210, 70, -1));
+        getContentPane().add(jEndDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 280, 210, -1));
 
         jStartDate.setBackground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 210, 70, -1));
+        getContentPane().add(jStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 210, 210, -1));
 
         jLeaveType.setForeground(new java.awt.Color(153, 153, 153));
         jLeaveType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sick", "Vacation", "Personal", "Maternity/Paternity", "Bereavement" }));
-        getContentPane().add(jLeaveType, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 240, -1));
+        getContentPane().add(jLeaveType, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 240, -1));
 
         jManager.setForeground(new java.awt.Color(153, 153, 153));
         jManager.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sarah Johnson", "David Rodriguez", "Emily Chen", "Michael Patel", "Jennifer Smith" }));
-        getContentPane().add(jManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 240, -1));
+        getContentPane().add(jManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 240, -1));
 
         jReason.setColumns(20);
         jReason.setForeground(new java.awt.Color(153, 153, 153));
@@ -81,16 +78,7 @@ public class RequestLeave extends javax.swing.JFrame {
                 jEmployeeNameActionPerformed(evt);
             }
         });
-        getContentPane().add(jEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 240, -1));
-
-        jEmployeeID.setForeground(new java.awt.Color(54, 117, 136));
-        jEmployeeID.setText("1");
-        jEmployeeID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEmployeeIDActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 240, -1));
+        getContentPane().add(jEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 240, -1));
 
         saveRequestButton.setText("Save Request");
         saveRequestButton.addActionListener(new java.awt.event.ActionListener() {
@@ -114,19 +102,15 @@ public class RequestLeave extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Manager:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Leave Type:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("Employee Name:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setText("Employee ID:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Start Date of Leave:");
@@ -134,11 +118,7 @@ public class RequestLeave extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("End Date of Leave:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 210, -1, -1));
-
-        jRequestDate.setBackground(new java.awt.Color(255, 255, 255));
-        jRequestDate.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(jRequestDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, 410, 220));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -189,7 +169,6 @@ public class RequestLeave extends javax.swing.JFrame {
 
     private void clearFieldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFieldButtonActionPerformed
         // Clear input fields so user wont need to manually remove each one after inserting data into Database
-        jEmployeeID.setText("");
         jEmployeeName.setText("");
         jLeaveType.setSelectedIndex(-1);
         jManager.setSelectedIndex(-1);
@@ -197,10 +176,6 @@ public class RequestLeave extends javax.swing.JFrame {
         jStartDate.setDate(null); // Clear the date
         jEndDate.setDate(null); // Clear the date
     }//GEN-LAST:event_clearFieldButtonActionPerformed
-
-    private void jEmployeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEmployeeIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jEmployeeIDActionPerformed
 
     private void jEmployeeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEmployeeNameActionPerformed
         // TODO add your handling code here:
@@ -225,7 +200,6 @@ public class RequestLeave extends javax.swing.JFrame {
 
     private void saveRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRequestButtonActionPerformed
         // Getting the data from the form fields
-        String employeeID = jEmployeeID.getText();
         String employeeName = jEmployeeName.getText();
         String leaveType = (String) jLeaveType.getSelectedItem();
         String manager = (String) jManager.getSelectedItem();
@@ -234,8 +208,6 @@ public class RequestLeave extends javax.swing.JFrame {
         Date startDate = new Date(utilStartDate.getTime()); // Only using date, not exact time in seconds, to insert to SQL DB
         java.util.Date utilEndDate = jEndDate.getDate(); // Get date from jdatepicker
         Date endDate = new Date(utilEndDate.getTime()); // Only using date, not exact time in seconds, to insert to SQL DB
-        LocalDate currentDate = LocalDate.now(); // Get current date
-        Date sqlCurrentDate = Date.valueOf(currentDate); // Convert to java.sql.Date
         
         
         
@@ -243,9 +215,8 @@ public class RequestLeave extends javax.swing.JFrame {
         try{
             
             Statement s = db.mycon().createStatement();
-            s.executeUpdate("INSERT INTO leave_requests (employeeID,employeeName,leaveType,manager,reason,startDate,endDate,status,dateRequested,dateApproved) "
-            + "VALUES('"+employeeID+"','"+employeeName+"','"+leaveType+"','"+manager+"', '"+reason+"',"
-                    + "'"+startDate+"','"+endDate+"','Pending', '" + sqlCurrentDate + "', NULL)");
+            s.executeUpdate("INSERT INTO leave_requests (employeeName, leaveType, manager, reason, startDate, endDate) "
+            + "VALUES ('"+employeeName+"', '"+leaveType+"', '"+manager+"', '"+reason+"', '"+startDate+"', '"+endDate+"')");
             
             // Dialogue Box to inform user that the employee has been created, this can be changed to something better (Please suggest - Roshmel)
             JOptionPane.showMessageDialog(rootPane, "You have succesfully requested for a leave.");
@@ -256,7 +227,6 @@ public class RequestLeave extends javax.swing.JFrame {
         }
         
         // Clear input fields so user wont need to manually remove each one after inserting data into Database
-        jEmployeeID.setText("");
         jEmployeeName.setText("");
         jLeaveType.setSelectedIndex(-1);
         jManager.setSelectedIndex(-1);
@@ -315,11 +285,9 @@ public class RequestLeave extends javax.swing.JFrame {
     private Button.Button clearFieldButton;
     private Button.DarkButton darkButton2;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JTextField jEmployeeID;
     private javax.swing.JTextField jEmployeeName;
     private com.toedter.calendar.JDateChooser jEndDate;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -329,7 +297,6 @@ public class RequestLeave extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jLeaveType;
     private javax.swing.JComboBox<String> jManager;
     private javax.swing.JTextArea jReason;
-    private com.toedter.calendar.JCalendar jRequestDate;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser jStartDate;
     private Button.DarkButton saveRequestButton;

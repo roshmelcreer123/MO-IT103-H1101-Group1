@@ -16,10 +16,12 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
      */
     public leaveRequestDashboard() {
         initComponents();
-        fetchData("1001"); // Calling the fetchData method with the specific employee ID
+        //fetchData("1001"); // Calling the fetchData method with the specific employee ID
+        fetchData();
     }
     
-    private void fetchData(String employeeID) {
+   // private void fetchData(String employeeID) {
+    private void fetchData() {
         try {
             // Get the connection from db class
             Connection conn = db.mycon();
@@ -30,7 +32,9 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
                 Statement stmt = conn.createStatement();
 
                 // Execute a query to retrieve data from the employees table
-                String query = "SELECT * FROM leave_requests WHERE employeeID = '" + employeeID + "'";
+                //String query = "SELECT * FROM leave_requests WHERE employeeID = '" + employeeID + "'";
+                
+                String query = "SELECT * FROM leave_requests";
                 ResultSet rs = stmt.executeQuery(query);
 
                 // Get the table model from jTable2
@@ -47,9 +51,6 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
                         rs.getString("reason"),
                         rs.getString("startDate"),
                         rs.getString("endDate"),
-                        rs.getString("status"),
-                        rs.getString("dateRequested"),
-                        rs.getString("dateApproved")
                     });
                 }
 
