@@ -4,19 +4,37 @@
  */
 package Jframes;
 
-import Classes.db; // Import the db class
+import Classes.db;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ViewAllEmployee extends javax.swing.JFrame {
 
+    
+    private int selectedEmployeeID;
+    private String selectedFirstName, selectedLastName, selectedAddress, selectedPhoneNumber, 
+                   selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber, 
+                   selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor;
+    
+    private BigDecimal selectedBasicSalary, selectedRiceSubsidy, selectedPhoneAllowance,
+                   selectedClothingAllowance, selectedGrossSemiMonthlyRate, selectedHourlyRate;
+    private java.sql.Date selectedBirthday;  // Changed to java.sql.Date
+    
+    
     /**
      * Creates new form ViewAllEmployee
      */
     public ViewAllEmployee() {
         initComponents();
         fetchData(); // Calling the fetchData method so whenever a user goes to View All Employees, there would be data in the table
+        addTableListener();
     }
     
     private void fetchData() {
@@ -52,7 +70,13 @@ public class ViewAllEmployee extends javax.swing.JFrame {
                         rs.getString("pagibigNumber"),
                         rs.getString("status"),
                         rs.getString("position"),
-                        rs.getString("immediateSupervisor")
+                        rs.getString("immediateSupervisor"),
+                        rs.getString("basicSalary"),
+                        rs.getString("riceSubsidy"),
+                        rs.getString("phoneAllowance"),
+                        rs.getString("clothingAllowance"),
+                        rs.getString("grossSemiMonthlyRate"),
+                        rs.getString("hourlyRate"),
                     });
                 }
 
@@ -67,6 +91,38 @@ public class ViewAllEmployee extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    
+    // This is used to get the row then pass it to the UpdateEmployee
+    private void addTableListener() {
+        jTable2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = jTable2.getSelectedRow();
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                
+                // Assuming the ID is in the first column
+                selectedEmployeeID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+                selectedLastName = model.getValueAt(selectedRow, 1).toString();
+                selectedFirstName = model.getValueAt(selectedRow, 2).toString();
+                selectedBirthday = new java.sql.Date(((java.util.Date) model.getValueAt(selectedRow, 3)).getTime());
+                selectedAddress = model.getValueAt(selectedRow, 4).toString();
+                selectedPhoneNumber = model.getValueAt(selectedRow, 5).toString();
+                selectedSSSNumber = model.getValueAt(selectedRow, 6).toString();
+                selectedPhilhealthNumber = model.getValueAt(selectedRow, 7).toString();
+                selectedTINNumber = model.getValueAt(selectedRow, 8).toString();
+                selectedPagibigNumber = model.getValueAt(selectedRow, 9).toString();
+                selectedStatus = model.getValueAt(selectedRow, 10).toString();
+                selectedPosition = model.getValueAt(selectedRow, 11).toString();
+                selectedImmediateSupervisor = model.getValueAt(selectedRow, 12).toString();
+                selectedBasicSalary = new BigDecimal(model.getValueAt(selectedRow, 13).toString());
+                selectedRiceSubsidy = new BigDecimal(model.getValueAt(selectedRow, 14).toString());
+                selectedPhoneAllowance = new BigDecimal(model.getValueAt(selectedRow, 15).toString());
+                selectedClothingAllowance = new BigDecimal(model.getValueAt(selectedRow, 16).toString());
+                selectedGrossSemiMonthlyRate = new BigDecimal(model.getValueAt(selectedRow, 17).toString());
+                selectedHourlyRate = new BigDecimal(model.getValueAt(selectedRow, 18).toString());
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,7 +133,8 @@ public class ViewAllEmployee extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        button1 = new Button.Button();
+        deleteEmployee = new Button.DarkButton();
+        updateEmployee = new Button.DarkButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -89,34 +146,43 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        button1.setText("Update Employee");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        deleteEmployee.setText("Delete");
+        deleteEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                deleteEmployeeActionPerformed(evt);
             }
         });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 170, -1));
+        getContentPane().add(deleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 150, -1));
+
+        updateEmployee.setText("Update");
+        updateEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateEmployeeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("View All Employees");
+        jLabel2.setText("Employee Database");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         jTable2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "First Name", "Last Name", "Birthday", "Address", "Phone Number", "SSS Number", "Philhealth Number", "Tin Number", "Pagibig Number", "Status", "Position", "Immediate Supervisor", "Actions"
+                "Employee ID", "First Name", "Last Name", "Birthday", "Address", "Phone Number", "SSS Number", "Philhealth Number", "Tin Number", "Pagibig Number", "Status", "Position", "Immediate Supervisor", "Basic Salary", "Rice Subsidy", "Phone Allowance", "Clothing Allowance", "Gross Semi-monthly Rate", "Hourly Rate"
             }
         ));
         jTable2.setToolTipText("");
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(jTable2);
 
@@ -140,13 +206,13 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         });
         getContentPane().add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 120, 30));
 
-        darkButton1.setText("Create Employee");
+        darkButton1.setText("Create");
         darkButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 darkButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, -1, -1));
+        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 150, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
         background.setText("jLabel3");
@@ -179,22 +245,53 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         this.dispose(); // Assuming this is the Login frame
     }//GEN-LAST:event_darkButton1ActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        int selectedRow = jTable2.getSelectedRow();
-        if (selectedRow != -1) {
-            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-            String[] employeeData = new String[model.getColumnCount()];
-            for (int i = 0; i < model.getColumnCount(); i++) {
-                employeeData[i] = model.getValueAt(selectedRow, i).toString();
+    private void updateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeActionPerformed
+        UpdateEmployee updateEmployeeForm = new UpdateEmployee(
+                selectedEmployeeID, selectedFirstName, selectedLastName, selectedBirthday, selectedAddress,
+                selectedPhoneNumber, selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber,
+                selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor,
+                selectedBasicSalary, selectedRiceSubsidy, selectedPhoneAllowance, selectedClothingAllowance,
+                selectedGrossSemiMonthlyRate, selectedHourlyRate);
+        updateEmployeeForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_updateEmployeeActionPerformed
+
+    private void deleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployeeActionPerformed
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this employee?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            try {
+                // Get the connection from db class
+                Connection conn = db.mycon();
+
+                // Check if the connection is successful
+                if (conn != null) {
+                    // Create a statement
+                    Statement stmt = conn.createStatement();
+
+                    // Execute a query to delete the selected employee
+                    String query = "DELETE FROM employees WHERE employeeID = " + selectedEmployeeID;
+                    int rowsAffected = stmt.executeUpdate(query);
+
+                    // Check if deletion was successful
+                    if (rowsAffected > 0) {
+                        JOptionPane.showMessageDialog(null, "Employee deleted successfully");
+                        // Refresh the table
+                        fetchData();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Failed to delete employee");
+                    }
+
+                    // Close the connection
+                    stmt.close();
+                    conn.close();
+                } else {
+                    System.out.println("Failed to make connection!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            //UpdateEmployee updateEmployeeFrame = new UpdateEmployee(employeeData);
-            //updateEmployeeFrame.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
-        }
-        
-          
-    }//GEN-LAST:event_button1ActionPerformed
+        }   
+    }//GEN-LAST:event_deleteEmployeeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,10 +332,11 @@ public class ViewAllEmployee extends javax.swing.JFrame {
     private Button.Button Dashboard;
     private Button.Button Logout;
     private javax.swing.JLabel background;
-    private Button.Button button1;
     private Button.DarkButton darkButton1;
+    private Button.DarkButton deleteEmployee;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
+    private Button.DarkButton updateEmployee;
     // End of variables declaration//GEN-END:variables
 }

@@ -30,7 +30,7 @@ public class EmployeeDatabase extends javax.swing.JFrame {
         initComponents();
         fetchData();
         addTableListener();
-        addActionListeners();
+        //addActionListeners();
     }
     
     private void fetchData() {
@@ -106,8 +106,8 @@ public class EmployeeDatabase extends javax.swing.JFrame {
             }
         });
     }
-    private void updateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        UpdateEmployee updateEmployeeForm = new UpdateEmployee(
+    /*private void updateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {
+     UpdateEmployee updateEmployeeForm = new UpdateEmployee(
                 selectedEmployeeID, selectedFirstName, selectedLastName, selectedBirthday, selectedAddress,
                 selectedPhoneNumber, selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber,
                 selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor);
@@ -121,7 +121,7 @@ public class EmployeeDatabase extends javax.swing.JFrame {
                 updateEmployeeButtonActionPerformed(evt);
             }
         });
-    }
+    } */
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -249,7 +249,7 @@ public class EmployeeDatabase extends javax.swing.JFrame {
     }//GEN-LAST:event_createEmployeeActionPerformed
 
     private void deleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployeeActionPerformed
-        // TODO add your handling code here:
+
         int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this employee?", "Warning", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
             try {
