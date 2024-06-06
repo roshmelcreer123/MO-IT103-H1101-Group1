@@ -39,7 +39,7 @@ public class UpdateEmployee extends javax.swing.JFrame {
     
     
     /// Constructor with parameters
-    public UpdateEmployee(int employeeID, String firstName, String lastName, java.sql.Date birthday, String address,
+    public UpdateEmployee(int employeeID, String lastName, String firstName, java.sql.Date birthday, String address,
                           String phoneNumber, String sssNumber, String philhealthNumber, String tinNumber,
                           String pagibigNumber, String status, String position, String immediateSupervisor,
                           BigDecimal basicSalary, BigDecimal riceSubsidy, BigDecimal phoneAllowance, 
@@ -70,8 +70,8 @@ public class UpdateEmployee extends javax.swing.JFrame {
 
         
         // Set form fields with passed data
-        jEmployeeFirstName.setText(firstName);
         jEmployeeLastName.setText(lastName);
+        jEmployeeFirstName.setText(firstName);
         jEmployeeBirthday.setDate(birthday);
         jEmployeeAddress.setText(address);
         jPhoneNumber.setText(phoneNumber);
