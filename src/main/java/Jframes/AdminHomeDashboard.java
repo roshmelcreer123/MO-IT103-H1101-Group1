@@ -100,7 +100,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
 
     private void btnViewEmployeeDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewEmployeeDatabaseActionPerformed
         // Redirects to Employee Database Page
-        new EmployeeDatabase().setVisible(true); dispose();
+        new ViewAllEmployee().setVisible(true); dispose();
     }//GEN-LAST:event_btnViewEmployeeDatabaseActionPerformed
 	
 	
