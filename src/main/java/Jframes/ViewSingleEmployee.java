@@ -164,7 +164,7 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
         jSssNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jSssNumber.setForeground(new java.awt.Color(54, 117, 136));
         jSssNumber.setText("00-1234567-8");
-        getContentPane().add(jSssNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 340, 100, -1));
+        getContentPane().add(jSssNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 340, 130, -1));
 
         goBackToViewAllEmployee.setText("Go Back");
         goBackToViewAllEmployee.addActionListener(new java.awt.event.ActionListener() {
