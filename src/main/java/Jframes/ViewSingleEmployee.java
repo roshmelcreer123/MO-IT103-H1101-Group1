@@ -222,7 +222,7 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
         jPosition.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jPosition.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPosition.setText("IT");
-        getContentPane().add(jPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, 140, 20));
+        getContentPane().add(jPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 140, 20));
 
         button2.setText("Dashboard");
         button2.addActionListener(new java.awt.event.ActionListener() {
