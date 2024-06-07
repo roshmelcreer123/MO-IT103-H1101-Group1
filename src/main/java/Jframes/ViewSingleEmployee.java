@@ -242,7 +242,7 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
 
         employeeProfileBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Profile Page.png"))); // NOI18N
         employeeProfileBackground.setText("jLabel3");
-        getContentPane().add(employeeProfileBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
+        getContentPane().add(employeeProfileBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
 
         pack();
         setLocationRelativeTo(null);
