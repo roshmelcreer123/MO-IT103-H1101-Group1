@@ -50,6 +50,11 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         getContentPane().add(btnViewEmployeeDatabase, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 170, 40));
 
         userAccountsButton.setText("User Accounts");
+        userAccountsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userAccountsButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(userAccountsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, 170, 40));
 
         btnLogout.setText("Logout");
@@ -102,6 +107,11 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         // Redirects to Employee Database Page
         new ViewAllEmployee().setVisible(true); dispose();
     }//GEN-LAST:event_btnViewEmployeeDatabaseActionPerformed
+
+    private void userAccountsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userAccountsButtonActionPerformed
+        // Redirects to User Accounts Database Page
+        new UserAccounts().setVisible(true); dispose();
+    }//GEN-LAST:event_userAccountsButtonActionPerformed
 	
 	
     /**
