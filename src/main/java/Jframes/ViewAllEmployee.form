@@ -25,6 +25,19 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
+    <Component class="Button.DarkButton" name="viewSingleEmployee">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewSingleEmployeeActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="670" y="80" width="160" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
     <Component class="Button.DarkButton" name="deleteEmployee">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
@@ -34,7 +47,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="530" y="80" width="150" height="-1"/>
+          <AbsoluteConstraints x="330" y="80" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -47,7 +60,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="690" y="80" width="150" height="-1"/>
+          <AbsoluteConstraints x="500" y="80" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -63,7 +76,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="50" y="90" width="-1" height="-1"/>
+          <AbsoluteConstraints x="50" y="85" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -147,16 +160,16 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="Button.DarkButton" name="darkButton1">
+    <Component class="Button.DarkButton" name="createEmployee">
       <Properties>
         <Property name="text" type="java.lang.String" value="Create"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="darkButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createEmployeeActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="850" y="80" width="150" height="-1"/>
+          <AbsoluteConstraints x="840" y="80" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

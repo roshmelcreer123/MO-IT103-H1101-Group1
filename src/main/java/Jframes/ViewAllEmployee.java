@@ -133,6 +133,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        viewSingleEmployee = new Button.DarkButton();
         deleteEmployee = new Button.DarkButton();
         updateEmployee = new Button.DarkButton();
         jLabel2 = new javax.swing.JLabel();
@@ -140,11 +141,19 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         Dashboard = new Button.Button();
         Logout = new Button.Button();
-        darkButton1 = new Button.DarkButton();
+        createEmployee = new Button.DarkButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        viewSingleEmployee.setText("View");
+        viewSingleEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewSingleEmployeeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(viewSingleEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 160, -1));
 
         deleteEmployee.setText("Delete");
         deleteEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +161,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
                 deleteEmployeeActionPerformed(evt);
             }
         });
-        getContentPane().add(deleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 150, -1));
+        getContentPane().add(deleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 160, -1));
 
         updateEmployee.setText("Update");
         updateEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -160,12 +169,12 @@ public class ViewAllEmployee extends javax.swing.JFrame {
                 updateEmployeeActionPerformed(evt);
             }
         });
-        getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, 150, -1));
+        getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 160, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Employee Database");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 85, -1, -1));
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
@@ -206,13 +215,13 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         });
         getContentPane().add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 120, 30));
 
-        darkButton1.setText("Create");
-        darkButton1.addActionListener(new java.awt.event.ActionListener() {
+        createEmployee.setText("Create");
+        createEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                darkButton1ActionPerformed(evt);
+                createEmployeeActionPerformed(evt);
             }
         });
-        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 150, -1));
+        getContentPane().add(createEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 160, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
         background.setText("jLabel3");
@@ -236,14 +245,14 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_LogoutActionPerformed
 
-    private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
+    private void createEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEmployeeActionPerformed
         // Create an instance of the CreateLeaveRequest frame
         CreateEmployee createEmployee = new CreateEmployee();
         // Set the visibility of the CreateLeaveRequest frame to true
         createEmployee.setVisible(true);
         // Close the leaveRequestDashboard Dashboard frame
         this.dispose(); // Assuming this is the Login frame
-    }//GEN-LAST:event_darkButton1ActionPerformed
+    }//GEN-LAST:event_createEmployeeActionPerformed
 
     private void updateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeActionPerformed
         UpdateEmployee updateEmployeeForm = new UpdateEmployee(
@@ -293,6 +302,21 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_deleteEmployeeActionPerformed
 
+    private void viewSingleEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSingleEmployeeActionPerformed
+         // Create an instance of ViewSingleEmployee and pass the selected employee's data
+            ViewSingleEmployee viewSingleEmployeeForm = new ViewSingleEmployee(
+            selectedEmployeeID, selectedLastName, selectedFirstName, selectedBirthday, selectedAddress,
+            selectedPhoneNumber, selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber,
+            selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor,
+            selectedBasicSalary, selectedRiceSubsidy, selectedPhoneAllowance, selectedClothingAllowance,
+            selectedGrossSemiMonthlyRate, selectedHourlyRate);
+    
+            // Set the visibility of ViewSingleEmployee form to true
+            viewSingleEmployeeForm.setVisible(true);
+            // Close the current form
+            this.dispose();
+    }//GEN-LAST:event_viewSingleEmployeeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -332,11 +356,12 @@ public class ViewAllEmployee extends javax.swing.JFrame {
     private Button.Button Dashboard;
     private Button.Button Logout;
     private javax.swing.JLabel background;
-    private Button.DarkButton darkButton1;
+    private Button.DarkButton createEmployee;
     private Button.DarkButton deleteEmployee;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     private Button.DarkButton updateEmployee;
+    private Button.DarkButton viewSingleEmployee;
     // End of variables declaration//GEN-END:variables
 }
