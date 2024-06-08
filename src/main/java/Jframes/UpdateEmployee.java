@@ -274,7 +274,7 @@ public class UpdateEmployee extends javax.swing.JFrame {
         getContentPane().add(jPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, 150, -1));
 
         jStatus.setForeground(new java.awt.Color(153, 153, 153));
-        jStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employed", "Unemployed" }));
+        jStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Regular", "Probationary" }));
         getContentPane().add(jStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 350, 150, -1));
 
         jPagibigNumber.addActionListener(new java.awt.event.ActionListener() {
