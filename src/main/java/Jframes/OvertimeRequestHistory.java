@@ -6,11 +6,13 @@ package Jframes;
  * @author sheen
  */
 public class OvertimeRequestHistory extends javax.swing.JFrame {
-
+    private String userID;
+    
     /**
      * Creates new form OvertimeRequestHistory
      */
-    public OvertimeRequestHistory() {
+    public OvertimeRequestHistory(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -93,14 +95,14 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
 
     private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
          // Create an instance of OvertimeRequest and display it
-        OvertimeRequest overtimeRequest = new OvertimeRequest();
+        OvertimeRequest overtimeRequest = new OvertimeRequest(userID);
         overtimeRequest.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_darkButton1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
+        HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Overtime Request frame
@@ -144,7 +146,7 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OvertimeRequestHistory().setVisible(true);
+                
             }
         });
     }

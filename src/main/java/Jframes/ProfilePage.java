@@ -9,11 +9,13 @@ package Jframes;
  * @author User
  */
 public class ProfilePage extends javax.swing.JFrame {
-
+    private String userID;
+    
     /**
      * Creates new form leaveRequestHistory
      */
-    public ProfilePage() {
+    public ProfilePage(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -308,7 +310,7 @@ public class ProfilePage extends javax.swing.JFrame {
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
+        HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Profile Page frame
@@ -355,7 +357,7 @@ public class ProfilePage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProfilePage().setVisible(true);
+                
             }
         });
     }

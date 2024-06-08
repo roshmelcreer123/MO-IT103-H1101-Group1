@@ -34,7 +34,7 @@ public class LogInNew extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         userLogInLabel = new javax.swing.JLabel();
-        enterUsernameLabel1 = new javax.swing.JLabel();
+        enterUserIDLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         selectUserTypeLabel = new javax.swing.JLabel();
         userTypeComboBox = new javax.swing.JComboBox<>();
@@ -54,9 +54,9 @@ public class LogInNew extends javax.swing.JFrame {
         userLogInLabel.setText("USER LOGIN");
         getContentPane().add(userLogInLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, -1, 30));
 
-        enterUsernameLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        enterUsernameLabel1.setText("Enter User ID");
-        getContentPane().add(enterUsernameLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 130, 30));
+        enterUserIDLabel.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        enterUserIDLabel.setText("Enter User ID");
+        getContentPane().add(enterUserIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 170, 130, 30));
 
         passwordLabel.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         passwordLabel.setText("Password");
@@ -104,7 +104,7 @@ public class LogInNew extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        String username = textUser.getText();
+        String userID = textUser.getText();
         String password = new String(jPasswordField1.getPassword());
         String userType = userTypeComboBox.getSelectedItem().toString();
 
@@ -112,13 +112,13 @@ public class LogInNew extends javax.swing.JFrame {
             Connection conn = db.mycon();
             String query = "SELECT * FROM `user_accounts` WHERE `userID`=?";
             PreparedStatement pst = conn.prepareStatement(query);
-            pst.setString(1, username);
+            pst.setString(1, userID);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
                 query = "SELECT * FROM `user_accounts` WHERE `userID`=? AND `password`=? AND `userType`=?";
                 pst = conn.prepareStatement(query);
-                pst.setString(1, username);
+                pst.setString(1, userID);
                 pst.setString(2, password);
                 pst.setString(3, userType);
                 rs = pst.executeQuery();
@@ -131,7 +131,7 @@ public class LogInNew extends javax.swing.JFrame {
                         AdminHomeDashboard itDashboard = new AdminHomeDashboard();
                         itDashboard.setVisible(true);
                     } else {
-                        HomeDashboard dashboard = new HomeDashboard();
+                        HomeDashboard dashboard = new HomeDashboard(userID);  // Pass userID to HomeDashboard
                         dashboard.setVisible(true);
                     }
                     this.setVisible(false);
@@ -187,7 +187,7 @@ public class LogInNew extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LogInBackground;
-    private javax.swing.JLabel enterUsernameLabel1;
+    private javax.swing.JLabel enterUserIDLabel;
     private javax.swing.JLabel forgotPasswordLabel1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPasswordField jPasswordField1;

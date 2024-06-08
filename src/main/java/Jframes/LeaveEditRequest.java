@@ -9,11 +9,13 @@ package Jframes;
  * @author User
  */
 public class LeaveEditRequest extends javax.swing.JFrame {
+    private String userID;
 
     /**
      * Creates new form LeaveEditRequest
      */
-    public LeaveEditRequest() {
+    public LeaveEditRequest(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -189,7 +191,7 @@ public class LeaveEditRequest extends javax.swing.JFrame {
     private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
 
         // Create an instance of the Dashboard frame
-        leaveRequestDashboard leaveDashboard = new leaveRequestDashboard();
+        leaveRequestDashboard leaveDashboard = new leaveRequestDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         leaveDashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
@@ -199,7 +201,7 @@ public class LeaveEditRequest extends javax.swing.JFrame {
     private void dashboardButtondashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtondashboardButton
 
         // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
+        HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
@@ -243,7 +245,7 @@ public class LeaveEditRequest extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LeaveEditRequest().setVisible(true);
+                
             }
         });
     }

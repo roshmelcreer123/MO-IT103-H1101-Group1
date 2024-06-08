@@ -9,11 +9,13 @@ package Jframes;
  * @author STUDY MODE
  */
 public class AttendanceDashboard extends javax.swing.JFrame {
-
+    private String userID;
+    
     /**
      * Creates new form AttendanceDashboard
      */
-    public AttendanceDashboard() {
+    public AttendanceDashboard(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -232,13 +234,13 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_button2ActionPerformed
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
-        OvertimeRequestHistory OvertimeRequestHistoryNew = new OvertimeRequestHistory();
+        OvertimeRequestHistory OvertimeRequestHistoryNew = new OvertimeRequestHistory(userID);
         OvertimeRequestHistoryNew.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_button4ActionPerformed
 
     private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
-        OvertimeRequest OvertimeRequestNew = new OvertimeRequest();
+        OvertimeRequest OvertimeRequestNew = new OvertimeRequest(userID);
         OvertimeRequestNew.setVisible(true);
         this.dispose();
         
@@ -251,7 +253,7 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
         
         // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
+        HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Attendance Dashboard frame
@@ -296,7 +298,7 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AttendanceDashboard().setVisible(true);
+                
             }
         });
     }

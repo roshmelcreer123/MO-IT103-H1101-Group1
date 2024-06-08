@@ -11,12 +11,14 @@ import Archived.Dashboard;
  * @author User
  */
 public class ViewLeave extends javax.swing.JFrame {
-
+    private String userID;
+    
     /**
      * Creates new form ViewLeave
      */
-    public ViewLeave() {
-        initComponents();
+    public ViewLeave(String userID) {
+        this.userID = userID;
+        initComponents(); 
     }
 
     /**
@@ -156,7 +158,7 @@ public class ViewLeave extends javax.swing.JFrame {
 
     private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
         // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
+        HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
@@ -172,7 +174,7 @@ public class ViewLeave extends javax.swing.JFrame {
 
     private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
         // Create an instance of the Leave Request Dashboard frame
-        leaveRequestDashboard LeaveRequest = new leaveRequestDashboard();
+        leaveRequestDashboard LeaveRequest = new leaveRequestDashboard(userID);
         // Set the visibility of the Leave Request Dashboard frame to true
         LeaveRequest.setVisible(true);
         // Close the Create leaveRequest Dashboard frame
@@ -213,7 +215,7 @@ public class ViewLeave extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewLeave().setVisible(true);
+                
             }
         });
     }

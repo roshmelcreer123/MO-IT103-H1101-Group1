@@ -14,11 +14,13 @@ import Jframes.AttendanceDashboard;
  * @author User
  */
 public class Dashboard extends javax.swing.JFrame {
+    private String userID;
 
     /**
      * Creates new form DashboardNew
      */
-    public Dashboard() {
+    public Dashboard(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -911,7 +913,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void salaryButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryButton
         
         // Create an instance of the Salary Dashboard frame
-        SalaryDashboard salaryDashboard = new SalaryDashboard();
+        SalaryDashboard salaryDashboard = new SalaryDashboard(userID);
         
         // Set the visibility of the Salary Dashboard frame to true
         salaryDashboard.setVisible(true);
@@ -971,7 +973,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void attendanceButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceButton
         // Create an instance of the Attendance Dashboard frame
-        AttendanceDashboard attendanceDashboard = new AttendanceDashboard();
+        AttendanceDashboard attendanceDashboard = new AttendanceDashboard(userID);
         
         // Set the visibility of the Attendance Dashboard frame to true
         attendanceDashboard.setVisible(true);
@@ -983,7 +985,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void profileButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButton
         
         // Create an instance of the Profile frame
-        ProfileDashboard profile = new ProfileDashboard();
+        ProfileDashboard profile = new ProfileDashboard(userID);
         // Set the visibility of the Profile frame to true
         profile.setVisible(true);
         // Close the Login frame
@@ -993,7 +995,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void logoutButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButton
         
         // Create an instance of the Login frame
-        Login login = new Login();
+        Login login = new Login(userID);
         // Set the visibility of the Login frame to true
         login.setVisible(true);
         // Close the Dashboard frame
@@ -1031,7 +1033,7 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dashboard().setVisible(true);
+                
             }
         });
     }

@@ -52,12 +52,13 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="88" green="75" red="36" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ging Lee"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Employee Name"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="90" y="240" width="-1" height="-1"/>
+          <AbsoluteConstraints x="29" y="240" width="210" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -69,12 +70,13 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="88" green="75" red="36" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=" Sales Associate"/>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Position"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="80" y="260" width="100" height="20"/>
+          <AbsoluteConstraints x="30" y="260" width="210" height="20"/>
         </Constraint>
       </Constraints>
     </Component>

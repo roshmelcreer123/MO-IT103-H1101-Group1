@@ -9,11 +9,13 @@ package Archived;
  * @author STUDY MODE
  */
 public class SalaryDashboard extends javax.swing.JFrame {
+    private String userID;
 
     /**
      * Creates new form SalaryDashboard
      */
-    public SalaryDashboard() {
+    public SalaryDashboard(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -505,7 +507,7 @@ public class SalaryDashboard extends javax.swing.JFrame {
     private void dashboardButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButton
         
         // Create an instance of the Dashboard frame
-        Dashboard dashboard = new Dashboard();
+        Dashboard dashboard = new Dashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Login frame
@@ -547,7 +549,7 @@ public class SalaryDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SalaryDashboard().setVisible(true);
+                
             }
         });
     }

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Jframes;
 
 import Classes.db; // Import the db class
@@ -10,29 +7,37 @@ import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
 public class leaveRequestDashboard extends javax.swing.JFrame {
+    private String userID;
 
      /**
      * Creates new form leaveRequestHistory
      */
-    public leaveRequestDashboard() {
+    public leaveRequestDashboard(String userID) {
+        this.userID = userID;
         initComponents();
-        fetchData("1001"); // Calling the fetchData method with the specific employee ID
+        fetchData(); // Call fetchData method to load the data
     }
 
     // private void fetchData(String employeeID) {
-    private void fetchData(String employeeID) {
+    private void fetchData() {
         try {
             // Get the connection from db class
             Connection conn = db.mycon();
 
-            // Check if the connection is successful
-            if (conn != null) {
-                // Create a statement
-                Statement stmt = conn.createStatement();
+            // Query to get the employeeID based on the userID
+            String query = "SELECT employeeID FROM user_accounts WHERE userID = ?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, userID);
+            ResultSet rs = pst.executeQuery();
 
-                // Execute a query to retrieve data from the employees table
-                String query = "SELECT * FROM leave_requests WHERE employeeID = '" + employeeID + "'";
-                ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                String employeeID = rs.getString("employeeID");
+
+                // Now use this employeeID to fetch leave requests
+                query = "SELECT * FROM leave_requests WHERE employeeID = ?";
+                pst = conn.prepareStatement(query);
+                pst.setString(1, employeeID);
+                rs = pst.executeQuery();
 
                 // Get the table model from jTable2
                 DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
@@ -56,10 +61,10 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
 
                 // Close the connection
                 rs.close();
-                stmt.close();
+                pst.close();
                 conn.close();
             } else {
-                System.out.println("Failed to make connection!");
+                System.out.println("Failed to find employeeID for userID: " + userID);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,7 +153,7 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
 
     private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
         // Create an instance of the CreateLeaveRequest frame
-        RequestLeave requestLeave = new RequestLeave();
+        RequestLeave requestLeave = new RequestLeave(userID);
         // Set the visibility of the CreateLeaveRequest frame to true
         requestLeave.setVisible(true);
         // Close the leaveRequestDashboard Dashboard frame
@@ -157,7 +162,7 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
 
     private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
         // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
+        HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
@@ -202,7 +207,7 @@ public class leaveRequestDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new leaveRequestDashboard().setVisible(true); // Pass the specific employee ID
+                
             }
         });
     }

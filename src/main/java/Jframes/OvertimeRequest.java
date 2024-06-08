@@ -10,11 +10,13 @@ import org.jdatepicker.JDatePicker;
  * @author User
  */
 public class OvertimeRequest extends javax.swing.JFrame {
+    private String userID;
 
     /**
      * Creates new form OvertimeRequest
      */
-    public OvertimeRequest() {
+    public OvertimeRequest(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -191,7 +193,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
 
     private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
 
-        OvertimeRequestHistory OvertimeRequest = new OvertimeRequestHistory();
+        OvertimeRequestHistory OvertimeRequest = new OvertimeRequestHistory(userID);
         OvertimeRequest.setVisible(true);
         this.dispose(); 
         
@@ -207,7 +209,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // Create an instance of the Dashboard frame
-        HomeDashboard dashboard = new HomeDashboard();
+        HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Overtime Request frame
@@ -251,7 +253,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OvertimeRequest().setVisible(true);
+                
             }
         });
     }

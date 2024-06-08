@@ -1,14 +1,50 @@
 
 package Jframes;
 
+import Classes.db;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import Archived.SalaryDashboard;
+import javax.swing.JOptionPane;
+
+
 
 
 public class HomeDashboard extends javax.swing.JFrame {
 
-   
-    public HomeDashboard() {
+   private String userID;
+
+    public HomeDashboard(String userID) {
+        this.userID = userID;
         initComponents();
+        loadUserData(userID);
+    }
+
+    private void loadUserData(String userID) {
+        try {
+            Connection conn = db.mycon();
+            String query = "SELECT * FROM `user_accounts` WHERE `userID`=?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, userID);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String position = rs.getString("position");
+                String profilePicturePath = rs.getString("profilePicturePath");
+
+                employeeNameLabel.setText(firstName + " " + lastName);
+                positionLabel.setText(position);
+                if (profilePicturePath != null && !profilePicturePath.isEmpty()) {
+                    employeeProfilePicture.setIcon(new ImageIcon(profilePicturePath));
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
 
     /**
@@ -63,15 +99,17 @@ public class HomeDashboard extends javax.swing.JFrame {
 
         employeeNameLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         employeeNameLabel.setForeground(new java.awt.Color(54, 117, 136));
-        employeeNameLabel.setText("Ging Lee");
+        employeeNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeeNameLabel.setText("Employee Name");
         employeeNameLabel.setToolTipText("");
-        getContentPane().add(employeeNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+        getContentPane().add(employeeNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 240, 210, -1));
 
         positionLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         positionLabel.setForeground(new java.awt.Color(54, 117, 136));
-        positionLabel.setText(" Sales Associate");
+        positionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        positionLabel.setText("Position");
         positionLabel.setToolTipText("");
-        getContentPane().add(positionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 100, 20));
+        getContentPane().add(positionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 210, 20));
 
         leaveCreditsLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         leaveCreditsLabel.setForeground(new java.awt.Color(54, 117, 136));
@@ -327,7 +365,7 @@ public class HomeDashboard extends javax.swing.JFrame {
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
         // Create an instance of ProfilePage and display it
-    ProfilePage profilePage = new ProfilePage();
+    ProfilePage profilePage = new ProfilePage(userID);
     profilePage.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_profileButtonActionPerformed
@@ -338,28 +376,28 @@ public class HomeDashboard extends javax.swing.JFrame {
 
     private void salaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryButtonActionPerformed
         // Create an instance of SalaryPage and display it
-    SalaryPage salaryPage = new SalaryPage();
+    SalaryPage salaryPage = new SalaryPage(userID);
     salaryPage.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_salaryButtonActionPerformed
 
     private void attendanceButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceButton1ActionPerformed
         // Create an instance of AttendanceDashboard and display it
-    AttendanceDashboard attendanceDashboard = new AttendanceDashboard();
+    AttendanceDashboard attendanceDashboard = new AttendanceDashboard(userID);
     attendanceDashboard.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_attendanceButton1ActionPerformed
 
     private void leaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaveButtonActionPerformed
         // Create an instance of leaveRequestDashboard and display it
-    leaveRequestDashboard leaveRequestDashboard = new leaveRequestDashboard();
+    leaveRequestDashboard leaveRequestDashboard = new leaveRequestDashboard(userID);
     leaveRequestDashboard.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_leaveButtonActionPerformed
 
     private void overtimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overtimeButtonActionPerformed
         // Create an instance of overtimeRequestHistoryDashboard and display it
-    OvertimeRequestHistory overtimeRequestHistory = new OvertimeRequestHistory();
+    OvertimeRequestHistory overtimeRequestHistory = new OvertimeRequestHistory(userID);
     overtimeRequestHistory.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_overtimeButtonActionPerformed
@@ -452,7 +490,7 @@ public class HomeDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomeDashboard().setVisible(true);
+                
             }
         });
     }
