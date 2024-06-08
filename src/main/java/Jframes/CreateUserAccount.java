@@ -199,8 +199,8 @@ public class CreateUserAccount extends javax.swing.JFrame {
     private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
 
          // Redirects to View All Employees Admin Page
-        ViewAllEmployee viewAllEmployee = new ViewAllEmployee();
-        viewAllEmployee.setVisible(true);
+        UserAccounts userAccounts = new UserAccounts();
+        userAccounts.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_darkButton2ActionPerformed
 
