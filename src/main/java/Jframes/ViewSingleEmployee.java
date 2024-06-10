@@ -124,27 +124,27 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
         jFirstName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jFirstName.setForeground(new java.awt.Color(54, 117, 136));
         jFirstName.setText("Ging");
-        getContentPane().add(jFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
+        getContentPane().add(jFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, -1, -1));
 
         jBirthday.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jBirthday.setForeground(new java.awt.Color(54, 117, 136));
         jBirthday.setText("Jan-01-1990");
-        getContentPane().add(jBirthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, -1, -1));
+        getContentPane().add(jBirthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, -1, -1));
 
         jPhoneNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jPhoneNumber.setForeground(new java.awt.Color(54, 117, 136));
         jPhoneNumber.setText("09123456789");
-        getContentPane().add(jPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 180, -1, -1));
+        getContentPane().add(jPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 170, -1, -1));
 
         jAddress.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jAddress.setForeground(new java.awt.Color(54, 117, 136));
         jAddress.setText("123 Luzon, Philippines");
-        getContentPane().add(jAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 210, 100, -1));
+        getContentPane().add(jAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, 420, -1));
 
         jLastName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLastName.setForeground(new java.awt.Color(54, 117, 136));
         jLastName.setText("Lee");
-        getContentPane().add(jLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
+        getContentPane().add(jLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, -1, -1));
 
         jPhilhealthNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jPhilhealthNumber.setForeground(new java.awt.Color(54, 117, 136));
@@ -207,7 +207,7 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
         jStatus.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jStatus.setForeground(new java.awt.Color(54, 117, 136));
         jStatus.setText("Employed");
-        getContentPane().add(jStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 240, -1, 20));
+        getContentPane().add(jStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 200, -1, 20));
 
         jImmediateSupervisor.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jImmediateSupervisor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
