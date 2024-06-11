@@ -26,6 +26,19 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
+    <Component class="Button.Button" name="salaryButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salary"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salaryButtonActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="50" y="390" width="170" height="40"/>
+        </Constraint>
+      </Constraints>
+    </Component>
     <Component class="Button.Button" name="leaveRequestButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Leave Request"/>
@@ -35,7 +48,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="50" y="380" width="170" height="40"/>
+          <AbsoluteConstraints x="50" y="435" width="170" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -45,7 +58,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="50" y="440" width="170" height="40"/>
+          <AbsoluteConstraints x="50" y="480" width="170" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -58,7 +71,20 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="50" y="320" width="170" height="40"/>
+          <AbsoluteConstraints x="50" y="300" width="170" height="40"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="Button.Button" name="attendanceSalaryButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Attendance"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="attendanceSalaryButtonActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="50" y="345" width="170" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -71,7 +97,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="50" y="500" width="170" height="40"/>
+          <AbsoluteConstraints x="50" y="525" width="170" height="40"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -14,9 +14,11 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        salaryButton = new Button.Button();
         leaveRequestButton = new Button.Button();
         overtimeRequestButton = new Button.Button();
         btnViewEmployeeDatabase = new Button.Button();
+        attendanceSalaryButton = new Button.Button();
         userAccountsButton = new Button.Button();
         btnLogout = new Button.Button();
         Calendar = new com.toedter.calendar.JCalendar();
@@ -30,16 +32,24 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        salaryButton.setText("Salary");
+        salaryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salaryButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(salaryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 170, 40));
+
         leaveRequestButton.setText("Leave Request");
         leaveRequestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 leaveRequestButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(leaveRequestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 170, 40));
+        getContentPane().add(leaveRequestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 435, 170, 40));
 
         overtimeRequestButton.setText("Overtime Request");
-        getContentPane().add(overtimeRequestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, 170, 40));
+        getContentPane().add(overtimeRequestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, 170, 40));
 
         btnViewEmployeeDatabase.setText("Employees Data");
         btnViewEmployeeDatabase.addActionListener(new java.awt.event.ActionListener() {
@@ -47,7 +57,15 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
                 btnViewEmployeeDatabaseActionPerformed(evt);
             }
         });
-        getContentPane().add(btnViewEmployeeDatabase, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 170, 40));
+        getContentPane().add(btnViewEmployeeDatabase, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 170, 40));
+
+        attendanceSalaryButton.setText("Attendance");
+        attendanceSalaryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                attendanceSalaryButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(attendanceSalaryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 345, 170, 40));
 
         userAccountsButton.setText("User Accounts");
         userAccountsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -55,7 +73,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
                 userAccountsButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(userAccountsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, 170, 40));
+        getContentPane().add(userAccountsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 525, 170, 40));
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -108,10 +126,18 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         new ViewAllEmployee().setVisible(true); dispose();
     }//GEN-LAST:event_btnViewEmployeeDatabaseActionPerformed
 
-    private void userAccountsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userAccountsButtonActionPerformed
+    private void attendanceSalaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceSalaryButtonActionPerformed
         // Redirects to User Accounts Database Page
+        new AttendanceDashboardAdmin().setVisible(true); dispose();
+    }//GEN-LAST:event_attendanceSalaryButtonActionPerformed
+
+    private void userAccountsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userAccountsButtonActionPerformed
         new UserAccounts().setVisible(true); dispose();
     }//GEN-LAST:event_userAccountsButtonActionPerformed
+
+    private void salaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salaryButtonActionPerformed
 	
 	
     /**
@@ -151,6 +177,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar Calendar;
+    private Button.Button attendanceSalaryButton;
     private javax.swing.JLabel background;
     private Button.Button btnLogout;
     private Button.Button btnViewEmployeeDatabase;
@@ -160,6 +187,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkboxAdminTask4;
     private Button.Button leaveRequestButton;
     private Button.Button overtimeRequestButton;
+    private Button.Button salaryButton;
     private Button.Button userAccountsButton;
     // End of variables declaration//GEN-END:variables
 
