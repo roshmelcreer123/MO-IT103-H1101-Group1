@@ -8,13 +8,13 @@ package Jframes;
  *
  * @author STUDY MODE
  */
-public class AttendanceDashboard extends javax.swing.JFrame {
+public class AttendanceDashboardAdmin extends javax.swing.JFrame {
     private String userID;
     
     /**
      * Creates new form AttendanceDashboard
      */
-    public AttendanceDashboard(String userID) {
+    public AttendanceDashboardAdmin(String userID) {
         this.userID = userID;
         initComponents();
     }
@@ -41,6 +41,8 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        button2 = new Button.Button();
+        button3 = new Button.Button();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -151,6 +153,22 @@ public class AttendanceDashboard extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 340, 140));
 
+        button2.setText("Time-Out");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 260, 140, -1));
+
+        button3.setText("Time-In");
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 210, 140, -1));
+
         jLabel6.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("08:30:01");
@@ -209,6 +227,10 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_button1ActionPerformed
 
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button2ActionPerformed
+
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         OvertimeRequestHistory OvertimeRequestHistoryNew = new OvertimeRequestHistory(userID);
         OvertimeRequestHistoryNew.setVisible(true);
@@ -221,6 +243,10 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_button5ActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button3ActionPerformed
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
         
@@ -257,14 +283,15 @@ public class AttendanceDashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AttendanceDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceDashboardAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AttendanceDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceDashboardAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AttendanceDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceDashboardAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AttendanceDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AttendanceDashboardAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -277,6 +304,8 @@ public class AttendanceDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Button.Button button1;
+    private Button.Button button2;
+    private Button.Button button3;
     private Button.Button button4;
     private Button.Button button5;
     private Button.Button button6;
