@@ -136,7 +136,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_userAccountsButtonActionPerformed
 
     private void salaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryButtonActionPerformed
-        // TODO add your handling code here:
+        new ViewSalaryAdmin().setVisible(true); dispose();
     }//GEN-LAST:event_salaryButtonActionPerformed
 	
 	

@@ -145,7 +145,7 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
     }
     
     
-    private long calculateTotalHoursWorkedForMonth(int year, int month) {
+    public long calculateTotalHoursWorkedForMonth(int year, int month) {
         long totalHoursWorkedForMonth = 0;
 
         try {

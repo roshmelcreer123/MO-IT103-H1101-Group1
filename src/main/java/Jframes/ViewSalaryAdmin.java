@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author STUDY MODE
  */
-public class EmployeeDatabase extends javax.swing.JFrame {
+public class ViewSalaryAdmin extends javax.swing.JFrame {
 
     private int selectedEmployeeID;
     private String selectedFirstName, selectedLastName, selectedAddress, selectedPhoneNumber, 
@@ -26,7 +26,7 @@ public class EmployeeDatabase extends javax.swing.JFrame {
                    selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor;
     private java.sql.Date selectedBirthday;  // Changed to java.sql.Date
     
-    public EmployeeDatabase() {
+    public ViewSalaryAdmin() {
         initComponents();
         fetchData();
         addTableListener();
@@ -137,10 +137,10 @@ public class EmployeeDatabase extends javax.swing.JFrame {
         Label = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        viewEmployee = new Button.DarkButton();
-        deleteEmployee = new Button.DarkButton();
-        updateEmployee = new Button.DarkButton();
-        createEmployee = new Button.DarkButton();
+        viewSalary = new Button.DarkButton();
+        deleteSalary = new Button.DarkButton();
+        updateSalary = new Button.DarkButton();
+        createSalary = new Button.DarkButton();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -167,7 +167,7 @@ public class EmployeeDatabase extends javax.swing.JFrame {
 
         Label.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         Label.setForeground(new java.awt.Color(255, 255, 255));
-        Label.setText("Employee Database");
+        Label.setText("Salary Database");
         getContentPane().add(Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -197,32 +197,37 @@ public class EmployeeDatabase extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 940, 390));
 
-        viewEmployee.setText("View");
-        viewEmployee.addActionListener(new java.awt.event.ActionListener() {
+        viewSalary.setText("View");
+        viewSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewEmployeeActionPerformed(evt);
+                viewSalaryActionPerformed(evt);
             }
         });
-        getContentPane().add(viewEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, 160, -1));
+        getContentPane().add(viewSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, 160, -1));
 
-        deleteEmployee.setText("Delete");
-        deleteEmployee.addActionListener(new java.awt.event.ActionListener() {
+        deleteSalary.setText("Delete");
+        deleteSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteEmployeeActionPerformed(evt);
+                deleteSalaryActionPerformed(evt);
             }
         });
-        getContentPane().add(deleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 160, -1));
+        getContentPane().add(deleteSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 160, -1));
 
-        updateEmployee.setText("Update");
-        getContentPane().add(updateEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 160, -1));
-
-        createEmployee.setText("Create");
-        createEmployee.addActionListener(new java.awt.event.ActionListener() {
+        updateSalary.setText("Update");
+        updateSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createEmployeeActionPerformed(evt);
+                updateSalaryActionPerformed(evt);
             }
         });
-        getContentPane().add(createEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 160, -1));
+        getContentPane().add(updateSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 160, -1));
+
+        createSalary.setText("Create");
+        createSalary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createSalaryActionPerformed(evt);
+            }
+        });
+        getContentPane().add(createSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 160, -1));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -241,57 +246,21 @@ public class EmployeeDatabase extends javax.swing.JFrame {
         new LogInNew().setVisible(true); dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void createEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEmployeeActionPerformed
+    private void createSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createSalaryActionPerformed
+        new CreateSalary().setVisible(true); dispose();
+    }//GEN-LAST:event_createSalaryActionPerformed
+
+    private void deleteSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSalaryActionPerformed
+
+    }//GEN-LAST:event_deleteSalaryActionPerformed
+
+    private void viewSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSalaryActionPerformed
+        
+    }//GEN-LAST:event_viewSalaryActionPerformed
+
+    private void updateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSalaryActionPerformed
         // TODO add your handling code here:
-        CreateEmployee createEmployee = new CreateEmployee();
-        createEmployee.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_createEmployeeActionPerformed
-
-    private void deleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployeeActionPerformed
-
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this employee?", "Warning", JOptionPane.YES_NO_OPTION);
-        if (dialogResult == JOptionPane.YES_OPTION) {
-            try {
-                // Get the connection from db class
-                Connection conn = db.mycon();
-
-                // Check if the connection is successful
-                if (conn != null) {
-                    // Create a statement
-                    Statement stmt = conn.createStatement();
-
-                    // Execute a query to delete the selected employee
-                    String query = "DELETE FROM employees WHERE employeeID = " + selectedEmployeeID;
-                    int rowsAffected = stmt.executeUpdate(query);
-
-                    // Check if deletion was successful
-                    if (rowsAffected > 0) {
-                        JOptionPane.showMessageDialog(null, "Employee deleted successfully");
-                        // Refresh the table
-                        fetchData();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Failed to delete employee");
-                    }
-
-                    // Close the connection
-                    stmt.close();
-                    conn.close();
-                } else {
-                    System.out.println("Failed to make connection!");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }        
-    }//GEN-LAST:event_deleteEmployeeActionPerformed
-
-    private void viewEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEmployeeActionPerformed
-        // TODO add your handling code here:
-        ViewAllEmployee viewEmployees = new ViewAllEmployee();
-        viewEmployees.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_viewEmployeeActionPerformed
+    }//GEN-LAST:event_updateSalaryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,20 +279,21 @@ public class EmployeeDatabase extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EmployeeDatabase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EmployeeDatabase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EmployeeDatabase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmployeeDatabase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeDatabase().setVisible(true);
+                new ViewSalaryAdmin().setVisible(true);
             }
         });
     }
@@ -333,11 +303,11 @@ public class EmployeeDatabase extends javax.swing.JFrame {
     private javax.swing.JLabel Label;
     private Button.Button btnDashboard;
     private Button.Button btnLogout;
-    private Button.DarkButton createEmployee;
-    private Button.DarkButton deleteEmployee;
+    private Button.DarkButton createSalary;
+    private Button.DarkButton deleteSalary;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private Button.DarkButton updateEmployee;
-    private Button.DarkButton viewEmployee;
+    private Button.DarkButton updateSalary;
+    private Button.DarkButton viewSalary;
     // End of variables declaration//GEN-END:variables
 }
