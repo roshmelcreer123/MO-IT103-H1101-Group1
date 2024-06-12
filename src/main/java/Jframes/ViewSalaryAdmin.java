@@ -20,11 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewSalaryAdmin extends javax.swing.JFrame {
 
-    private int selectedEmployeeID;
-    private String selectedFirstName, selectedLastName, selectedAddress, selectedPhoneNumber, 
-                   selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber, 
-                   selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor;
-    private java.sql.Date selectedBirthday;  // Changed to java.sql.Date
+    private int selectedSalaryID;
     
     public ViewSalaryAdmin() {
         initComponents();
@@ -87,8 +83,7 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
                 // Assuming the ID is in the first column
-                int selectedSalaryID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
-                // Additional actions can be performed here if needed
+                selectedSalaryID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
             }
         });
     }
@@ -223,7 +218,39 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_createSalaryActionPerformed
 
     private void deleteSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSalaryActionPerformed
+        if (selectedSalaryID != 0) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this salary record?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    // Get the connection from db class
+                    Connection conn = db.mycon();
 
+                    // Check if the connection is successful
+                    if (conn != null) {
+                        // Prepare a delete statement
+                        String query = "DELETE FROM salary WHERE salaryID = ?";
+                        PreparedStatement pstmt = conn.prepareStatement(query);
+                        pstmt.setInt(1, selectedSalaryID);
+                        pstmt.executeUpdate();
+
+                        // Close the connection
+                        pstmt.close();
+                        conn.close();
+
+                        // Refresh the table
+                        fetchData();
+                        JOptionPane.showMessageDialog(this, "Salary record deleted successfully!");
+                    } else {
+                        System.out.println("Failed to make connection!");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Failed to delete salary record.");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No salary record selected.");
+        }
     }//GEN-LAST:event_deleteSalaryActionPerformed
 
     private void viewSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSalaryActionPerformed
