@@ -92,22 +92,7 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
             }
         });
     }
-    /*private void updateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-     UpdateEmployee updateEmployeeForm = new UpdateEmployee(
-                selectedEmployeeID, selectedFirstName, selectedLastName, selectedBirthday, selectedAddress,
-                selectedPhoneNumber, selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber,
-                selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor);
-        updateEmployeeForm.setVisible(true);
-        this.dispose();
-    }
     
-    private void addActionListeners() {
-        updateEmployee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateEmployeeButtonActionPerformed(evt);
-            }
-        });
-    } */
 
     /**
      * This method is called from within the constructor to initialize the form.
