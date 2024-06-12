@@ -73,6 +73,9 @@
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <Properties>
         <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
+        <Property name="columnHeaderView" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="null"/>
+        </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -88,22 +91,17 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="15" rowCount="4">
+              <Table columnCount="10" rowCount="4">
+                <Column editable="false" title="Salary ID" type="java.lang.Object"/>
                 <Column editable="false" title="Employee ID" type="java.lang.Object"/>
-                <Column editable="false" title="Last Name" type="java.lang.Object"/>
-                <Column editable="false" title="First Name" type="java.lang.Object"/>
-                <Column editable="false" title="Birthday" type="java.lang.Object"/>
-                <Column editable="false" title="Address" type="java.lang.Object"/>
-                <Column editable="false" title="Phone Number" type="java.lang.Object"/>
-                <Column editable="false" title="SSS #" type="java.lang.Object"/>
-                <Column editable="false" title="PhilHealth #" type="java.lang.Object"/>
-                <Column editable="false" title="TIN #" type="java.lang.Object"/>
-                <Column editable="false" title="Pag-ibig #" type="java.lang.Object"/>
-                <Column editable="false" title="Status" type="java.lang.Object"/>
-                <Column editable="false" title="Position" type="java.lang.Object"/>
-                <Column editable="false" title="ImmediateSupervisor" type="java.lang.Object"/>
-                <Column editable="false" title="Basic Salary" type="java.lang.Object"/>
-                <Column editable="false" title="Rice Subsidy" type="java.lang.Object"/>
+                <Column editable="false" title="Total Hours Worked" type="java.lang.Object"/>
+                <Column editable="false" title="Total Late Hours" type="java.lang.Object"/>
+                <Column editable="false" title="Gross Salary" type="java.lang.Object"/>
+                <Column editable="false" title="Net Salary" type="java.lang.Object"/>
+                <Column editable="false" title="Total Deductions" type="java.lang.Object"/>
+                <Column editable="false" title="Total Allowance" type="java.lang.Object"/>
+                <Column editable="false" title="Year" type="java.lang.Object"/>
+                <Column editable="false" title="Month" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="0"/>
