@@ -43,30 +43,27 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
                 // Create a statement
                 Statement stmt = conn.createStatement();
 
-                // Execute a query to retrieve data from the employees table
-                String query = "SELECT * FROM employees";
+                // Execute a query to retrieve data from the salary table
+                String query = "SELECT * FROM salary";
                 ResultSet rs = stmt.executeQuery(query);
 
-                // Get the table model from jTable2
+                // Get the table model from jTable1
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                 model.setRowCount(0); // Clear existing data
 
                 // Add rows to the table model
                 while (rs.next()) {
                     model.addRow(new Object[]{
+                        rs.getInt("salaryID"),
                         rs.getInt("employeeID"),
-                        rs.getString("firstName"),
-                        rs.getString("lastName"),
-                        rs.getDate("birthday"),
-                        rs.getString("address"),
-                        rs.getString("phoneNumber"),
-                        rs.getString("sssNumber"),
-                        rs.getString("philhealthNumber"),
-                        rs.getString("tinNumber"),
-                        rs.getString("pagibigNumber"),
-                        rs.getString("status"),
-                        rs.getString("position"),
-                        rs.getString("immediateSupervisor")
+                        rs.getInt("year"),
+                        rs.getInt("month"),
+                        rs.getBigDecimal("totalHoursWorked"),
+                        rs.getBigDecimal("totalLateHours"),
+                        rs.getBigDecimal("totalAllowance"),
+                        rs.getBigDecimal("grossSalary"),
+                        rs.getBigDecimal("totalDeductions"),
+                        rs.getBigDecimal("netSalary")
                     });
                 }
 
@@ -81,28 +78,17 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     private void addTableListener() {
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int selectedRow = jTable1.getSelectedRow();
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                
+
                 // Assuming the ID is in the first column
-                selectedEmployeeID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
-                selectedLastName = model.getValueAt(selectedRow, 1).toString();
-                selectedFirstName = model.getValueAt(selectedRow, 2).toString();
-                selectedBirthday = new java.sql.Date(((java.util.Date) model.getValueAt(selectedRow, 3)).getTime());
-                selectedAddress = model.getValueAt(selectedRow, 4).toString();
-                selectedPhoneNumber = model.getValueAt(selectedRow, 5).toString();
-                selectedSSSNumber = model.getValueAt(selectedRow, 6).toString();
-                selectedPhilhealthNumber = model.getValueAt(selectedRow, 7).toString();
-                selectedTINNumber = model.getValueAt(selectedRow, 8).toString();
-                selectedPagibigNumber = model.getValueAt(selectedRow, 9).toString();
-                selectedStatus = model.getValueAt(selectedRow, 10).toString();
-                selectedPosition = model.getValueAt(selectedRow, 11).toString();
-                selectedImmediateSupervisor = model.getValueAt(selectedRow, 12).toString();
+                int selectedSalaryID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+                // Additional actions can be performed here if needed
             }
         });
     }
@@ -181,7 +167,7 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Salary ID", "Employee ID", "Total Hours Worked", "Total Late Hours", "Gross Salary", "Net Salary", "Total Deductions", "Total Allowance", "Year", "Month"
+                "Salary ID", "Employee ID", "Year", "Month", "Total Hours Worked", "Total Late Hours", "Total Allowance", "Gross Salary", "Total Deductions", "Net Salary"
             }
         ) {
             boolean[] canEdit = new boolean [] {

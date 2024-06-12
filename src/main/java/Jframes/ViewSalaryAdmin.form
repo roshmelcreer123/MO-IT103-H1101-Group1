@@ -94,14 +94,14 @@
               <Table columnCount="10" rowCount="4">
                 <Column editable="false" title="Salary ID" type="java.lang.Object"/>
                 <Column editable="false" title="Employee ID" type="java.lang.Object"/>
-                <Column editable="false" title="Total Hours Worked" type="java.lang.Object"/>
-                <Column editable="false" title="Total Late Hours" type="java.lang.Object"/>
-                <Column editable="false" title="Gross Salary" type="java.lang.Object"/>
-                <Column editable="false" title="Net Salary" type="java.lang.Object"/>
-                <Column editable="false" title="Total Deductions" type="java.lang.Object"/>
-                <Column editable="false" title="Total Allowance" type="java.lang.Object"/>
                 <Column editable="false" title="Year" type="java.lang.Object"/>
                 <Column editable="false" title="Month" type="java.lang.Object"/>
+                <Column editable="false" title="Total Hours Worked" type="java.lang.Object"/>
+                <Column editable="false" title="Total Late Hours" type="java.lang.Object"/>
+                <Column editable="false" title="Total Allowance" type="java.lang.Object"/>
+                <Column editable="false" title="Gross Salary" type="java.lang.Object"/>
+                <Column editable="false" title="Total Deductions" type="java.lang.Object"/>
+                <Column editable="false" title="Net Salary" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="0"/>
