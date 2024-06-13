@@ -89,6 +89,8 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
         });
     }
     
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -255,7 +257,28 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteSalaryActionPerformed
 
     private void viewSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSalaryActionPerformed
-        
+        if (selectedSalaryID != 0) {
+            int selectedRow = jTable1.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+            int salaryID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+            int employeeID = Integer.parseInt(model.getValueAt(selectedRow, 1).toString());
+            int year = Integer.parseInt(model.getValueAt(selectedRow, 2).toString());
+            int month = Integer.parseInt(model.getValueAt(selectedRow, 3).toString());
+            BigDecimal totalHoursWorked = new BigDecimal(model.getValueAt(selectedRow, 4).toString());
+            BigDecimal totalLateHours = new BigDecimal(model.getValueAt(selectedRow, 5).toString());
+            BigDecimal totalAllowance = new BigDecimal(model.getValueAt(selectedRow, 6).toString());
+            BigDecimal grossSalary = new BigDecimal(model.getValueAt(selectedRow, 7).toString());
+            BigDecimal totalDeductions = new BigDecimal(model.getValueAt(selectedRow, 8).toString());
+            BigDecimal netSalary = new BigDecimal(model.getValueAt(selectedRow, 9).toString());
+
+            ViewOneSalaryAdmin viewOneSalaryAdmin = new ViewOneSalaryAdmin();
+            viewOneSalaryAdmin.setSalaryData(salaryID, employeeID, year, month, totalHoursWorked, totalLateHours, totalAllowance, grossSalary, totalDeductions, netSalary);
+            viewOneSalaryAdmin.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No salary record selected.");
+        }
     }//GEN-LAST:event_viewSalaryActionPerformed
 
     private void updateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSalaryActionPerformed
