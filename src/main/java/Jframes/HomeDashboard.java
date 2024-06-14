@@ -376,7 +376,7 @@ public class HomeDashboard extends javax.swing.JFrame {
 
     private void salaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryButtonActionPerformed
         // Create an instance of SalaryPage and display it
-    SalaryPage salaryPage = new SalaryPage(userID);
+    ViewOneSalaryEmployee salaryPage = new ViewOneSalaryEmployee(userID);
     salaryPage.setVisible(true);
     this.dispose();
     }//GEN-LAST:event_salaryButtonActionPerformed
