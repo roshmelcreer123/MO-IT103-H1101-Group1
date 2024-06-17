@@ -49,7 +49,7 @@ public class CreateSalary extends javax.swing.JFrame {
         fillEmployeeIDs(); // Populate employee IDs in the combo box
     }
     
-    private void fillEmployeeIDs() {
+    public void fillEmployeeIDs() {
         try {
             // Get the connection from db class
             Connection conn = db.mycon();
@@ -82,7 +82,7 @@ public class CreateSalary extends javax.swing.JFrame {
     
     
     // Method to fetch and set employee details in JLabels based on selected employee ID
-    private void setEmployeeDetails(String employeeID) {
+    public void setEmployeeDetails(String employeeID) {
         try {
             // Get the connection from db class
             Connection conn = db.mycon();
@@ -131,7 +131,7 @@ public class CreateSalary extends javax.swing.JFrame {
         }
     }
     
-    private long calculateTotalHoursWorkedForMonth(int year, int month, String employeeID) {
+    public long calculateTotalHoursWorkedForMonth(int year, int month, String employeeID) {
         long totalMinutesWorkedForMonth = 0;
 
         try {
@@ -193,7 +193,7 @@ public class CreateSalary extends javax.swing.JFrame {
     }
     
     // Calculate gross salary
-    private BigDecimal calculateGrossSalary(String employeeID, int year, int month) {
+    public BigDecimal calculateGrossSalary(String employeeID, int year, int month) {
         // Fetch employee details
         setEmployeeDetails(employeeID);
 
@@ -271,7 +271,7 @@ public class CreateSalary extends javax.swing.JFrame {
         return taxDue;
     }
     
-        private double calculateLateWorkHours(Time timeIn) throws java.text.ParseException {
+    public double calculateLateWorkHours(Time timeIn) throws java.text.ParseException {
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             java.util.Date expectedTimeIn = sdf.parse("08:00:00");
             java.util.Date actualTimeIn = sdf.parse(timeIn.toString());
@@ -306,9 +306,9 @@ public class CreateSalary extends javax.swing.JFrame {
             }
 
             return 0; // Return 0 if not late
-        }
+    }
 
-    private double calculateTotalLateHoursForMonth(int year, int month, String employeeID) {
+    public double calculateTotalLateHoursForMonth(int year, int month, String employeeID) {
         double totalLateHours = 0;
 
         try {
