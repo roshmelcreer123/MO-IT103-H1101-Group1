@@ -18,7 +18,7 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class CreateSalary extends javax.swing.JFrame {
+public class ViewOneSalaryAdmin extends javax.swing.JFrame {
     
     
     /* Deduction Constants */
@@ -44,9 +44,21 @@ public class CreateSalary extends javax.swing.JFrame {
     /**
      * Creates new form CreateSalary
      */
-    public CreateSalary() {
+    public ViewOneSalaryAdmin() {
         initComponents(); 
         fillEmployeeIDs(); // Populate employee IDs in the combo box
+    }
+    
+    public void setSalaryData(int salaryID, int employeeID, int year, int month, BigDecimal totalHoursWorked, BigDecimal totalLateHours, BigDecimal totalAllowance, BigDecimal grossSalary, BigDecimal totalDeductions, BigDecimal netSalary) {
+        jEmployeeID.setSelectedItem(String.valueOf(employeeID));
+        jYear.setSelectedItem(String.valueOf(year));
+        jMonth.setSelectedIndex(month - 1);
+        jTotalHoursWorked.setText(totalHoursWorked.toString());
+        jLateHours.setText(totalLateHours.toString());
+        jGrossSalary.setText(grossSalary.toString());
+        jTotalAllowance.setText(totalAllowance.toString());
+        jTotalDeductions.setText(totalDeductions.toString());
+        jNetSalary.setText(netSalary.toString());
     }
     
     private void fillEmployeeIDs() {
@@ -357,7 +369,6 @@ public class CreateSalary extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        createSalary = new Button.Button();
         jLabel24 = new javax.swing.JLabel();
         jLateHours = new javax.swing.JLabel();
         jGoBack = new Button.Button();
@@ -408,14 +419,6 @@ public class CreateSalary extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        createSalary.setText("Create Salary");
-        createSalary.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createSalaryActionPerformed(evt);
-            }
-        });
-        getContentPane().add(createSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 510, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(51, 51, 51));
@@ -540,7 +543,7 @@ public class CreateSalary extends javax.swing.JFrame {
                 CalculateSalaryActionPerformed(evt);
             }
         });
-        getContentPane().add(CalculateSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 510, -1, -1));
+        getContentPane().add(CalculateSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 510, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
@@ -715,59 +718,6 @@ public class CreateSalary extends javax.swing.JFrame {
         new ViewSalaryAdmin().setVisible(true); dispose();
     }//GEN-LAST:event_jGoBackActionPerformed
 
-    private void createSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createSalaryActionPerformed
-           try {
-            Connection conn = db.mycon();
-            if (conn != null) {
-                String query = "INSERT INTO salary (employeeID, year, month, totalHoursWorked, totalLateHours, grossSalary, riceSubsidy, phoneAllowance, clothingAllowance, totalAllowance, philhealthDeduction, sssDeduction, pagibigDeduction, taxDeduction, totalDeductions, netSalary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-                PreparedStatement pstmt = conn.prepareStatement(query);
-                pstmt.setInt(1, Integer.parseInt((String) jEmployeeID.getSelectedItem()));
-                pstmt.setInt(2, Integer.parseInt((String) jYear.getSelectedItem()));
-                pstmt.setInt(3, jMonth.getSelectedIndex() + 1);
-                pstmt.setBigDecimal(4, new BigDecimal(jTotalHoursWorked.getText().split(" ")[0]));
-                pstmt.setBigDecimal(5, new BigDecimal(jLateHours.getText().split(" ")[0]));
-                pstmt.setBigDecimal(6, new BigDecimal(jGrossSalary.getText()));
-                pstmt.setBigDecimal(7, new BigDecimal(jRiceSubsidy.getText()));
-                pstmt.setBigDecimal(8, new BigDecimal(jPhoneAllowance.getText()));
-                pstmt.setBigDecimal(9, new BigDecimal(jClothingAllowance.getText()));
-                pstmt.setBigDecimal(10, new BigDecimal(jTotalAllowance.getText()));
-                pstmt.setBigDecimal(11, new BigDecimal(jPhilhealthDeductions.getText()));
-                pstmt.setBigDecimal(12, new BigDecimal(jSssDeductions.getText()));
-                pstmt.setBigDecimal(13, new BigDecimal(jPagibigDeductions.getText()));
-                pstmt.setBigDecimal(14, new BigDecimal(jTax.getText()));
-                pstmt.setBigDecimal(15, new BigDecimal(jTotalDeductions.getText()));
-                pstmt.setBigDecimal(16, new BigDecimal(jNetSalary.getText()));
-                pstmt.executeUpdate();
-                pstmt.close();
-                conn.close();
-                JOptionPane.showMessageDialog(this, "Salary record created successfully!");
-            } else {
-                System.out.println("Failed to make connection!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Failed to create salary record.");
-        }
-           
-        // Clear input fields so user wont need to manually remove each one after inserting data into Database
-        jEmployeeID.setSelectedIndex(0);
-        jYear.setSelectedIndex(0);
-        jMonth.setSelectedIndex(0);
-        jTotalHoursWorked.setText("0");
-        jLateHours.setText("0");
-        jGrossSalary.setText("0");
-        jRiceSubsidy.setText("0");
-        jPhoneAllowance.setText("0");
-        jClothingAllowance.setText("0");
-        jTotalAllowance.setText("0");
-        jPhilhealthDeductions.setText("0");
-        jSssDeductions.setText("0");
-        jPagibigDeductions.setText("0");
-        jTax.setText("0");
-        jTotalDeductions.setText("0");
-        jNetSalary.setText("0");
-    }//GEN-LAST:event_createSalaryActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -785,14 +735,22 @@ public class CreateSalary extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateSalary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewOneSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateSalary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewOneSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateSalary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewOneSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateSalary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewOneSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -814,7 +772,6 @@ public class CreateSalary extends javax.swing.JFrame {
     private Button.Button CalculateSalary;
     private Button.Button button2;
     private Button.Button button4;
-    private Button.Button createSalary;
     private javax.swing.JLabel jClothingAllowance;
     private javax.swing.JComboBox<String> jEmployeeID;
     private Button.Button jGoBack;

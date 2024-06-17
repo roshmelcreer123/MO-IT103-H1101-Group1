@@ -4,10 +4,23 @@
  */
 package Jframes;
 
-/**
- *
- * @author STUDY MODE
- */
+import Classes.db;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.time.Duration;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class AttendanceDashboard extends javax.swing.JFrame {
     private String userID;
     
@@ -17,7 +30,227 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     public AttendanceDashboard(String userID) {
         this.userID = userID;
         initComponents();
+        startClock();
     }
+    //Clock
+    private void startClock() {
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                jLabel6.setText(now.format(timeFormatter));
+                jLabel8.setText(now.format(dateFormatter));
+            }
+        });
+        timer.start();
+    }
+    
+    private int extractEmployeeID(String userID) {
+    // Extract numeric part from userID (e.g., U10001 -> 10001)
+    return Integer.parseInt(userID.substring(1));
+    }
+    
+    private int fetchEmployeeID() {
+        int employeeID = -1; // Initialize with an invalid ID
+        
+        try {
+            // Get the connection from db class
+            Connection conn = db.mycon();
+
+            // Check if the connection is successful
+            if (conn != null) {
+                // Create a statement
+                Statement stmt = conn.createStatement();
+
+                // Execute a query to retrieve employeeID from the user_accounts table
+                String query = "SELECT employeeID FROM user_accounts WHERE userID = '" + userID + "'";
+                ResultSet rs = stmt.executeQuery(query);
+
+                // Fetch the employeeID
+                if (rs.next()) {
+                    employeeID = rs.getInt("employeeID");
+                }
+
+                // Close the connection
+                rs.close();
+                stmt.close();
+                conn.close();
+            } else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return employeeID;
+    }
+
+
+    private void fetchDataAttendance(int employeeID, int year, int month) {
+        try {
+            // Get the connection from db class
+            Connection conn = db.mycon();
+
+            // Check if the connection is successful
+            if (conn != null) {
+                // Create a statement
+                Statement stmt = conn.createStatement();
+
+                // Execute a query to retrieve data from the attendance_records table
+                String query = "SELECT * FROM attendance_records WHERE employeeID = " + employeeID + " AND YEAR(date) = " + year + " AND MONTH(date) = " + month + " LIMIT 30";
+                System.out.println("Debug: query = " + query); // Debug output
+                ResultSet rs = stmt.executeQuery(query);
+
+                // Get the table model from jTable2
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                model.setRowCount(0); // Clear existing data
+
+                // Add rows to the table model
+                while (rs.next()) {
+                    model.addRow(new Object[]{
+                        rs.getDate("date"),
+                        rs.getTime("timeIn"),
+                        rs.getTime("timeOut")
+                    });
+                }
+
+                // Close the connection
+                rs.close();
+                stmt.close();
+                conn.close();
+            } else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void fetchDataAttendanceHoursWorked(int employeeID, int year, int month) {
+        try {
+            // Get the connection from db class
+            Connection conn = db.mycon();
+
+            // Check if the connection is successful
+            if (conn != null) {
+                // Create a statement
+                Statement stmt = conn.createStatement();
+
+                // Execute a query to retrieve data from the attendance_records table
+                String query = "SELECT * FROM attendance_records WHERE employeeID = " + employeeID + " AND YEAR(date) = " + year + " AND MONTH(date) = " + month + " LIMIT 30";
+                System.out.println("Debug: query = " + query); // Debug output
+                ResultSet rs = stmt.executeQuery(query);
+
+                // Get the table model from jTable1
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.setRowCount(0); // Clear existing data
+
+                // Add rows to the table model
+                while (rs.next()) {
+                    int attendanceID = rs.getInt("attendanceID");
+                    Date date = rs.getDate("date");
+                    Time timeIn = rs.getTime("timeIn");
+                    Time timeOut = rs.getTime("timeOut");
+
+                    // Calculate the total hours worked
+                    long totalHoursWorked = 0;
+                    long totalMinutesWorked = 0;
+
+                    if (timeIn != null && timeOut != null) {
+                        Duration duration = Duration.between(timeIn.toLocalTime(), timeOut.toLocalTime());
+                        totalHoursWorked = duration.toHours();
+                        totalMinutesWorked = duration.minusHours(totalHoursWorked).toMinutes();
+
+                        // Subtract 1 hour for lunch break if total working hours are more than 4 hours
+                        if (totalHoursWorked > 4) {
+                            duration = duration.minusHours(1);
+                            totalHoursWorked = duration.toHours();
+                            totalMinutesWorked = duration.minusHours(totalHoursWorked).toMinutes();
+                        }
+
+                        // Check if the hours worked fall within the range of 7 hours and 45 minutes to 8 hours
+                        long totalMinutesWorkedForRounding = totalHoursWorked * 60 + totalMinutesWorked;
+                        if (totalMinutesWorkedForRounding >= 465 && totalMinutesWorkedForRounding <= 480) { // 465 minutes is 7 hours and 45 minutes
+                            totalHoursWorked = 8;
+                            totalMinutesWorked = 0;
+                        }
+                    }
+
+                    String formattedTotalWorkedTime = totalHoursWorked + "h " + totalMinutesWorked + "m";
+
+                    // Add the row to the table model
+                    model.addRow(new Object[]{
+                        employeeID,
+                        date,
+                        timeIn,
+                        timeOut,
+                        formattedTotalWorkedTime
+                    });
+                }
+
+                // Close the connection
+                rs.close();
+                stmt.close();
+                conn.close();
+            } else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public long calculateTotalHoursWorkedForMonth(int employeeID, int year, int month) {
+        long totalHoursWorkedForMonth = 0;
+
+        try {
+            // Get the connection from db class
+            Connection conn = db.mycon();
+
+            // Check if the connection is successful
+            if (conn != null) {
+                // Create a statement
+                Statement stmt = conn.createStatement();
+
+                // Execute a query to retrieve data from the attendance_records table
+                String query = "SELECT * FROM attendance_records WHERE employeeID = " + employeeID + " AND YEAR(date) = " + year + " AND MONTH(date) = " + month;
+                ResultSet rs = stmt.executeQuery(query);
+
+                // Iterate through the result set and calculate the total hours worked
+                while (rs.next()) {
+                    Time timeIn = rs.getTime("timeIn");
+                    Time timeOut = rs.getTime("timeOut");
+
+                    if (timeIn != null && timeOut != null) {
+                        Duration duration = Duration.between(timeIn.toLocalTime(), timeOut.toLocalTime());
+                        long hours = duration.toHours();
+
+                        // Subtract 1 hour for lunch break if total working hours are more than 4 hours
+                        if (hours > 4) {
+                            duration = duration.minusHours(1);
+                            hours = duration.toHours();
+                        }
+
+                        totalHoursWorkedForMonth += hours;
+                    }
+                }
+
+                // Close the connection
+                rs.close();
+                stmt.close();
+                conn.close();
+            } else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return totalHoursWorkedForMonth;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,7 +266,7 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
-        button1 = new Button.Button();
+        jViewAttendance = new Button.Button();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
@@ -42,7 +275,6 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         button4 = new Button.Button();
         button5 = new Button.Button();
@@ -79,14 +311,14 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 90, -1));
 
-        button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/working-time.png"))); // NOI18N
-        button1.setText("View");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        jViewAttendance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/working-time.png"))); // NOI18N
+        jViewAttendance.setText("View");
+        jViewAttendance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                jViewAttendanceActionPerformed(evt);
             }
         });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 190, 40));
+        getContentPane().add(jViewAttendance, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 190, 40));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
@@ -153,13 +385,8 @@ public class AttendanceDashboard extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("08:30:01");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel7.setText("(GMT +8)");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 240, -1, -1));
+        jLabel6.setText("8:30:01 AM");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(54, 117, 136));
@@ -205,9 +432,33 @@ public class AttendanceDashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button1ActionPerformed
+    private void jViewAttendanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jViewAttendanceActionPerformed
+           // Get selected year and month from the combo boxes
+           String yearStr = (String) jComboBox1.getSelectedItem();
+           String monthStr = (String) jComboBox2.getSelectedItem();
+
+           if (!yearStr.equals("----") && !monthStr.equals("----")) {
+               int year = Integer.parseInt(yearStr);
+               int month = jComboBox2.getSelectedIndex(); // 1-based index for the month
+
+               // Extract the employeeID from the userID
+               int employeeID = extractEmployeeID(userID);
+
+               System.out.println("Debug: employeeID = " + employeeID); // Debug output
+
+               // Fetch data with the selected year and month using the employeeID
+               fetchDataAttendance(employeeID, year, month);
+               fetchDataAttendanceHoursWorked(employeeID, year, month);
+
+               // Calculate total hours worked for the month
+               long totalHoursWorked = calculateTotalHoursWorkedForMonth(employeeID, year, month);
+
+               // Display the total hours worked in the jTextPane1 JTextPane
+               jTextPane1.setText("Total Hours Worked: " + totalHoursWorked + " hours");
+           } else {
+               JOptionPane.showMessageDialog(this, "Please select both year and month.", "Input Error", JOptionPane.ERROR_MESSAGE);
+           }
+    }//GEN-LAST:event_jViewAttendanceActionPerformed
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         OvertimeRequestHistory OvertimeRequestHistoryNew = new OvertimeRequestHistory(userID);
@@ -276,7 +527,6 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Button.Button button1;
     private Button.Button button4;
     private Button.Button button5;
     private Button.Button button6;
@@ -289,7 +539,6 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -297,5 +546,6 @@ public class AttendanceDashboard extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextPane jTextPane1;
+    private Button.Button jViewAttendance;
     // End of variables declaration//GEN-END:variables
 }

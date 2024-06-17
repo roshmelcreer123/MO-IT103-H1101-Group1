@@ -18,8 +18,10 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class CreateSalary extends javax.swing.JFrame {
+public class UpdateSalaryAdmin extends javax.swing.JFrame {
     
+    //instance variable
+    private int salaryID;
     
     /* Deduction Constants */
     
@@ -44,10 +46,26 @@ public class CreateSalary extends javax.swing.JFrame {
     /**
      * Creates new form CreateSalary
      */
-    public CreateSalary() {
-        initComponents(); 
-        fillEmployeeIDs(); // Populate employee IDs in the combo box
+    public UpdateSalaryAdmin(int salaryID, int employeeID, int year, int month, BigDecimal totalHoursWorked, BigDecimal totalLateHours, BigDecimal totalAllowance, BigDecimal grossSalary, BigDecimal totalDeductions, BigDecimal netSalary) {
+        this.salaryID = salaryID;
+        initComponents();
+        fillEmployeeIDs();
+        populateFields(employeeID, year, month, totalHoursWorked, totalLateHours, totalAllowance, grossSalary, totalDeductions, netSalary);
     }
+    
+    private void populateFields(int employeeID, int year, int month, BigDecimal totalHoursWorked, BigDecimal totalLateHours, BigDecimal totalAllowance, BigDecimal grossSalary, BigDecimal totalDeductions, BigDecimal netSalary) {
+        
+        jEmployeeID.setSelectedItem(String.valueOf(employeeID));
+        jYear.setSelectedItem(String.valueOf(year));
+        jMonth.setSelectedIndex(month - 1);
+        jTotalHoursWorked.setText(totalHoursWorked.toString());
+        jLateHours.setText(totalLateHours.toString());
+        jGrossSalary.setText(grossSalary.toString());
+        jTotalAllowance.setText(totalAllowance.toString());
+        jTotalDeductions.setText(totalDeductions.toString());
+        jNetSalary.setText(netSalary.toString());
+        
+    }   
     
     private void fillEmployeeIDs() {
         try {
@@ -357,7 +375,7 @@ public class CreateSalary extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        createSalary = new Button.Button();
+        updateSalary = new Button.Button();
         jLabel24 = new javax.swing.JLabel();
         jLateHours = new javax.swing.JLabel();
         jGoBack = new Button.Button();
@@ -409,13 +427,13 @@ public class CreateSalary extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        createSalary.setText("Create Salary");
-        createSalary.addActionListener(new java.awt.event.ActionListener() {
+        updateSalary.setText("Update Salary");
+        updateSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createSalaryActionPerformed(evt);
+                updateSalaryActionPerformed(evt);
             }
         });
-        getContentPane().add(createSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 510, -1, -1));
+        getContentPane().add(updateSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 510, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(51, 51, 51));
@@ -715,11 +733,11 @@ public class CreateSalary extends javax.swing.JFrame {
         new ViewSalaryAdmin().setVisible(true); dispose();
     }//GEN-LAST:event_jGoBackActionPerformed
 
-    private void createSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createSalaryActionPerformed
-           try {
+    private void updateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSalaryActionPerformed
+        try {
             Connection conn = db.mycon();
             if (conn != null) {
-                String query = "INSERT INTO salary (employeeID, year, month, totalHoursWorked, totalLateHours, grossSalary, riceSubsidy, phoneAllowance, clothingAllowance, totalAllowance, philhealthDeduction, sssDeduction, pagibigDeduction, taxDeduction, totalDeductions, netSalary) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String query = "UPDATE salary SET employeeID = ?, year = ?, month = ?, totalHoursWorked = ?, totalLateHours = ?, grossSalary = ?, riceSubsidy = ?, phoneAllowance = ?, clothingAllowance = ?, totalAllowance = ?, philhealthDeduction = ?, sssDeduction = ?, pagibigDeduction = ?, taxDeduction = ?, totalDeductions = ?, netSalary = ? WHERE salaryID = ?";
                 PreparedStatement pstmt = conn.prepareStatement(query);
                 pstmt.setInt(1, Integer.parseInt((String) jEmployeeID.getSelectedItem()));
                 pstmt.setInt(2, Integer.parseInt((String) jYear.getSelectedItem()));
@@ -737,19 +755,20 @@ public class CreateSalary extends javax.swing.JFrame {
                 pstmt.setBigDecimal(14, new BigDecimal(jTax.getText()));
                 pstmt.setBigDecimal(15, new BigDecimal(jTotalDeductions.getText()));
                 pstmt.setBigDecimal(16, new BigDecimal(jNetSalary.getText()));
+                pstmt.setInt(17, this.salaryID); // Use the instance variable salaryID
                 pstmt.executeUpdate();
                 pstmt.close();
                 conn.close();
-                JOptionPane.showMessageDialog(this, "Salary record created successfully!");
-            } else {
-                System.out.println("Failed to make connection!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Failed to create salary record.");
-        }
-           
-        // Clear input fields so user wont need to manually remove each one after inserting data into Database
+             JOptionPane.showMessageDialog(this, "Salary record updated successfully!");
+         } else {
+             System.out.println("Failed to make connection!");
+         }
+     } catch (Exception e) {
+         e.printStackTrace();
+         JOptionPane.showMessageDialog(this, "Failed to update salary record.");
+     }
+    
+        // Clear input fields so user wont need to manually remove each one after updating data in the Database
         jEmployeeID.setSelectedIndex(0);
         jYear.setSelectedIndex(0);
         jMonth.setSelectedIndex(0);
@@ -766,7 +785,7 @@ public class CreateSalary extends javax.swing.JFrame {
         jTax.setText("0");
         jTotalDeductions.setText("0");
         jNetSalary.setText("0");
-    }//GEN-LAST:event_createSalaryActionPerformed
+    }//GEN-LAST:event_updateSalaryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -785,14 +804,22 @@ public class CreateSalary extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateSalary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateSalary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateSalary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateSalary.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UpdateSalaryAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -814,7 +841,6 @@ public class CreateSalary extends javax.swing.JFrame {
     private Button.Button CalculateSalary;
     private Button.Button button2;
     private Button.Button button4;
-    private Button.Button createSalary;
     private javax.swing.JLabel jClothingAllowance;
     private javax.swing.JComboBox<String> jEmployeeID;
     private Button.Button jGoBack;
@@ -858,5 +884,6 @@ public class CreateSalary extends javax.swing.JFrame {
     private javax.swing.JLabel jTotalDeductions;
     private javax.swing.JLabel jTotalHoursWorked;
     private javax.swing.JComboBox<String> jYear;
+    private Button.Button updateSalary;
     // End of variables declaration//GEN-END:variables
 }

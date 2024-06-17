@@ -7,6 +7,7 @@ package Jframes;
 import Classes.db;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -20,11 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewSalaryAdmin extends javax.swing.JFrame {
 
-    private int selectedEmployeeID;
-    private String selectedFirstName, selectedLastName, selectedAddress, selectedPhoneNumber, 
-                   selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber, 
-                   selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor;
-    private java.sql.Date selectedBirthday;  // Changed to java.sql.Date
+    private int selectedSalaryID;
     
     public ViewSalaryAdmin() {
         initComponents();
@@ -43,30 +40,27 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
                 // Create a statement
                 Statement stmt = conn.createStatement();
 
-                // Execute a query to retrieve data from the employees table
-                String query = "SELECT * FROM employees";
+                // Execute a query to retrieve data from the salary table
+                String query = "SELECT * FROM salary";
                 ResultSet rs = stmt.executeQuery(query);
 
-                // Get the table model from jTable2
+                // Get the table model from jTable1
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                 model.setRowCount(0); // Clear existing data
 
                 // Add rows to the table model
                 while (rs.next()) {
                     model.addRow(new Object[]{
+                        rs.getInt("salaryID"),
                         rs.getInt("employeeID"),
-                        rs.getString("firstName"),
-                        rs.getString("lastName"),
-                        rs.getDate("birthday"),
-                        rs.getString("address"),
-                        rs.getString("phoneNumber"),
-                        rs.getString("sssNumber"),
-                        rs.getString("philhealthNumber"),
-                        rs.getString("tinNumber"),
-                        rs.getString("pagibigNumber"),
-                        rs.getString("status"),
-                        rs.getString("position"),
-                        rs.getString("immediateSupervisor")
+                        rs.getInt("year"),
+                        rs.getInt("month"),
+                        rs.getBigDecimal("totalHoursWorked"),
+                        rs.getBigDecimal("totalLateHours"),
+                        rs.getBigDecimal("totalAllowance"),
+                        rs.getBigDecimal("grossSalary"),
+                        rs.getBigDecimal("totalDeductions"),
+                        rs.getBigDecimal("netSalary")
                     });
                 }
 
@@ -81,47 +75,22 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
+
     private void addTableListener() {
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int selectedRow = jTable1.getSelectedRow();
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                
+
                 // Assuming the ID is in the first column
-                selectedEmployeeID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
-                selectedLastName = model.getValueAt(selectedRow, 1).toString();
-                selectedFirstName = model.getValueAt(selectedRow, 2).toString();
-                selectedBirthday = new java.sql.Date(((java.util.Date) model.getValueAt(selectedRow, 3)).getTime());
-                selectedAddress = model.getValueAt(selectedRow, 4).toString();
-                selectedPhoneNumber = model.getValueAt(selectedRow, 5).toString();
-                selectedSSSNumber = model.getValueAt(selectedRow, 6).toString();
-                selectedPhilhealthNumber = model.getValueAt(selectedRow, 7).toString();
-                selectedTINNumber = model.getValueAt(selectedRow, 8).toString();
-                selectedPagibigNumber = model.getValueAt(selectedRow, 9).toString();
-                selectedStatus = model.getValueAt(selectedRow, 10).toString();
-                selectedPosition = model.getValueAt(selectedRow, 11).toString();
-                selectedImmediateSupervisor = model.getValueAt(selectedRow, 12).toString();
+                selectedSalaryID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
             }
         });
-    }
-    /*private void updateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {
-     UpdateEmployee updateEmployeeForm = new UpdateEmployee(
-                selectedEmployeeID, selectedFirstName, selectedLastName, selectedBirthday, selectedAddress,
-                selectedPhoneNumber, selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber,
-                selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor);
-        updateEmployeeForm.setVisible(true);
-        this.dispose();
     }
     
-    private void addActionListeners() {
-        updateEmployee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateEmployeeButtonActionPerformed(evt);
-            }
-        });
-    } */
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,20 +140,21 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
         getContentPane().add(Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setColumnHeaderView(null);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Last Name", "First Name", "Birthday", "Address", "Phone Number", "SSS #", "PhilHealth #", "TIN #", "Pag-ibig #", "Status", "Position", "ImmediateSupervisor", "Basic Salary", "Rice Subsidy"
+                "Salary ID", "Employee ID", "Year", "Month", "Total Hours Worked", "Total Late Hours", "Total Allowance", "Gross Salary", "Total Deductions", "Net Salary"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -251,15 +221,86 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_createSalaryActionPerformed
 
     private void deleteSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSalaryActionPerformed
+        if (selectedSalaryID != 0) {
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this salary record?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    // Get the connection from db class
+                    Connection conn = db.mycon();
 
+                    // Check if the connection is successful
+                    if (conn != null) {
+                        // Prepare a delete statement
+                        String query = "DELETE FROM salary WHERE salaryID = ?";
+                        PreparedStatement pstmt = conn.prepareStatement(query);
+                        pstmt.setInt(1, selectedSalaryID);
+                        pstmt.executeUpdate();
+
+                        // Close the connection
+                        pstmt.close();
+                        conn.close();
+
+                        // Refresh the table
+                        fetchData();
+                        JOptionPane.showMessageDialog(this, "Salary record deleted successfully!");
+                    } else {
+                        System.out.println("Failed to make connection!");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Failed to delete salary record.");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No salary record selected.");
+        }
     }//GEN-LAST:event_deleteSalaryActionPerformed
 
     private void viewSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSalaryActionPerformed
-        
+        if (selectedSalaryID != 0) {
+            int selectedRow = jTable1.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+            int salaryID = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+            int employeeID = Integer.parseInt(model.getValueAt(selectedRow, 1).toString());
+            int year = Integer.parseInt(model.getValueAt(selectedRow, 2).toString());
+            int month = Integer.parseInt(model.getValueAt(selectedRow, 3).toString());
+            BigDecimal totalHoursWorked = new BigDecimal(model.getValueAt(selectedRow, 4).toString());
+            BigDecimal totalLateHours = new BigDecimal(model.getValueAt(selectedRow, 5).toString());
+            BigDecimal totalAllowance = new BigDecimal(model.getValueAt(selectedRow, 6).toString());
+            BigDecimal grossSalary = new BigDecimal(model.getValueAt(selectedRow, 7).toString());
+            BigDecimal totalDeductions = new BigDecimal(model.getValueAt(selectedRow, 8).toString());
+            BigDecimal netSalary = new BigDecimal(model.getValueAt(selectedRow, 9).toString());
+
+            ViewOneSalaryAdmin viewOneSalaryAdmin = new ViewOneSalaryAdmin();
+            viewOneSalaryAdmin.setSalaryData(salaryID, employeeID, year, month, totalHoursWorked, totalLateHours, totalAllowance, grossSalary, totalDeductions, netSalary);
+            viewOneSalaryAdmin.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No salary record selected.");
+        }
     }//GEN-LAST:event_viewSalaryActionPerformed
 
     private void updateSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSalaryActionPerformed
-        // TODO add your handling code here:
+        if (selectedSalaryID != 0) {
+            int selectedRow = jTable1.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+            int employeeID = Integer.parseInt(model.getValueAt(selectedRow, 1).toString());
+            int year = Integer.parseInt(model.getValueAt(selectedRow, 2).toString());
+            int month = Integer.parseInt(model.getValueAt(selectedRow, 3).toString());
+            BigDecimal totalHoursWorked = new BigDecimal(model.getValueAt(selectedRow, 4).toString());
+            BigDecimal totalLateHours = new BigDecimal(model.getValueAt(selectedRow, 5).toString());
+            BigDecimal totalAllowance = new BigDecimal(model.getValueAt(selectedRow, 6).toString());
+            BigDecimal grossSalary = new BigDecimal(model.getValueAt(selectedRow, 7).toString());
+            BigDecimal totalDeductions = new BigDecimal(model.getValueAt(selectedRow, 8).toString());
+            BigDecimal netSalary = new BigDecimal(model.getValueAt(selectedRow, 9).toString());
+
+            new UpdateSalaryAdmin(selectedSalaryID, employeeID, year, month, totalHoursWorked, totalLateHours, totalAllowance, grossSalary, totalDeductions, netSalary).setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No salary record selected.");
+        }
     }//GEN-LAST:event_updateSalaryActionPerformed
 
     /**

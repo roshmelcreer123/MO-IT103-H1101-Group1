@@ -15,6 +15,11 @@ import java.time.Duration;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AttendanceDashboardAdmin extends javax.swing.JFrame {
     
@@ -23,6 +28,22 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
      */
     public AttendanceDashboardAdmin() {
         initComponents();
+        startClock();
+    }
+    
+    //Clock
+    private void startClock() {
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                jLabel6.setText(now.format(timeFormatter));
+                jLabel8.setText(now.format(dateFormatter));
+            }
+        });
+        timer.start();
     }
 
     private void fetchDataAttendance(int year, int month) {
@@ -197,6 +218,7 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnDashboard = new Button.Button();
         jHoursWorked = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -212,11 +234,9 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
         button2 = new Button.Button();
         button3 = new Button.Button();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         button4 = new Button.Button();
         button5 = new Button.Button();
-        button6 = new Button.Button();
         button7 = new Button.Button();
         jLabel1 = new javax.swing.JLabel();
 
@@ -224,6 +244,15 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
         setTitle("Attendance Dashboard");
         setBackground(new java.awt.Color(245, 245, 245));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnDashboard.setText("Dashboard");
+        btnDashboard.setToolTipText("");
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboardActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, 30));
 
         jHoursWorked.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jHoursWorked.setForeground(new java.awt.Color(51, 51, 51));
@@ -339,13 +368,8 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("08:30:01");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, -1, -1));
-
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel7.setText("(GMT +8)");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 240, -1, -1));
+        jLabel6.setText("08:30:01 AM");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(54, 117, 136));
@@ -368,14 +392,6 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
         });
         getContentPane().add(button5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 480, -1, -1));
 
-        button6.setText("Dashboard");
-        button6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button6ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, 30));
-
         button7.setText("Logout");
         button7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,7 +401,7 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
         getContentPane().add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AttendanceBackground.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 
         pack();
         setLocationRelativeTo(null);
@@ -432,10 +448,6 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_button3ActionPerformed
 
-    private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
-
-    }//GEN-LAST:event_button6ActionPerformed
-
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
         
         // Create an instance of LoginNew and display it
@@ -443,6 +455,11 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
         loginNew.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_button7ActionPerformed
+
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
+        // Redirects to Admin Dashboard
+        new AdminHomeDashboard().setVisible(true); dispose();
+    }//GEN-LAST:event_btnDashboardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,11 +498,11 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Button.Button btnDashboard;
     private Button.Button button2;
     private Button.Button button3;
     private Button.Button button4;
     private Button.Button button5;
-    private Button.Button button6;
     private Button.Button button7;
     private javax.swing.JComboBox<String> jChooseMonth;
     private javax.swing.JComboBox<String> jChooseYear;
@@ -496,7 +513,6 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
