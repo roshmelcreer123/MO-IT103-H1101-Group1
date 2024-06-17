@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import Classes.db;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 
 public class RequestLeave extends javax.swing.JFrame {
@@ -20,7 +21,41 @@ public class RequestLeave extends javax.swing.JFrame {
     public RequestLeave(String userID) {
         this.userID = userID;
         initComponents();
+        fetchEmployeeDetails(); // Fetch and set employee details based on userID
     }
+    
+    private void fetchEmployeeDetails() {
+        try {
+            // Get the connection from db class
+            Connection conn = db.mycon();
+
+            // Check if the connection is successful
+            if (conn != null) {
+                // Create a statement
+                Statement stmt = conn.createStatement();
+
+                // Execute a query to retrieve employee details based on userID
+                String query = "SELECT employeeID, CONCAT(firstName, ' ', lastName) as employeeName FROM user_accounts WHERE userID = '" + userID + "'";
+                ResultSet rs = stmt.executeQuery(query);
+
+                // Set the employee ID and name in the text fields
+                if (rs.next()) {
+                    jEmployeeID.setText(rs.getString("employeeID"));
+                    jEmployeeName.setText(rs.getString("employeeName"));
+                }
+
+                // Close the connection
+                rs.close();
+                stmt.close();
+                conn.close();
+            } else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     
     @SuppressWarnings("unchecked")
@@ -28,9 +63,9 @@ public class RequestLeave extends javax.swing.JFrame {
     private void initComponents() {
 
         jCalendar1 = new com.toedter.calendar.JCalendar();
-        jEmployeeID = new javax.swing.JTextField();
+        jEmployeeID = new javax.swing.JLabel();
+        jEmployeeName = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jEmployeeName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLeaveType = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
@@ -55,26 +90,17 @@ public class RequestLeave extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jEmployeeID.setForeground(new java.awt.Color(54, 117, 136));
-        jEmployeeID.setText("1");
-        jEmployeeID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEmployeeIDActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 240, -1));
+        jEmployeeID.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jEmployeeID.setText("Employee Number:");
+        getContentPane().add(jEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, -1, -1));
+
+        jEmployeeName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jEmployeeName.setText("Employee Name:");
+        getContentPane().add(jEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("Employee Name:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, -1, -1));
-
-        jEmployeeName.setText("John Doe");
-        jEmployeeName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEmployeeNameActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 240, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Leave Type:");
@@ -191,7 +217,6 @@ public class RequestLeave extends javax.swing.JFrame {
 
     private void clearFieldButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFieldButtonActionPerformed
         // Clear input fields so user wont need to manually remove each one after inserting data into Database
-        jEmployeeName.setText("");
         jLeaveType.setSelectedIndex(-1);
         jManager.setSelectedIndex(-1);
         jReason.setText("");
@@ -228,7 +253,7 @@ public class RequestLeave extends javax.swing.JFrame {
         java.util.Date utilEndDate = jEndDate.getDate(); // Get date from jdatepicker
         Date endDate = new Date(utilEndDate.getTime()); // Only using date, not exact time in seconds, to insert to SQL DB
         LocalDate currentDate = LocalDate.now(); // Get current date
-        Date sqlCurrentDate = Date.valueOf(currentDate); // Convert to java.sql.Date
+        Timestamp sqlCurrentTimestamp = Timestamp.valueOf(LocalDateTime.now()); // Get current timestamp
         
         // SQL Query to insert data into MYSQL Database
         try{
@@ -236,7 +261,7 @@ public class RequestLeave extends javax.swing.JFrame {
             Statement s = db.mycon().createStatement();
             s.executeUpdate("INSERT INTO leave_requests (employeeID,employeeName,leaveType,manager,reason,startDate,endDate,status,dateRequested,dateApproved) "
             + "VALUES('"+employeeID+"','"+employeeName+"','"+leaveType+"','"+manager+"', '"+reason+"',"
-                    + "'"+startDate+"','"+endDate+"','Pending', '" + sqlCurrentDate + "', NULL)");
+                    + "'"+startDate+"','"+endDate+"','Pending', '" + sqlCurrentTimestamp + "', NULL)");
             
             // Dialogue Box to inform user that the employee has been created, this can be changed to something better (Please suggest - Roshmel)
             JOptionPane.showMessageDialog(rootPane, "You have succesfully requested for a leave.");
@@ -247,8 +272,6 @@ public class RequestLeave extends javax.swing.JFrame {
         }
         
         // Clear input fields so user wont need to manually remove each one after inserting data into Database
-        jEmployeeID.setText("");
-        jEmployeeName.setText("");
         jLeaveType.setSelectedIndex(-1);
         jManager.setSelectedIndex(-1);
         jReason.setText("");
@@ -257,14 +280,6 @@ public class RequestLeave extends javax.swing.JFrame {
 
        
     }//GEN-LAST:event_saveRequestButtonActionPerformed
-
-    private void jEmployeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEmployeeIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jEmployeeIDActionPerformed
-
-    private void jEmployeeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEmployeeNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jEmployeeNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,8 +330,8 @@ public class RequestLeave extends javax.swing.JFrame {
     private Button.Button clearFieldButton;
     private Button.DarkButton darkButton2;
     private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JTextField jEmployeeID;
-    private javax.swing.JTextField jEmployeeName;
+    private javax.swing.JLabel jEmployeeID;
+    private javax.swing.JLabel jEmployeeName;
     private com.toedter.calendar.JDateChooser jEndDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
