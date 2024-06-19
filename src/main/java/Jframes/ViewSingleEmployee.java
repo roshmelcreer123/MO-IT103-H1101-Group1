@@ -11,13 +11,16 @@ import java.math.BigDecimal;
  * @author User
  */
 public class ViewSingleEmployee extends javax.swing.JFrame {
+    
+    private String userID;
 
     /**
      * Creates new form leaveRequestHistory
      */
     
     // Default constructor
-    public ViewSingleEmployee() {
+    public ViewSingleEmployee(String userID) {
+        this.userID = userID;
         initComponents();
         // Set default or empty values for form fields
         jLastName.setText("");
@@ -42,11 +45,12 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
     
     
     // Parameterized constructor
-    public ViewSingleEmployee(int employeeID, String lastName, String firstName, java.sql.Date birthday, String address,
+    public ViewSingleEmployee(String userID, int employeeID, String lastName, String firstName, java.sql.Date birthday, String address,
                           String phoneNumber, String sssNumber, String philhealthNumber, String tinNumber,
                           String pagibigNumber, String status, String position, String immediateSupervisor,
                           BigDecimal basicSalary, BigDecimal riceSubsidy, BigDecimal phoneAllowance, 
                           BigDecimal clothingAllowance, BigDecimal grossSemiMonthlyRate, BigDecimal hourlyRate) {
+        this.userID = userID;
         initComponents();
         
         // Set form fields with passed data
@@ -250,7 +254,7 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // Create an instance of the Dashboard frame
-        AdminHomeDashboard dashboard = new AdminHomeDashboard();
+        AdminHomeDashboard dashboard = new AdminHomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Profile Page frame
@@ -267,7 +271,7 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
     private void goBackToViewAllEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackToViewAllEmployeeActionPerformed
 
         // Redirects to View All Employees Admin Page
-        ViewAllEmployee viewAllEmployee = new ViewAllEmployee();
+        ViewAllEmployee viewAllEmployee = new ViewAllEmployee(userID);
         viewAllEmployee.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goBackToViewAllEmployeeActionPerformed
@@ -309,7 +313,7 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewSingleEmployee().setVisible(true);
+                
             }
         });
     }

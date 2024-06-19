@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ViewAllEmployee extends javax.swing.JFrame {
+    
+    private String userID;
 
     
     private int selectedEmployeeID;
@@ -31,7 +33,8 @@ public class ViewAllEmployee extends javax.swing.JFrame {
     /**
      * Creates new form ViewAllEmployee
      */
-    public ViewAllEmployee() {
+    public ViewAllEmployee(String userID) {
+        this.userID = userID;
         initComponents();
         fetchData(); // Calling the fetchData method so whenever a user goes to View All Employees, there would be data in the table
         addTableListener();
@@ -233,7 +236,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
 
     private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
         
-        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard(userID);
         adminDashboard.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_DashboardActionPerformed
@@ -247,7 +250,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
 
     private void createEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEmployeeActionPerformed
         // Create an instance of the CreateLeaveRequest frame
-        CreateEmployee createEmployee = new CreateEmployee();
+        CreateEmployee createEmployee = new CreateEmployee(userID);
         // Set the visibility of the CreateLeaveRequest frame to true
         createEmployee.setVisible(true);
         // Close the leaveRequestDashboard Dashboard frame
@@ -260,7 +263,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
                 selectedPhoneNumber, selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber,
                 selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor,
                 selectedBasicSalary, selectedRiceSubsidy, selectedPhoneAllowance, selectedClothingAllowance,
-                selectedGrossSemiMonthlyRate, selectedHourlyRate);
+                selectedGrossSemiMonthlyRate, selectedHourlyRate, userID);
         updateEmployeeForm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_updateEmployeeActionPerformed
@@ -304,7 +307,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
 
     private void viewSingleEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewSingleEmployeeActionPerformed
          // Create an instance of ViewSingleEmployee and pass the selected employee's data
-            ViewSingleEmployee viewSingleEmployeeForm = new ViewSingleEmployee(
+            ViewSingleEmployee viewSingleEmployeeForm = new ViewSingleEmployee(userID,
             selectedEmployeeID, selectedLastName, selectedFirstName, selectedBirthday, selectedAddress,
             selectedPhoneNumber, selectedSSSNumber, selectedPhilhealthNumber, selectedTINNumber,
             selectedPagibigNumber, selectedStatus, selectedPosition, selectedImmediateSupervisor,
@@ -347,7 +350,7 @@ public class ViewAllEmployee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewAllEmployee().setVisible(true);
+                
             }
         });
     }

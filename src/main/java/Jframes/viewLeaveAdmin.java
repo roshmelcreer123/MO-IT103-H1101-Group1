@@ -11,11 +11,14 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class viewLeaveAdmin extends javax.swing.JFrame {
+    
+    private String userID;
 
     /**
      * Creates new form leaveRequestHistory
      */
-    public viewLeaveAdmin() {
+    public viewLeaveAdmin(String userID) {
+        this.userID = userID;
         initComponents();
         fetchData(); // Calling the fetchData method so whenever a user goes to View All Employees, there would be data in the table
     }
@@ -147,7 +150,7 @@ public class viewLeaveAdmin extends javax.swing.JFrame {
 
     private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
         // Create an instance of the CreateLeaveRequest frame
-        RequestLeaveAdmin requestLeaveAdmin = new RequestLeaveAdmin();
+        RequestLeaveAdmin requestLeaveAdmin = new RequestLeaveAdmin(userID);
         // Set the visibility of the CreateLeaveRequest frame to true
         requestLeaveAdmin.setVisible(true);
         // Close the leaveRequestDashboard Dashboard frame
@@ -156,7 +159,7 @@ public class viewLeaveAdmin extends javax.swing.JFrame {
 
     private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
         // Create an instance of the Dashboard frame
-        AdminHomeDashboard dashboard = new AdminHomeDashboard();
+        AdminHomeDashboard dashboard = new AdminHomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
@@ -207,7 +210,7 @@ public class viewLeaveAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewLeaveAdmin().setVisible(true);
+                
             }
         });
     }

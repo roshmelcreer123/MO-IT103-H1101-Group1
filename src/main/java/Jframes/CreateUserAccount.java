@@ -8,11 +8,14 @@ import Classes.db;
 
 
 public class CreateUserAccount extends javax.swing.JFrame {
+    
+    private String userID;
 
     /**
      * Creates new form CreateUserAccount
      */
-    public CreateUserAccount() {
+    public CreateUserAccount(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -182,7 +185,7 @@ public class CreateUserAccount extends javax.swing.JFrame {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         
-        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard(userID);
         adminDashboard.setVisible(true);
         this.dispose();
         
@@ -199,7 +202,7 @@ public class CreateUserAccount extends javax.swing.JFrame {
     private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
 
          // Redirects to View All Employees Admin Page
-        UserAccounts userAccounts = new UserAccounts();
+        UserAccounts userAccounts = new UserAccounts(userID);
         userAccounts.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_darkButton2ActionPerformed
@@ -317,7 +320,7 @@ public class CreateUserAccount extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateUserAccount().setVisible(true);
+                
             }
         });
     }

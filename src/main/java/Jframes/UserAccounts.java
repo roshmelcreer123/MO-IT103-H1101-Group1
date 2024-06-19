@@ -11,7 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class UserAccounts extends javax.swing.JFrame {
-
+    
+    private String userID;
+    
     
     private int selectedEmployeeID;
     private String selectedUserID, selectedPassword, selectedLastName,selectedFirstName,
@@ -19,10 +21,9 @@ public class UserAccounts extends javax.swing.JFrame {
   
     
     
-    /**
-     * Creates new form ViewAllEmployee
-     */
-    public UserAccounts() {
+   
+    public UserAccounts(String userID) {
+        this.userID = userID;
         initComponents();
         fetchData(); // Calling the fetchData method so whenever a user goes to UserAccounts, there would be data in the table
         addTableListener();
@@ -189,7 +190,7 @@ public class UserAccounts extends javax.swing.JFrame {
 
     private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
         
-        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard(userID);
         adminDashboard.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_DashboardActionPerformed
@@ -203,7 +204,7 @@ public class UserAccounts extends javax.swing.JFrame {
 
     private void createUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserAccountActionPerformed
         // Create an instance of the CreateLeaveRequest frame
-        CreateUserAccount createUserAccount = new CreateUserAccount();
+        CreateUserAccount createUserAccount = new CreateUserAccount(userID);
         // Set the visibility of the CreateLeaveRequest frame to true
         createUserAccount.setVisible(true);
         // Close the leaveRequestDashboard Dashboard frame
@@ -231,7 +232,7 @@ public class UserAccounts extends javax.swing.JFrame {
                     Statement stmt = conn.createStatement();
 
                     // Execute a query to delete the selected employee
-                    String query = "DELETE FROM user_accounts WHERE userID = " + selectedUserID;
+                    String query = "DELETE FROM user_accounts WHERE employeeID = " + selectedEmployeeID;
                     int rowsAffected = stmt.executeUpdate(query);
 
                     // Check if deletion was successful
@@ -286,7 +287,7 @@ public class UserAccounts extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserAccounts().setVisible(true);
+                
             }
         });
     }

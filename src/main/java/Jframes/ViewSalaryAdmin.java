@@ -31,6 +31,8 @@ import java.util.List;
  * @author STUDY MODE
  */
 public class ViewSalaryAdmin extends javax.swing.JFrame {
+    
+    private String userID;
 
     private int selectedSalaryID;
     
@@ -54,7 +56,8 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
     private static final double[] TAX_RATES = {0.2, 0.25, 0.3, 0.32, 0.35};
   
     
-    public ViewSalaryAdmin() {
+    public ViewSalaryAdmin(String userID) {
+        this.userID = userID;
         initComponents();
         fetchData();
         addTableListener();
@@ -622,7 +625,7 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
         // Redirects to Admin Dashboard
-        new AdminHomeDashboard().setVisible(true); dispose();
+        new AdminHomeDashboard(userID).setVisible(true); dispose();
     }//GEN-LAST:event_btnDashboardActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -631,7 +634,7 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void createSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createSalaryActionPerformed
-        new CreateSalary().setVisible(true); dispose();
+        new CreateSalary(userID).setVisible(true); dispose();
     }//GEN-LAST:event_createSalaryActionPerformed
 
     private void deleteSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSalaryActionPerformed
@@ -686,7 +689,7 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
             BigDecimal totalDeductions = new BigDecimal(model.getValueAt(selectedRow, 8).toString());
             BigDecimal netSalary = new BigDecimal(model.getValueAt(selectedRow, 9).toString());
 
-            ViewOneSalaryAdmin viewOneSalaryAdmin = new ViewOneSalaryAdmin();
+            ViewOneSalaryAdmin viewOneSalaryAdmin = new ViewOneSalaryAdmin(userID);
             viewOneSalaryAdmin.setSalaryData(salaryID, employeeID, year, month, totalHoursWorked, totalLateHours, totalAllowance, grossSalary, totalDeductions, netSalary);
             viewOneSalaryAdmin.setVisible(true);
             this.dispose();
@@ -710,7 +713,7 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
             BigDecimal totalDeductions = new BigDecimal(model.getValueAt(selectedRow, 8).toString());
             BigDecimal netSalary = new BigDecimal(model.getValueAt(selectedRow, 9).toString());
 
-            new UpdateSalaryAdmin(selectedSalaryID, employeeID, year, month, totalHoursWorked, totalLateHours, totalAllowance, grossSalary, totalDeductions, netSalary).setVisible(true);
+            new UpdateSalaryAdmin(userID, selectedSalaryID, employeeID, year, month, totalHoursWorked, totalLateHours, totalAllowance, grossSalary, totalDeductions, netSalary).setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "No salary record selected.");
@@ -763,7 +766,7 @@ public class ViewSalaryAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewSalaryAdmin().setVisible(true);
+                
             }
         });
     }

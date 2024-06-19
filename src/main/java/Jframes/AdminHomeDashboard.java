@@ -1,19 +1,56 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Jframes;
+
+import Classes.db;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.ImageIcon;
+import Archived.SalaryDashboard;
+import javax.swing.JOptionPane;
 
 public class AdminHomeDashboard extends javax.swing.JFrame {
     
-    public AdminHomeDashboard() {
+    private String userID;
+    
+    public AdminHomeDashboard(String userID) {
+        this.userID = userID;
         initComponents();
+        loadUserData(userID);
+    }
+    
+    private void loadUserData(String userID) {
+        try {
+            Connection conn = db.mycon();
+            String query = "SELECT * FROM `user_accounts` WHERE `userID`=?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, userID);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String position = rs.getString("position");
+                String profilePicturePath = rs.getString("profilePicturePath");
+
+                employeeNameLabel.setText(firstName + " " + lastName);
+                positionLabel.setText(position);
+                if (profilePicturePath != null && !profilePicturePath.isEmpty()) {
+                    employeeProfilePicture.setIcon(new ImageIcon(profilePicturePath));
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        employeeProfilePicture = new javax.swing.JLabel();
+        employeeNameLabel = new javax.swing.JLabel();
+        positionLabel = new javax.swing.JLabel();
         salaryButton = new Button.Button();
         leaveRequestButton = new Button.Button();
         overtimeRequestButton = new Button.Button();
@@ -31,6 +68,23 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        employeeProfilePicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adminProfilePicture.png"))); // NOI18N
+        getContentPane().add(employeeProfilePicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
+
+        employeeNameLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        employeeNameLabel.setForeground(new java.awt.Color(54, 117, 136));
+        employeeNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        employeeNameLabel.setText("Employee Name");
+        employeeNameLabel.setToolTipText("");
+        getContentPane().add(employeeNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 240, 210, -1));
+
+        positionLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        positionLabel.setForeground(new java.awt.Color(54, 117, 136));
+        positionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        positionLabel.setText("Position");
+        positionLabel.setToolTipText("");
+        getContentPane().add(positionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 210, 20));
 
         salaryButton.setText("Salary");
         salaryButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +158,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setForeground(new java.awt.Color(0, 153, 153));
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/AdminDashboardBackground.png"))); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Admin Dashboard Background New.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -118,25 +172,25 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
 
     private void leaveRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaveRequestButtonActionPerformed
         // Redirects to Admin Leave Request Page
-        new viewLeaveAdmin().setVisible(true); dispose();
+        new viewLeaveAdmin(userID).setVisible(true); dispose();
     }//GEN-LAST:event_leaveRequestButtonActionPerformed
 
     private void btnViewEmployeeDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewEmployeeDatabaseActionPerformed
         // Redirects to Employee Database Page
-        new ViewAllEmployee().setVisible(true); dispose();
+        new ViewAllEmployee(userID).setVisible(true); dispose();
     }//GEN-LAST:event_btnViewEmployeeDatabaseActionPerformed
 
     private void attendanceSalaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceSalaryButtonActionPerformed
         // Redirects to User Accounts Database Page
-        new AttendanceDashboardAdmin().setVisible(true); dispose();
+        new AttendanceDashboardAdmin(userID).setVisible(true); dispose();
     }//GEN-LAST:event_attendanceSalaryButtonActionPerformed
 
     private void userAccountsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userAccountsButtonActionPerformed
-        new UserAccounts().setVisible(true); dispose();
+        new UserAccounts(userID).setVisible(true); dispose();
     }//GEN-LAST:event_userAccountsButtonActionPerformed
 
     private void salaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryButtonActionPerformed
-        new ViewSalaryAdmin().setVisible(true); dispose();
+        new ViewSalaryAdmin(userID).setVisible(true); dispose();
     }//GEN-LAST:event_salaryButtonActionPerformed
 	
 	
@@ -170,7 +224,7 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminHomeDashboard().setVisible(true);
+                
             }
         });
     }
@@ -185,8 +239,11 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkboxAdminTask2;
     private javax.swing.JCheckBox checkboxAdminTask3;
     private javax.swing.JCheckBox checkboxAdminTask4;
+    private javax.swing.JLabel employeeNameLabel;
+    private javax.swing.JLabel employeeProfilePicture;
     private Button.Button leaveRequestButton;
     private Button.Button overtimeRequestButton;
+    private javax.swing.JLabel positionLabel;
     private Button.Button salaryButton;
     private Button.Button userAccountsButton;
     // End of variables declaration//GEN-END:variables

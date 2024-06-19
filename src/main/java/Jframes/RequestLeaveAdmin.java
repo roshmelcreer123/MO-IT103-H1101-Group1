@@ -14,11 +14,14 @@ import java.time.LocalDate;
 
 
 public class RequestLeaveAdmin extends javax.swing.JFrame {
+    
+    private String userID;
 
     /**
      * Creates new form requestLeave2
      */
-    public RequestLeaveAdmin() {
+    public RequestLeaveAdmin(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -185,7 +188,7 @@ public class RequestLeaveAdmin extends javax.swing.JFrame {
     private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
         
         // Create an instance of the Dashboard frame
-        viewLeaveAdmin leaveDashboard = new viewLeaveAdmin();
+        viewLeaveAdmin leaveDashboard = new viewLeaveAdmin(userID);
         // Set the visibility of the Dashboard frame to true
         leaveDashboard.setVisible(true);
         // Close the leaveRequest Dashboard frame
@@ -214,7 +217,7 @@ public class RequestLeaveAdmin extends javax.swing.JFrame {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         // Create an instance of the Dashboard frame
-        AdminHomeDashboard dashboard = new AdminHomeDashboard();
+        AdminHomeDashboard dashboard = new AdminHomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Request Leave frame
@@ -302,7 +305,7 @@ public class RequestLeaveAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RequestLeaveAdmin().setVisible(true);
+                
             }
         });
     }

@@ -7,7 +7,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.ImageIcon;
 import Archived.SalaryDashboard;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 
 
@@ -20,6 +25,21 @@ public class HomeDashboard extends javax.swing.JFrame {
         this.userID = userID;
         initComponents();
         loadUserData(userID);
+        startClock();
+    }
+    //Clock
+    private void startClock() {
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                clockLabel.setText(now.format(timeFormatter));
+                dateLabel.setText(now.format(dateFormatter));
+            }
+        });
+        timer.start();
     }
 
     private void loadUserData(String userID) {
@@ -168,12 +188,14 @@ public class HomeDashboard extends javax.swing.JFrame {
 
         clockLabel.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         clockLabel.setForeground(new java.awt.Color(54, 117, 136));
+        clockLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         clockLabel.setText("08:30:01");
         clockLabel.setToolTipText("");
-        getContentPane().add(clockLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 150, 70));
+        getContentPane().add(clockLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 290, 70));
 
         dateLabel.setFont(new java.awt.Font("Arial", 1, 21)); // NOI18N
         dateLabel.setForeground(new java.awt.Color(54, 117, 136));
+        dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dateLabel.setText(" 12 DEC 2022");
         dateLabel.setToolTipText("");
         getContentPane().add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 140, 40));

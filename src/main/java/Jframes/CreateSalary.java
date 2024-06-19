@@ -20,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class CreateSalary extends javax.swing.JFrame {
     
+    private String userID;
+    
     
     /* Deduction Constants */
     
@@ -44,8 +46,9 @@ public class CreateSalary extends javax.swing.JFrame {
     /**
      * Creates new form CreateSalary
      */
-    public CreateSalary() {
-        initComponents(); 
+    public CreateSalary(String userID) {
+        this.userID = userID;
+        initComponents();  
         fillEmployeeIDs(); // Populate employee IDs in the combo box
     }
     
@@ -635,7 +638,7 @@ public class CreateSalary extends javax.swing.JFrame {
     }//GEN-LAST:event_jYearActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard(userID);
         adminDashboard.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_button2ActionPerformed
@@ -712,7 +715,7 @@ public class CreateSalary extends javax.swing.JFrame {
     }//GEN-LAST:event_CalculateSalaryActionPerformed
 
     private void jGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGoBackActionPerformed
-        new ViewSalaryAdmin().setVisible(true); dispose();
+        new ViewSalaryAdmin(userID).setVisible(true); dispose();
     }//GEN-LAST:event_jGoBackActionPerformed
 
     private void createSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createSalaryActionPerformed

@@ -110,10 +110,10 @@ public class LogInNew extends javax.swing.JFrame {
                 String userType = rs.getString("userType");
                 
                 if (userType.equals("Admin")) {
-                    AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+                    AdminHomeDashboard adminDashboard = new AdminHomeDashboard(userID);
                     adminDashboard.setVisible(true);
                 } else if (userType.equals("IT")) {
-                    AdminHomeDashboard itDashboard = new AdminHomeDashboard();
+                    AdminHomeDashboard itDashboard = new AdminHomeDashboard(userID);
                     itDashboard.setVisible(true);
                 } else {
                     HomeDashboard dashboard = new HomeDashboard(userID);  // Pass userID to HomeDashboard

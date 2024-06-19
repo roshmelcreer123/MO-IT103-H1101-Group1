@@ -23,10 +23,10 @@ import java.awt.event.ActionListener;
 
 public class AttendanceDashboardAdmin extends javax.swing.JFrame {
     
-    /**
-     * Creates new form AttendanceDashboard
-     */
-    public AttendanceDashboardAdmin() {
+    private String userID;
+    
+    public AttendanceDashboardAdmin(String userID) {
+        this.userID = userID;
         initComponents();
         startClock();
     }
@@ -458,7 +458,7 @@ public class AttendanceDashboardAdmin extends javax.swing.JFrame {
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
         // Redirects to Admin Dashboard
-        new AdminHomeDashboard().setVisible(true); dispose();
+        new AdminHomeDashboard(userID).setVisible(true); dispose();
     }//GEN-LAST:event_btnDashboardActionPerformed
 
     /**

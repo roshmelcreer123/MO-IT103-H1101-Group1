@@ -16,6 +16,8 @@ import java.math.BigDecimal;
  * @author roshmelcreer
  */
 public class UpdateEmployee extends javax.swing.JFrame {
+    
+    private String userID;
 
     private int employeeID; // declare employeeID as a class-level variable
     private String firstName;
@@ -43,7 +45,8 @@ public class UpdateEmployee extends javax.swing.JFrame {
                           String phoneNumber, String sssNumber, String philhealthNumber, String tinNumber,
                           String pagibigNumber, String status, String position, String immediateSupervisor,
                           BigDecimal basicSalary, BigDecimal riceSubsidy, BigDecimal phoneAllowance, 
-                          BigDecimal clothingAllowance, BigDecimal grossSemiMonthlyRate, BigDecimal hourlyRate) {
+                          BigDecimal clothingAllowance, BigDecimal grossSemiMonthlyRate, BigDecimal hourlyRate, String userID) {
+        this.userID = userID;
         initComponents();
         
         // Assign the passed parameters to class-level variables
@@ -425,7 +428,7 @@ public class UpdateEmployee extends javax.swing.JFrame {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         
-        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard(userID);
         adminDashboard.setVisible(true);
         this.dispose();
         
@@ -442,7 +445,7 @@ public class UpdateEmployee extends javax.swing.JFrame {
     private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
 
         // Redirects to View All Employees Admin Page
-        ViewAllEmployee viewEmployees = new ViewAllEmployee();
+        ViewAllEmployee viewEmployees = new ViewAllEmployee(userID);
         viewEmployees.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_darkButton2ActionPerformed
@@ -477,7 +480,7 @@ public class UpdateEmployee extends javax.swing.JFrame {
         }
 
         // Redirects to View All Employees Admin Page
-        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard(userID);
         adminDashboard.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jUpdateEmployeeActionPerformed

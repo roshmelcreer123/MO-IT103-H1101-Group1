@@ -20,6 +20,7 @@ public class UpdateUserAccount extends javax.swing.JFrame {
     /// Constructor with parameters
     public UpdateUserAccount(String userID, int employeeID, String password, String lastName, String firstName,
                              String position, String userType) {
+        this.userID = userID;
         initComponents();
         
         // Assign the passed parameters to class-level variables
@@ -224,7 +225,7 @@ public class UpdateUserAccount extends javax.swing.JFrame {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         
-        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard(userID);
         adminDashboard.setVisible(true);
         this.dispose();
         
@@ -241,7 +242,7 @@ public class UpdateUserAccount extends javax.swing.JFrame {
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
 
         // Redirects to User Accounts Page
-        UserAccounts userAccounts = new UserAccounts();
+        UserAccounts userAccounts = new UserAccounts(userID);
         userAccounts.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goBackButtonActionPerformed
@@ -277,7 +278,7 @@ public class UpdateUserAccount extends javax.swing.JFrame {
         }
 
         // Redirects to User Accounts Page
-        UserAccounts userAccounts = new UserAccounts();
+        UserAccounts userAccounts = new UserAccounts(userID);
         userAccounts.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jUpdateUserAccountActionPerformed

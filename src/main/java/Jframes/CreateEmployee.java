@@ -13,10 +13,10 @@ import java.math.BigDecimal;
 
 public class CreateEmployee extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CreateEmployee
-     */
-    public CreateEmployee() {
+    private String userID;
+    
+    public CreateEmployee(String userID) {
+        this.userID = userID;
         initComponents();
     }
 
@@ -320,7 +320,7 @@ public class CreateEmployee extends javax.swing.JFrame {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         
-        AdminHomeDashboard adminDashboard = new AdminHomeDashboard();
+        AdminHomeDashboard adminDashboard = new AdminHomeDashboard(userID);
         adminDashboard.setVisible(true);
         this.dispose();
         
@@ -337,7 +337,7 @@ public class CreateEmployee extends javax.swing.JFrame {
     private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
 
          // Redirects to View All Employees Admin Page
-        ViewAllEmployee viewAllEmployee = new ViewAllEmployee();
+        ViewAllEmployee viewAllEmployee = new ViewAllEmployee(userID);
         viewAllEmployee.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_darkButton2ActionPerformed
@@ -536,7 +536,7 @@ public class CreateEmployee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateEmployee().setVisible(true);
+                
             }
         });
     }
