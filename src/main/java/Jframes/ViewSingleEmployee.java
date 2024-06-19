@@ -1,21 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Jframes;
 
 import java.math.BigDecimal;
 
-/**
- *
- * @author User
- */
+
 public class ViewSingleEmployee extends javax.swing.JFrame {
     
     private String userID;
 
     /**
-     * Creates new form leaveRequestHistory
+     * Creates new form ViewSingleEmployee
      */
     
     // Default constructor
@@ -90,7 +84,7 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jPageTitle = new javax.swing.JLabel();
         jFirstName = new javax.swing.JLabel();
         jBirthday = new javax.swing.JLabel();
         jPhoneNumber = new javax.swing.JLabel();
@@ -120,10 +114,10 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("View Single Employee");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jPageTitle.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jPageTitle.setForeground(new java.awt.Color(255, 255, 255));
+        jPageTitle.setText("Employee Profile");
+        getContentPane().add(jPageTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, 60));
 
         jFirstName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jFirstName.setForeground(new java.awt.Color(54, 117, 136));
@@ -216,17 +210,17 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
         jImmediateSupervisor.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jImmediateSupervisor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jImmediateSupervisor.setText("Allan Smith");
-        getContentPane().add(jImmediateSupervisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 500, 130, 20));
+        getContentPane().add(jImmediateSupervisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 230, 20));
 
         jEmployeeID.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jEmployeeID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jEmployeeID.setText("10001");
-        getContentPane().add(jEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 390, 100, 20));
+        getContentPane().add(jEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 230, 40));
 
         jPosition.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jPosition.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPosition.setText("IT");
-        getContentPane().add(jPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 140, 20));
+        getContentPane().add(jPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 230, 20));
 
         button2.setText("Dashboard");
         button2.addActionListener(new java.awt.event.ActionListener() {
@@ -333,8 +327,8 @@ public class ViewSingleEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel jHourlyRate;
     private javax.swing.JLabel jImmediateSupervisor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLastName;
+    private javax.swing.JLabel jPageTitle;
     private javax.swing.JLabel jPagibigNumber;
     private javax.swing.JLabel jPhilhealthNumber;
     private javax.swing.JLabel jPhoneAllowance;

@@ -1,22 +1,84 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Jframes;
 
-/**
- *
- * @author User
- */
+import Classes.db; // Import the db class
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
+
 public class ProfilePage extends javax.swing.JFrame {
     private String userID;
     
     /**
-     * Creates new form leaveRequestHistory
+     * Creates new form ProfilePage
      */
     public ProfilePage(String userID) {
         this.userID = userID;
         initComponents();
+        fetchData();  // Load profile data based on userID
+        
+    }
+    
+    
+    
+    private void fetchData() {
+        try {
+            // Get the connection from db class
+            Connection conn = db.mycon();
+
+            // Query to get the employeeID based on the userID
+            String query = "SELECT employeeID FROM user_accounts WHERE userID = ?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, userID);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                String employeeID = rs.getString("employeeID");
+
+                // Now use this employeeID to fetch employee details
+                query = "SELECT * FROM employees WHERE employeeID = ?";
+                pst = conn.prepareStatement(query);
+                pst.setString(1, employeeID);
+                rs = pst.executeQuery();
+
+                if (rs.next()) {
+
+                    // Setting the fetched data to labels
+                    jEmployeeID.setText(rs.getString("employeeID"));
+                    jLastName.setText(rs.getString("lastName"));
+                    jFirstName.setText(rs.getString("firstName"));
+                    jBirthday.setText(rs.getDate("birthday").toString());
+                    jAddress.setText(rs.getString("address"));
+                    jPhoneNumber.setText(rs.getString("phoneNumber"));
+                    jSssNumber.setText(rs.getString("sssNumber"));
+                    jPhilhealthNumber.setText(rs.getString("philhealthNumber"));
+                    jTinNumber.setText(rs.getString("tinNumber"));
+                    jPagibigNumber.setText(rs.getString("pagibigNumber"));
+                    jPosition.setText(rs.getString("position"));
+                    jImmediateSupervisor.setText(rs.getString("immediateSupervisor"));
+                    jBasicSalary.setText(rs.getBigDecimal("basicSalary").toString());
+                    jRiceSubsidy.setText(rs.getBigDecimal("riceSubsidy").toString());
+                    jPhoneAllowance.setText(rs.getBigDecimal("phoneAllowance").toString());
+                    jClothingAllowance.setText(rs.getBigDecimal("clothingAllowance").toString());
+                    jGrossSemiMonthlyRate.setText(rs.getBigDecimal("grossSemiMonthlyRate").toString());
+                    jHourlyRate.setText(rs.getBigDecimal("hourlyRate").toString());
+                    jStatus.setText(rs.getString("status"));
+                } else {
+                    System.out.println("No data found for employeeID: " + employeeID);
+                }
+
+                // Close the connection
+                rs.close();
+                pst.close();
+                conn.close();
+            } else {
+                System.out.println("Failed to find employeeID for userID: " + userID);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -30,37 +92,29 @@ public class ProfilePage extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         employeeProfilePicture = new javax.swing.JLabel();
-        employeeDetailsPanel = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        editButton = new Button.Button();
-        govtBenefitsPanel = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        regularLabel = new javax.swing.JLabel();
-        tenureLabel = new javax.swing.JLabel();
-        employeeIDLabel = new javax.swing.JLabel();
-        employeeIDLabel1 = new javax.swing.JLabel();
-        employeeIDLabel2 = new javax.swing.JLabel();
-        regularLabel1 = new javax.swing.JLabel();
-        regularLabel2 = new javax.swing.JLabel();
-        regularLabel3 = new javax.swing.JLabel();
-        button2 = new Button.Button();
-        button1 = new Button.Button();
+        dashboardButton = new Button.Button();
+        logoutButton = new Button.Button();
+        jEmployeeID = new javax.swing.JLabel();
+        jPosition = new javax.swing.JLabel();
+        jImmediateSupervisor = new javax.swing.JLabel();
+        jLastName = new javax.swing.JLabel();
+        jFirstName = new javax.swing.JLabel();
+        jBirthday = new javax.swing.JLabel();
+        jAddress = new javax.swing.JLabel();
+        jPhoneNumber = new javax.swing.JLabel();
+        jStatus = new javax.swing.JLabel();
+        jSssNumber = new javax.swing.JLabel();
+        jPagibigNumber = new javax.swing.JLabel();
+        jPhilhealthNumber = new javax.swing.JLabel();
+        jTinNumber = new javax.swing.JLabel();
+        jBasicSalary = new javax.swing.JLabel();
+        jRiceSubsidy = new javax.swing.JLabel();
+        jPhoneAllowance = new javax.swing.JLabel();
+        jClothingAllowance = new javax.swing.JLabel();
+        jGrossSemiMonthlyRate = new javax.swing.JLabel();
+        jHourlyRate = new javax.swing.JLabel();
+        darkButton1 = new Button.DarkButton();
+        jPageTitle = new javax.swing.JLabel();
         employeeProfileBackground = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -71,232 +125,127 @@ public class ProfilePage extends javax.swing.JFrame {
         employeeProfilePicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Persona210x210.png"))); // NOI18N
         getContentPane().add(employeeProfilePicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 210, 210));
 
-        employeeDetailsPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel10.setText("First Name:");
-
-        jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel11.setText("Birthdate:");
-
-        jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel12.setText("Phone Number:");
-
-        jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel13.setText("Address:");
-
-        jLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel19.setText("Lee");
-
-        jLabel20.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel20.setText("Ging");
-
-        jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel21.setText("Jan-01-1990");
-
-        jLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel22.setText("09123456789");
-
-        jLabel23.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel23.setText("123 Luzon, Philippines");
-
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel7.setText("Last Name:");
-
-        javax.swing.GroupLayout employeeDetailsPanelLayout = new javax.swing.GroupLayout(employeeDetailsPanel);
-        employeeDetailsPanel.setLayout(employeeDetailsPanelLayout);
-        employeeDetailsPanelLayout.setHorizontalGroup(
-            employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(employeeDetailsPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addGap(33, 33, 33)
-                .addGroup(employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(employeeDetailsPanelLayout.createSequentialGroup()
-                        .addGroup(employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel21))
-                        .addContainerGap(55, Short.MAX_VALUE))
-                    .addGroup(employeeDetailsPanelLayout.createSequentialGroup()
-                        .addGroup(employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel20))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        employeeDetailsPanelLayout.setVerticalGroup(
-            employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(employeeDetailsPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel21))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel22))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(employeeDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel23))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(employeeDetailsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, -1, -1));
-
-        editButton.setText("Edit");
-        editButton.setToolTipText("");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
+        dashboardButton.setText("Dashboard");
+        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
+                dashboardButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(editButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 190, 70, 30));
+        getContentPane().add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
-        govtBenefitsPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel27.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel27.setText("123-456-789-000");
-
-        jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel14.setText("SSS Number:");
-
-        jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel15.setText("Pagibig Number:");
-
-        jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel16.setText("Philhealth Number:");
-
-        jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel17.setText("TIN Number:");
-
-        jLabel24.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel24.setText("00-1234567-8");
-
-        jLabel25.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel25.setText("987654321000");
-
-        jLabel26.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(54, 117, 136));
-        jLabel26.setText("000123456789");
-
-        javax.swing.GroupLayout govtBenefitsPanelLayout = new javax.swing.GroupLayout(govtBenefitsPanel);
-        govtBenefitsPanel.setLayout(govtBenefitsPanelLayout);
-        govtBenefitsPanelLayout.setHorizontalGroup(
-            govtBenefitsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(govtBenefitsPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(govtBenefitsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(govtBenefitsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel26)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel25))
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
-        govtBenefitsPanelLayout.setVerticalGroup(
-            govtBenefitsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(govtBenefitsPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(govtBenefitsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel24))
-                .addGap(4, 4, 4)
-                .addGroup(govtBenefitsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel25))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(govtBenefitsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel26))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(govtBenefitsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel27))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(govtBenefitsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 350, -1, 130));
-
-        regularLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        regularLabel.setForeground(new java.awt.Color(54, 117, 136));
-        regularLabel.setText("Supervisor");
-        getContentPane().add(regularLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 530, -1, 20));
-
-        tenureLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        tenureLabel.setText("Tenure:");
-        getContentPane().add(tenureLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, 60, 20));
-
-        employeeIDLabel.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        employeeIDLabel.setText("Allan Smith");
-        getContentPane().add(employeeIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 130, 20));
-
-        employeeIDLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        employeeIDLabel1.setText("10001");
-        getContentPane().add(employeeIDLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 60, 20));
-
-        employeeIDLabel2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        employeeIDLabel2.setText("Sales Associate");
-        getContentPane().add(employeeIDLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 130, 20));
-
-        regularLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        regularLabel1.setForeground(new java.awt.Color(54, 117, 136));
-        regularLabel1.setText("Regular");
-        getContentPane().add(regularLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 510, -1, 20));
-
-        regularLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        regularLabel2.setForeground(new java.awt.Color(54, 117, 136));
-        regularLabel2.setText("Employee ID");
-        getContentPane().add(regularLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, -1, 20));
-
-        regularLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        regularLabel3.setForeground(new java.awt.Color(54, 117, 136));
-        regularLabel3.setText("Position/Role");
-        getContentPane().add(regularLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, -1, 20));
-
-        button2.setText("Dashboard");
-        button2.addActionListener(new java.awt.event.ActionListener() {
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
+                logoutButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
 
-        button1.setText("Logout");
-        button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
+        jEmployeeID.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jEmployeeID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jEmployeeID.setText("10001");
+        getContentPane().add(jEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 230, 30));
 
-        employeeProfileBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/EmployeeProfileBackground.png"))); // NOI18N
+        jPosition.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jPosition.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPosition.setText("IT");
+        getContentPane().add(jPosition, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 230, 30));
+
+        jImmediateSupervisor.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jImmediateSupervisor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jImmediateSupervisor.setText("Allan Smith");
+        getContentPane().add(jImmediateSupervisor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 230, 30));
+
+        jLastName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLastName.setForeground(new java.awt.Color(54, 117, 136));
+        jLastName.setText("Lee");
+        getContentPane().add(jLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 167, 120, 30));
+
+        jFirstName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jFirstName.setForeground(new java.awt.Color(54, 117, 136));
+        jFirstName.setText("Ging");
+        getContentPane().add(jFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 197, 120, 30));
+
+        jBirthday.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jBirthday.setForeground(new java.awt.Color(54, 117, 136));
+        jBirthday.setText("Jan-01-1990");
+        getContentPane().add(jBirthday, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 227, 120, 30));
+
+        jAddress.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jAddress.setForeground(new java.awt.Color(54, 117, 136));
+        jAddress.setText("123 Luzon, Philippines");
+        getContentPane().add(jAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 257, 430, 30));
+
+        jPhoneNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jPhoneNumber.setForeground(new java.awt.Color(54, 117, 136));
+        jPhoneNumber.setText("09123456789");
+        getContentPane().add(jPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 167, -1, 30));
+
+        jStatus.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jStatus.setForeground(new java.awt.Color(54, 117, 136));
+        jStatus.setText("Employed");
+        getContentPane().add(jStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 200, -1, 30));
+
+        jSssNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jSssNumber.setForeground(new java.awt.Color(54, 117, 136));
+        jSssNumber.setText("00-1234567-8");
+        getContentPane().add(jSssNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 130, -1));
+
+        jPagibigNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jPagibigNumber.setForeground(new java.awt.Color(54, 117, 136));
+        jPagibigNumber.setText("987654321000");
+        getContentPane().add(jPagibigNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 390, -1, -1));
+
+        jPhilhealthNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jPhilhealthNumber.setForeground(new java.awt.Color(54, 117, 136));
+        jPhilhealthNumber.setText("000123456789");
+        getContentPane().add(jPhilhealthNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, -1, -1));
+
+        jTinNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTinNumber.setForeground(new java.awt.Color(54, 117, 136));
+        jTinNumber.setText("123-456-789-000");
+        getContentPane().add(jTinNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 470, -1, -1));
+
+        jBasicSalary.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jBasicSalary.setForeground(new java.awt.Color(54, 117, 136));
+        jBasicSalary.setText("50,000.00");
+        getContentPane().add(jBasicSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 510, -1, 20));
+
+        jRiceSubsidy.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jRiceSubsidy.setForeground(new java.awt.Color(54, 117, 136));
+        jRiceSubsidy.setText("5,000.00");
+        getContentPane().add(jRiceSubsidy, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 350, 70, 20));
+
+        jPhoneAllowance.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jPhoneAllowance.setForeground(new java.awt.Color(54, 117, 136));
+        jPhoneAllowance.setText("5,000.00");
+        getContentPane().add(jPhoneAllowance, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 390, -1, 20));
+
+        jClothingAllowance.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jClothingAllowance.setForeground(new java.awt.Color(54, 117, 136));
+        jClothingAllowance.setText("5,000.00");
+        getContentPane().add(jClothingAllowance, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 430, 70, 20));
+
+        jGrossSemiMonthlyRate.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jGrossSemiMonthlyRate.setForeground(new java.awt.Color(54, 117, 136));
+        jGrossSemiMonthlyRate.setText("45,000.00");
+        getContentPane().add(jGrossSemiMonthlyRate, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 470, -1, 20));
+
+        jHourlyRate.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jHourlyRate.setForeground(new java.awt.Color(54, 117, 136));
+        jHourlyRate.setText("514.00");
+        getContentPane().add(jHourlyRate, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 510, -1, 20));
+
+        darkButton1.setText("Edit");
+        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 90, 70, -1));
+
+        jPageTitle.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jPageTitle.setForeground(new java.awt.Color(255, 255, 255));
+        jPageTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPageTitle.setText("Employee Profile");
+        getContentPane().add(jPageTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 78, 290, 50));
+
+        employeeProfileBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Profile Page_Employee.png"))); // NOI18N
         employeeProfileBackground.setText("jLabel3");
         getContentPane().add(employeeProfileBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
 
@@ -304,25 +253,21 @@ public class ProfilePage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editButtonActionPerformed
-
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+    private void dashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtonActionPerformed
         // Create an instance of the Dashboard frame
         HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Profile Page frame
         this.dispose(); // Assuming this is the Login frame
-    }//GEN-LAST:event_button2ActionPerformed
+    }//GEN-LAST:event_dashboardButtonActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // Create an instance of LoginNew and display it
         LogInNew loginNew = new LogInNew();
         loginNew.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,39 +308,32 @@ public class ProfilePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Button.Button button1;
-    private Button.Button button2;
-    private Button.Button editButton;
-    private javax.swing.JPanel employeeDetailsPanel;
-    private javax.swing.JLabel employeeIDLabel;
-    private javax.swing.JLabel employeeIDLabel1;
-    private javax.swing.JLabel employeeIDLabel2;
+    private Button.DarkButton darkButton1;
+    private Button.Button dashboardButton;
     private javax.swing.JLabel employeeProfileBackground;
     private javax.swing.JLabel employeeProfilePicture;
-    private javax.swing.JPanel govtBenefitsPanel;
+    private javax.swing.JLabel jAddress;
+    private javax.swing.JLabel jBasicSalary;
+    private javax.swing.JLabel jBirthday;
+    private javax.swing.JLabel jClothingAllowance;
+    private javax.swing.JLabel jEmployeeID;
+    private javax.swing.JLabel jFirstName;
+    private javax.swing.JLabel jGrossSemiMonthlyRate;
+    private javax.swing.JLabel jHourlyRate;
+    private javax.swing.JLabel jImmediateSupervisor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel regularLabel;
-    private javax.swing.JLabel regularLabel1;
-    private javax.swing.JLabel regularLabel2;
-    private javax.swing.JLabel regularLabel3;
-    private javax.swing.JLabel tenureLabel;
+    private javax.swing.JLabel jLastName;
+    private javax.swing.JLabel jPageTitle;
+    private javax.swing.JLabel jPagibigNumber;
+    private javax.swing.JLabel jPhilhealthNumber;
+    private javax.swing.JLabel jPhoneAllowance;
+    private javax.swing.JLabel jPhoneNumber;
+    private javax.swing.JLabel jPosition;
+    private javax.swing.JLabel jRiceSubsidy;
+    private javax.swing.JLabel jSssNumber;
+    private javax.swing.JLabel jStatus;
+    private javax.swing.JLabel jTinNumber;
+    private Button.Button logoutButton;
     // End of variables declaration//GEN-END:variables
 }
+
