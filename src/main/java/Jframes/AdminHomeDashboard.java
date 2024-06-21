@@ -103,6 +103,11 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
         getContentPane().add(leaveRequestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 435, 170, 40));
 
         overtimeRequestButton.setText("Overtime Request");
+        overtimeRequestButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                overtimeRequestButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(overtimeRequestButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 480, 170, 40));
 
         btnViewEmployeeDatabase.setText("Employees Data");
@@ -192,6 +197,11 @@ public class AdminHomeDashboard extends javax.swing.JFrame {
     private void salaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryButtonActionPerformed
         new ViewSalaryAdmin(userID).setVisible(true); dispose();
     }//GEN-LAST:event_salaryButtonActionPerformed
+
+    private void overtimeRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overtimeRequestButtonActionPerformed
+        // TODO add your handling code here:
+        new OvertimeRequestAdmin(userID).setVisible(true); dispose();
+    }//GEN-LAST:event_overtimeRequestButtonActionPerformed
 	
 	
     /**
