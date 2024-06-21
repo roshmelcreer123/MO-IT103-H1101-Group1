@@ -116,6 +116,11 @@ public class RequestLeave extends javax.swing.JFrame {
 
         jManager.setForeground(new java.awt.Color(153, 153, 153));
         jManager.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sarah Johnson", "David Rodriguez", "Emily Chen", "Michael Patel", "Jennifer Smith" }));
+        jManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jManagerActionPerformed(evt);
+            }
+        });
         getContentPane().add(jManager, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 240, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -280,6 +285,10 @@ public class RequestLeave extends javax.swing.JFrame {
 
        
     }//GEN-LAST:event_saveRequestButtonActionPerformed
+
+    private void jManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManagerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jManagerActionPerformed
 
     /**
      * @param args the command line arguments

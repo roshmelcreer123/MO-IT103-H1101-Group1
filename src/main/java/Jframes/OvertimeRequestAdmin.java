@@ -21,6 +21,9 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         btnDashboard = new Button.Button();
+        btnLogout = new Button.Button();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblOvertime = new javax.swing.JTable();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -34,6 +37,50 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(919, 10, 100, 30));
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        tblOvertime.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Employee ID", "Employee Name", "Date of Overtime", "Start Time", "End Time", "Total Hour/s", "Reason", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblOvertime.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane1.setViewportView(tblOvertime);
+        if (tblOvertime.getColumnModel().getColumnCount() > 0) {
+            tblOvertime.getColumnModel().getColumn(0).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblOvertime.getColumnModel().getColumn(2).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(3).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(4).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(5).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(6).setPreferredWidth(250);
+            tblOvertime.getColumnModel().getColumn(7).setPreferredWidth(125);
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 940, 390));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/OvertimeAdminBackground.png"))); // NOI18N
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -50,6 +97,11 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
         // Close the Request Leave frame
         this.dispose(); // Assuming this is the Login frame
     }//GEN-LAST:event_btnDashboardActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // Redirects to Login Dashboard Page
+        new LogInNew().setVisible(true); dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -89,7 +141,10 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private Button.Button btnDashboard;
+    private Button.Button btnLogout;
     private Button.Button button4;
     private Button.Button button5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblOvertime;
     // End of variables declaration//GEN-END:variables
 }
