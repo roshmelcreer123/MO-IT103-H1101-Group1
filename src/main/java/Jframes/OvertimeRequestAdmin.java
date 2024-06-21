@@ -24,6 +24,9 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
         btnLogout = new Button.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOvertime = new javax.swing.JTable();
+        txtEmployeeID = new javax.swing.JTextField();
+        btnEmployeeID = new Button.DarkButton();
+        labelEmployeeID = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,6 +85,23 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 940, 390));
 
+        txtEmployeeID.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        txtEmployeeID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmployeeIDActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 140, 30));
+
+        btnEmployeeID.setText("Search");
+        getContentPane().add(btnEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 100, 90, 30));
+
+        labelEmployeeID.setBackground(new java.awt.Color(255, 255, 255));
+        labelEmployeeID.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labelEmployeeID.setForeground(new java.awt.Color(255, 255, 255));
+        labelEmployeeID.setText("Enter Employee ID:");
+        getContentPane().add(labelEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, -1, 30));
+
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/OvertimeAdminBackground.png"))); // NOI18N
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -102,6 +122,10 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
         // Redirects to Login Dashboard Page
         new LogInNew().setVisible(true); dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void txtEmployeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmployeeIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,10 +165,13 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private Button.Button btnDashboard;
+    private Button.DarkButton btnEmployeeID;
     private Button.Button btnLogout;
     private Button.Button button4;
     private Button.Button button5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelEmployeeID;
     private javax.swing.JTable tblOvertime;
+    private javax.swing.JTextField txtEmployeeID;
     // End of variables declaration//GEN-END:variables
 }
