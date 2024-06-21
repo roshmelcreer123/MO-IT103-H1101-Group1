@@ -1,5 +1,10 @@
 package Jframes;
 
+import Classes.db; // Import the db class
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+
+
 public class OvertimeRequestAdmin extends javax.swing.JFrame {
 
     private String userID;
@@ -9,6 +14,54 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
     public OvertimeRequestAdmin(String userID) {
         this.userID = userID;
         initComponents();
+        fetchData();
+    }
+    
+    public void fetchData(){
+        
+        try {
+            // Get the connection from db class
+            Connection con = db.mycon();
+        
+            // Check if the connection to db class is successful
+            if(con != null){
+                // Create a Statement
+                Statement st = con.createStatement();
+                
+                // Execute a query to retrieve data from the overtime_requests sql
+                String query = "SELECT * FROM overtime_requests";
+                ResultSet rs = st.executeQuery(query);
+                
+                // Get the table model from tblOvertime
+                DefaultTableModel model = (DefaultTableModel) tblOvertime.getModel();
+                model.setRowCount(0); // Clear existing data
+                
+                // Add rows to the table model
+                while(rs.next()){
+                    model.addRow(new Object[]{
+                        rs.getString("employeeID"),
+                        rs.getString("employeeName"),
+                        rs.getString("overtimeDate"),
+                        rs.getString("startTime"),
+                        rs.getString("endTime"),
+                        rs.getString("totalHours"),
+                        rs.getString("reason"),
+                        rs.getString("status"),                        
+                    });
+                }
+                
+                // Close the connection
+                rs.close();
+                st.close();
+                con.close();
+            } else {
+                    System.out.println("Unable to get connection!");
+            }           
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        
     }
 
     /**
