@@ -1,6 +1,12 @@
 package Jframes;
 
+import com.raven.swing.TimePicker;
 import org.jdatepicker.JDatePicker;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.Duration;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class OvertimeRequest extends javax.swing.JFrame {
     private String userID;
@@ -8,10 +14,54 @@ public class OvertimeRequest extends javax.swing.JFrame {
     public OvertimeRequest(String userID) {
         this.userID = userID;
         initComponents();
+        // Add event listeners after initializing components
+        addTimePickerListeners();
+    }
+
+    private void calculateTimeDifference() {
+    try {
+        // Assuming clockStartTime and clockEndTime are the time picker components
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+
+        // Retrieve start time and end time from time pickers
+        String startTimeStr = clockStartTime.getSelectedTime();
+        String endTimeStr = clockEndTime.getSelectedTime();
+
+        // Parse the times
+        LocalTime startTime = LocalTime.parse(startTimeStr, formatter);
+        LocalTime endTime = LocalTime.parse(endTimeStr, formatter);
+
+        // Calculate the difference
+        Duration duration = Duration.between(startTime, endTime);
+        long hours = duration.toHours();
+        long minutes = duration.toMinutes() % 60;
+
+        // Display the result in txtTotalHours
+        txtTotalHours.setText(String.format("%02d:%02d", hours, minutes));
+    } catch (Exception e) {
+        e.printStackTrace();
+        txtTotalHours.setText("Invalid Time");
+        }
     }
     
-    
+    private void addTimePickerListeners() {
+        // Add action listeners to the time picker components
+        clockStartTime.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                calculateTimeDifference();
+            }
+        });
 
+        clockEndTime.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                calculateTimeDifference();
+            }
+        });
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,8 +89,8 @@ public class OvertimeRequest extends javax.swing.JFrame {
         btnAttachFile = new Button.DarkButton();
         btnDashboard = new Button.Button();
         btnLogout = new Button.Button();
-        txtEndTime = new javax.swing.JTextField();
         txtStartTime = new javax.swing.JTextField();
+        txtEndTime = new javax.swing.JTextField();
         btnEndTime = new javax.swing.JButton();
         btnStartTime = new javax.swing.JButton();
         Background = new javax.swing.JLabel();
@@ -102,6 +152,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
         labelTotalHours.setText("Total Hours:");
         getContentPane().add(labelTotalHours, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, -1, -1));
 
+        txtTotalHours.setEditable(false);
         txtTotalHours.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTotalHours.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,19 +194,19 @@ public class OvertimeRequest extends javax.swing.JFrame {
         });
         getContentPane().add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
 
-        txtEndTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEndTimeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 110, -1));
-
         txtStartTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStartTimeActionPerformed(evt);
             }
         });
         getContentPane().add(txtStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 110, -1));
+
+        txtEndTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEndTimeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 110, -1));
 
         btnEndTime.setText("Choose End Time");
         btnEndTime.addActionListener(new java.awt.event.ActionListener() {
@@ -217,13 +268,15 @@ public class OvertimeRequest extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void txtEndTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEndTimeActionPerformed
-        // TODO add your handling code here:
+        // Call calculateTimeDifference when start time is set
+        calculateTimeDifference();
     }//GEN-LAST:event_txtEndTimeActionPerformed
 
     private void txtStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStartTimeActionPerformed
-        // TODO add your handling code here:
+        // Call calculateTimeDifference when start time is set
+        calculateTimeDifference();
     }//GEN-LAST:event_txtStartTimeActionPerformed
-
+   
     private void btnStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartTimeActionPerformed
         // TODO add your handling code here:
         clockStartTime.showPopup(this, 100, 100);
@@ -264,7 +317,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+                new OvertimeRequest("userID").setVisible(true);
             }
         });
     }
