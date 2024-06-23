@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.Duration;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import Classes.db;
+import java.sql.*;
 
 public class OvertimeRequest extends javax.swing.JFrame {
     private String userID;
@@ -37,7 +40,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
         long minutes = duration.toMinutes() % 60;
 
         // Display the result in txtTotalHours
-        txtTotalHours.setText(String.format("%02d:%02d", hours, minutes));
+        txtTotalHours.setText(String.format("%02d hr, %02d min", hours, minutes));
     } catch (Exception e) {
         e.printStackTrace();
         txtTotalHours.setText("Invalid Time");
@@ -146,10 +149,10 @@ public class OvertimeRequest extends javax.swing.JFrame {
 
         labelEndTime.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelEndTime.setText("End Time: ");
-        getContentPane().add(labelEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, -1, -1));
+        getContentPane().add(labelEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
 
         labelTotalHours.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        labelTotalHours.setText("Total Hours:");
+        labelTotalHours.setText("Total Time:");
         getContentPane().add(labelTotalHours, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, -1, -1));
 
         txtTotalHours.setEditable(false);
@@ -163,7 +166,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
 
         labelReason.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelReason.setText("Reason:");
-        getContentPane().add(labelReason, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 220, -1, -1));
+        getContentPane().add(labelReason, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
 
         txtReason.setColumns(20);
         txtReason.setForeground(new java.awt.Color(153, 153, 153));
@@ -176,6 +179,11 @@ public class OvertimeRequest extends javax.swing.JFrame {
         btnAttachFile.setBackground(new java.awt.Color(120, 121, 123));
         btnAttachFile.setForeground(new java.awt.Color(0, 0, 0));
         btnAttachFile.setText("Attach File");
+        btnAttachFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAttachFileActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAttachFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 390, -1, -1));
 
         btnDashboard.setText("Dashboard");
@@ -199,30 +207,32 @@ public class OvertimeRequest extends javax.swing.JFrame {
                 txtStartTimeActionPerformed(evt);
             }
         });
-        getContentPane().add(txtStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 110, -1));
+        getContentPane().add(txtStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 110, 20));
 
         txtEndTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEndTimeActionPerformed(evt);
             }
         });
-        getContentPane().add(txtEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 110, -1));
+        getContentPane().add(txtEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 110, 20));
 
+        btnEndTime.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         btnEndTime.setText("Choose End Time");
         btnEndTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEndTimeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 120, -1));
+        getContentPane().add(btnEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 130, -1));
 
+        btnStartTime.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         btnStartTime.setText("Choose Start Time");
         btnStartTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStartTimeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, -1, -1));
+        getContentPane().add(btnStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 130, -1));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
@@ -236,11 +246,10 @@ public class OvertimeRequest extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTotalHoursActionPerformed
 
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
-
+        // TODO add your handling code here:
         OvertimeRequestHistory OvertimeRequest = new OvertimeRequestHistory(userID);
         OvertimeRequest.setVisible(true);
-        this.dispose(); 
-        
+        this.dispose();     
     }//GEN-LAST:event_btnGoBackActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -286,6 +295,11 @@ public class OvertimeRequest extends javax.swing.JFrame {
         // TODO add your handling code here:
         clockEndTime.showPopup(this, 100, 100);
     }//GEN-LAST:event_btnEndTimeActionPerformed
+
+    private void btnAttachFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttachFileActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "File attached successfully.", "Attach File", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnAttachFileActionPerformed
 
     /**
      * @param args the command line arguments
