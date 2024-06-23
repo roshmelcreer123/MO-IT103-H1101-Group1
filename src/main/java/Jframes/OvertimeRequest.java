@@ -40,7 +40,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
         long minutes = duration.toMinutes() % 60;
 
         // Display the result in txtTotalHours
-        txtTotalHours.setText(String.format("%02d hr, %02d min", hours, minutes));
+        txtTotalHours.setText(String.format("%02d HR, %02d MIN", hours, minutes));
     } catch (Exception e) {
         e.printStackTrace();
         txtTotalHours.setText("Invalid Time");
@@ -312,11 +312,40 @@ public class OvertimeRequest extends javax.swing.JFrame {
         txtStartTime.setText("");
         txtEndTime.setText("");
         txtTotalHours.setText("");
-        txtReason.setText("");      
+        txtReason.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        // TODO add your handling code here:
+        // Getting the data from the form fields
+        String employeeID = txtEmployeeNumber.getText();
+        String employeeName = txtEmployeeName.getText();
+        java.util.Date utilDate = txtOvertimeDate.getDate();
+        Date overtimeDate = new Date(utilDate.getTime());
+        String startTime = txtStartTime.getText();
+        String endTime = txtEndTime.getText();
+        String totalHours = txtTotalHours.getText();
+        String reason = txtReason.getText();
+        
+        // SQL query to input data into overtime_requests database        
+        try{
+            
+            Statement st = db.mycon().createStatement();
+            st.executeUpdate("INSERT INTO overtime_requests (employeeID,employeeName,overtimeDate,startTime,endTime,totalHours,reason,status)" 
+                    + "VALUES('"+employeeID+"','"+employeeName+"','"+overtimeDate+"','"+startTime+"','"+endTime+"','"+totalHours+"','"+reason+"', 'Pending')");
+            
+        // Show a confirmation message to notify the user when an overtime request is successful
+            JOptionPane.showMessageDialog(this, "Request sent successfully. Wait for approval", "Overtime Request", JOptionPane.INFORMATION_MESSAGE);
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        // Clear all inputs like clear button
+        txtOvertimeDate.setDate(null);
+        txtStartTime.setText("");
+        txtEndTime.setText("");
+        txtTotalHours.setText("");
+        txtReason.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
