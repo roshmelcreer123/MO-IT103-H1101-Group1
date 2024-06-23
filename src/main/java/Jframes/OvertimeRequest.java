@@ -307,7 +307,12 @@ public class OvertimeRequest extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGoBackActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
+        // Clear all inputs so that user won't manually clear each box and calendar.
+        txtOvertimeDate.setDate(null);
+        txtStartTime.setText("");
+        txtEndTime.setText("");
+        txtTotalHours.setText("");
+        txtReason.setText("");      
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
