@@ -17,8 +17,8 @@ public class OvertimeRequest extends javax.swing.JFrame {
     public OvertimeRequest(String userID) {
         this.userID = userID;
         initComponents();
-        // Add event listeners after initializing components
-        addTimePickerListeners();
+        addTimePickerListeners(); // Add event listeners after initializing components
+        fetchEmployeeDetails();
     }
 
     private void calculateTimeDifference() {
@@ -64,6 +64,38 @@ public class OvertimeRequest extends javax.swing.JFrame {
         });
     }
 
+    private void fetchEmployeeDetails(){
+        try{
+            // Get the connection to the db database
+            Connection con = db.mycon();
+            
+            if(con != null){
+                
+                // Create a statement
+                Statement st = con.createStatement();
+                
+                // Execute a query to retrieve employee details based on userID
+                String query = "SELECT employeeID, CONCAT(firstName, ' ', lastName) as employeeName FROM user_accounts WHERE userID = '" + userID + "'";
+                ResultSet rs = st.executeQuery(query);
+                
+                // Set employeeName and userID in text field
+                if(rs.next()){
+                    txtEmployeeNumber.setText(rs.getString("employeeID"));
+                    txtEmployeeName.setText(rs.getString("employeeName"));
+                    }
+                // Close the connection
+                rs.close();
+                st.close();
+                con.close();
+                
+            }else{
+                System.out.println("Database connection failed!");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,7 +109,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
         clockStartTime = new com.raven.swing.TimePicker();
         clockEndTime = new com.raven.swing.TimePicker();
         btnSubmit = new Button.DarkButton();
-        btnCancel = new Button.Button();
+        btnClear = new Button.Button();
         btnGoBack = new Button.DarkButton();
         labelOvertimeDate = new javax.swing.JLabel();
         labelRequestOvertime = new javax.swing.JLabel();
@@ -96,6 +128,10 @@ public class OvertimeRequest extends javax.swing.JFrame {
         txtEndTime = new javax.swing.JTextField();
         btnEndTime = new javax.swing.JButton();
         btnStartTime = new javax.swing.JButton();
+        labelEmployeeNumber = new javax.swing.JLabel();
+        txtEmployeeNumber = new javax.swing.JLabel();
+        labelEmployeeName = new javax.swing.JLabel();
+        txtEmployeeName = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
 
         clockStartTime.setForeground(new java.awt.Color(0, 153, 153));
@@ -117,13 +153,13 @@ public class OvertimeRequest extends javax.swing.JFrame {
         });
         getContentPane().add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, 160, -1));
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, 160, -1));
+        getContentPane().add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, 160, -1));
 
         btnGoBack.setText("Go Back");
         btnGoBack.addActionListener(new java.awt.event.ActionListener() {
@@ -135,25 +171,25 @@ public class OvertimeRequest extends javax.swing.JFrame {
 
         labelOvertimeDate.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelOvertimeDate.setText("Overtime Date:");
-        getContentPane().add(labelOvertimeDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
+        getContentPane().add(labelOvertimeDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, 20));
 
         labelRequestOvertime.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         labelRequestOvertime.setForeground(new java.awt.Color(255, 255, 255));
         labelRequestOvertime.setText("Request Overtime");
         getContentPane().add(labelRequestOvertime, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, -1, -1));
-        getContentPane().add(txtOvertimeDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 290, -1));
+        getContentPane().add(txtOvertimeDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 260, -1));
 
         labelStartTime.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelStartTime.setText("Start Time: ");
-        getContentPane().add(labelStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        getContentPane().add(labelStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, 20));
 
         labelEndTime.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelEndTime.setText("End Time: ");
-        getContentPane().add(labelEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
+        getContentPane().add(labelEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, -1, 20));
 
         labelTotalHours.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelTotalHours.setText("Total Time:");
-        getContentPane().add(labelTotalHours, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, -1, -1));
+        getContentPane().add(labelTotalHours, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
 
         txtTotalHours.setEditable(false);
         txtTotalHours.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -162,19 +198,19 @@ public class OvertimeRequest extends javax.swing.JFrame {
                 txtTotalHoursActionPerformed(evt);
             }
         });
-        getContentPane().add(txtTotalHours, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 180, 120, -1));
+        getContentPane().add(txtTotalHours, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, 120, -1));
 
         labelReason.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelReason.setText("Reason:");
-        getContentPane().add(labelReason, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
+        getContentPane().add(labelReason, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, -1, -1));
 
         txtReason.setColumns(20);
         txtReason.setForeground(new java.awt.Color(153, 153, 153));
         txtReason.setRows(5);
-        txtReason.setText("Enter a reason for overtime here.");
+        txtReason.setName(""); // NOI18N
         jScrollPane2.setViewportView(txtReason);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 310, 140));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, 310, 140));
 
         btnAttachFile.setBackground(new java.awt.Color(120, 121, 123));
         btnAttachFile.setForeground(new java.awt.Color(0, 0, 0));
@@ -184,7 +220,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
                 btnAttachFileActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAttachFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 390, -1, -1));
+        getContentPane().add(btnAttachFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 400, -1, -1));
 
         btnDashboard.setText("Dashboard");
         btnDashboard.addActionListener(new java.awt.event.ActionListener() {
@@ -202,37 +238,55 @@ public class OvertimeRequest extends javax.swing.JFrame {
         });
         getContentPane().add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
 
+        txtStartTime.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         txtStartTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtStartTimeActionPerformed(evt);
             }
         });
-        getContentPane().add(txtStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 110, 20));
+        getContentPane().add(txtStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 120, 20));
 
+        txtEndTime.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         txtEndTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEndTimeActionPerformed(evt);
             }
         });
-        getContentPane().add(txtEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 110, 20));
+        getContentPane().add(txtEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 120, 20));
 
-        btnEndTime.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        btnEndTime.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         btnEndTime.setText("Choose End Time");
         btnEndTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEndTimeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 130, -1));
+        getContentPane().add(btnEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 130, -1));
 
-        btnStartTime.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        btnStartTime.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         btnStartTime.setText("Choose Start Time");
         btnStartTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStartTimeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 240, 130, -1));
+        getContentPane().add(btnStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 130, -1));
+
+        labelEmployeeNumber.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelEmployeeNumber.setText("Employee No:");
+        getContentPane().add(labelEmployeeNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, 20));
+
+        txtEmployeeNumber.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtEmployeeNumber.setText("Employee Number");
+        getContentPane().add(txtEmployeeNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+
+        labelEmployeeName.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelEmployeeName.setText("Employee Name:");
+        getContentPane().add(labelEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, 20));
+
+        txtEmployeeName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtEmployeeName.setText("Employee Name");
+        getContentPane().add(txtEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, -1, -1));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
@@ -252,9 +306,9 @@ public class OvertimeRequest extends javax.swing.JFrame {
         this.dispose();     
     }//GEN-LAST:event_btnGoBackActionPerformed
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelActionPerformed
+    }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
@@ -339,7 +393,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private Button.DarkButton btnAttachFile;
-    private Button.Button btnCancel;
+    private Button.Button btnClear;
     private Button.Button btnDashboard;
     private javax.swing.JButton btnEndTime;
     private Button.DarkButton btnGoBack;
@@ -349,12 +403,16 @@ public class OvertimeRequest extends javax.swing.JFrame {
     private com.raven.swing.TimePicker clockEndTime;
     private com.raven.swing.TimePicker clockStartTime;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelEmployeeName;
+    private javax.swing.JLabel labelEmployeeNumber;
     private javax.swing.JLabel labelEndTime;
     private javax.swing.JLabel labelOvertimeDate;
     private javax.swing.JLabel labelReason;
     private javax.swing.JLabel labelRequestOvertime;
     private javax.swing.JLabel labelStartTime;
     private javax.swing.JLabel labelTotalHours;
+    private javax.swing.JLabel txtEmployeeName;
+    private javax.swing.JLabel txtEmployeeNumber;
     private javax.swing.JTextField txtEndTime;
     private com.toedter.calendar.JDateChooser txtOvertimeDate;
     private javax.swing.JTextArea txtReason;
