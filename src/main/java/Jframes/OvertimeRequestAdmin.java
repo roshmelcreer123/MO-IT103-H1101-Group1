@@ -9,9 +9,7 @@ import javax.swing.JOptionPane;
 public class OvertimeRequestAdmin extends javax.swing.JFrame {
 
     private String userID;
-    /**
-     * Creates new form OvertimeRequestAdmin
-     */
+    
     public OvertimeRequestAdmin(String userID) {
         this.userID = userID;
         initComponents();
@@ -29,7 +27,7 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
                 // Create a Statement
                 Statement st = con.createStatement();
                 
-                // Execute a query to retrieve data from the overtime_requests sql
+                // Execute a query to retrieve data from the overtime_requests.sql
                 String query = "SELECT * FROM overtime_requests";
                 ResultSet rs = st.executeQuery(query);
                 
@@ -211,7 +209,8 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
                 pst.close();
                 rs.close();
             } else{
-                    JOptionPane.showMessageDialog(this, "No employee requests found. Please verify the data or check for any system issues.", "Information", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "No employee requests found. Please verify the data or"
+                            + " check for any system issues.", "Information", JOptionPane.WARNING_MESSAGE);
             }
             
             
