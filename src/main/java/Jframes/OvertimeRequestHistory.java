@@ -22,8 +22,17 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
             // Check if the connection to db class is successful
             if(con != null){
                 
-                // Create a statement and Execute Query from overtime_requests.sql motorph database
-                PreparedStatement pst = con.prepareStatement("SELECT * FROM overtime_requests");
+                // SQL query to join user_accounts and overtime_requests based on employeeID
+                String query = "SELECT orq.status, orq.requestedDate, orq.overtimeDate, orq.startTime, orq.endTime, orq.totalHours, orq.reason " +
+                               "FROM overtime_requests orq " +
+                               "JOIN user_accounts ua ON orq.employeeID = ua.employeeID " +
+                               "WHERE ua.userID = ?";
+                
+                // Create a prepared statement
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setString(1, this.userID); // Set the userID parameter
+                
+                // Execute the query
                 ResultSet rs = pst.executeQuery();
                 
                 // Get the table model from tblOvertimeHistory
