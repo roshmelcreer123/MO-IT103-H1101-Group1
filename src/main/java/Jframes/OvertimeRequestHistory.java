@@ -81,7 +81,6 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
         btnLogout = new Button.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOvertimeHistory = new javax.swing.JTable();
-        darkButton1 = new Button.DarkButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -142,9 +141,6 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 940, 390));
-
-        darkButton1.setText("Cancel Request");
-        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 160, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/OvertimeHistoryBackground.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
@@ -216,7 +212,6 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
     private Button.Button btnDashboard;
     private Button.Button btnLogout;
     private Button.DarkButton btnRequestOvertime;
-    private Button.DarkButton darkButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOvertimeHistory;
     // End of variables declaration//GEN-END:variables
