@@ -79,10 +79,9 @@ public class viewLeaveAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        Logout = new Button.Button();
-        Dashboard = new Button.Button();
-        darkButton1 = new Button.DarkButton();
+        btnRequestLeave = new Button.DarkButton();
+        btnLogout = new Button.Button();
+        btnDashboard = new Button.Button();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         background = new javax.swing.JLabel();
@@ -90,40 +89,35 @@ public class viewLeaveAdmin extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Leave Request");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, -1, -1));
-
-        Logout.setText("Logout");
-        Logout.setToolTipText("");
-        Logout.addActionListener(new java.awt.event.ActionListener() {
+        btnRequestLeave.setText("Request Leave");
+        btnRequestLeave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutActionPerformed(evt);
+                btnRequestLeaveActionPerformed(evt);
             }
         });
-        getContentPane().add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 120, 30));
+        getContentPane().add(btnRequestLeave, new org.netbeans.lib.awtextra.AbsoluteConstraints(836, 90, 160, -1));
 
-        Dashboard.setText("Dashboard");
-        Dashboard.setToolTipText("");
-        Dashboard.addActionListener(new java.awt.event.ActionListener() {
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DashboardActionPerformed(evt);
+                btnLogoutActionPerformed(evt);
             }
         });
-        getContentPane().add(Dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 120, 30));
+        getContentPane().add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(919, 10, 100, 30));
 
-        darkButton1.setText("Request Leave");
-        darkButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDashboard.setText("Dashboard");
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                darkButton1ActionPerformed(evt);
+                btnDashboardActionPerformed(evt);
             }
         });
-        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, -1, -1));
+        getContentPane().add(btnDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         jTable2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -138,40 +132,37 @@ public class viewLeaveAdmin extends javax.swing.JFrame {
         jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(jTable2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 940, 390));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 940, 390));
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
-        background.setText("jLabel3");
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/viewLeaveAdminBackground.png"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
+    private void btnRequestLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestLeaveActionPerformed
         // Create an instance of the CreateLeaveRequest frame
         RequestLeaveAdmin requestLeaveAdmin = new RequestLeaveAdmin(userID);
         // Set the visibility of the CreateLeaveRequest frame to true
         requestLeaveAdmin.setVisible(true);
         // Close the leaveRequestDashboard Dashboard frame
         this.dispose(); // Assuming this is the Login frame
-    }//GEN-LAST:event_darkButton1ActionPerformed
+    }//GEN-LAST:event_btnRequestLeaveActionPerformed
 
-    private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // Redirects to Login Dashboard Page
+        new LogInNew().setVisible(true); dispose();
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
         // Create an instance of the Dashboard frame
         AdminHomeDashboard dashboard = new AdminHomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
-        // Close the leaveRequest Dashboard frame
+        // Close the Request Leave frame
         this.dispose(); // Assuming this is the Login frame
-    }//GEN-LAST:event_DashboardActionPerformed
-
-    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-        // Create an instance of LoginNew and display it
-        LogInNew loginNew = new LogInNew();
-        loginNew.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_LogoutActionPerformed
+    }//GEN-LAST:event_btnDashboardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,12 +207,11 @@ public class viewLeaveAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Button.Button Dashboard;
-    private Button.Button Logout;
     private javax.swing.JLabel background;
-    private Button.DarkButton darkButton1;
+    private Button.Button btnDashboard;
+    private Button.Button btnLogout;
+    private Button.DarkButton btnRequestLeave;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
