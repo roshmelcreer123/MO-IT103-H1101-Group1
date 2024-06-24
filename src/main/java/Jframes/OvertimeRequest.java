@@ -40,7 +40,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
         long minutes = duration.toMinutes() % 60;
 
         // Display the result in txtTotalHours
-        txtTotalHours.setText(String.format("%02d HR, %02d MIN", hours, minutes));
+        txtTotalHours.setText(String.format("%02d hrs, %02d mins", hours, minutes));
     } catch (Exception e) {
         e.printStackTrace();
         txtTotalHours.setText("Invalid Time");

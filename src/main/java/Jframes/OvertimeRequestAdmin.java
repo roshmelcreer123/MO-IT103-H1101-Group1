@@ -3,6 +3,7 @@ package Jframes;
 import Classes.db; // Import the db class
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 
 public class OvertimeRequestAdmin extends javax.swing.JFrame {
@@ -106,10 +107,7 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
 
         tblOvertime.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Employee ID", "Employee Name", "Date of Overtime", "Start Time", "End Time", "Total Hour/s", "Reason", "Status"
@@ -147,6 +145,11 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
         getContentPane().add(txtEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 140, 30));
 
         btnEmployeeID.setText("Search");
+        btnEmployeeID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmployeeIDActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 100, 90, 30));
 
         labelEmployeeID.setBackground(new java.awt.Color(255, 255, 255));
@@ -179,6 +182,43 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
     private void txtEmployeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmployeeIDActionPerformed
+
+    private void btnEmployeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeIDActionPerformed
+        // TODO add your handling code here:
+        try{
+            String employeeID = txtEmployeeID.getText();
+            
+            Connection con = db.mycon();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM overtime_requests WHERE employeeID=?");
+            pst.setString(1, employeeID);
+            ResultSet rs = pst.executeQuery();
+            
+            DefaultTableModel model = (DefaultTableModel) tblOvertime.getModel();
+            model.setRowCount(0);
+            
+            if(rs.next() == true){
+                model.addRow(new Object[]{
+                        rs.getString("employeeID"),
+                        rs.getString("employeeName"),
+                        rs.getString("overtimeDate"),
+                        rs.getString("startTime"),
+                        rs.getString("endTime"),
+                        rs.getString("totalHours"),
+                        rs.getString("reason"),
+                        rs.getString("status"),                        
+                    });
+                con.close();
+                pst.close();
+                rs.close();
+            } else{
+                    JOptionPane.showMessageDialog(this, "No employee requests found. Please verify the data or check for any system issues.", "Information", JOptionPane.WARNING_MESSAGE);
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnEmployeeIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,8 +260,6 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
     private Button.Button btnDashboard;
     private Button.DarkButton btnEmployeeID;
     private Button.Button btnLogout;
-    private Button.Button button4;
-    private Button.Button button5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEmployeeID;
     private javax.swing.JTable tblOvertime;
