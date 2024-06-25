@@ -38,14 +38,15 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
                 // Add rows to the table model
                 while(rs.next()){
                     model.addRow(new Object[]{
+                        rs.getString("status"),
+                        rs.getString("requestedDate"),
                         rs.getString("employeeID"),
                         rs.getString("employeeName"),
                         rs.getString("overtimeDate"),
                         rs.getString("startTime"),
                         rs.getString("endTime"),
                         rs.getString("totalHours"),
-                        rs.getString("reason"),
-                        rs.getString("status"),                        
+                        rs.getString("reason")                        
                     });
                 }
                 
@@ -79,6 +80,7 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
         txtEmployeeID = new javax.swing.JTextField();
         btnEmployeeID = new Button.DarkButton();
         labelEmployeeID = new javax.swing.JLabel();
+        darkButton1 = new Button.DarkButton();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,11 +110,11 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Employee ID", "Employee Name", "Date of Overtime", "Start Time", "End Time", "Total Hour/s", "Reason", "Status"
+                "Status", "Requested Date", "Employee ID", "Employee Name", "Date of Overtime", "Start Time", "End Time", "Total Hour/s", "Reason"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -125,11 +127,12 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
             tblOvertime.getColumnModel().getColumn(0).setPreferredWidth(125);
             tblOvertime.getColumnModel().getColumn(1).setPreferredWidth(150);
             tblOvertime.getColumnModel().getColumn(2).setPreferredWidth(125);
-            tblOvertime.getColumnModel().getColumn(3).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(3).setPreferredWidth(150);
             tblOvertime.getColumnModel().getColumn(4).setPreferredWidth(125);
             tblOvertime.getColumnModel().getColumn(5).setPreferredWidth(125);
-            tblOvertime.getColumnModel().getColumn(6).setPreferredWidth(250);
+            tblOvertime.getColumnModel().getColumn(6).setPreferredWidth(125);
             tblOvertime.getColumnModel().getColumn(7).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(8).setPreferredWidth(250);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 940, 390));
@@ -140,7 +143,7 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
                 txtEmployeeIDActionPerformed(evt);
             }
         });
-        getContentPane().add(txtEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 100, 140, 30));
+        getContentPane().add(txtEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 140, 30));
 
         btnEmployeeID.setText("Search");
         btnEmployeeID.addActionListener(new java.awt.event.ActionListener() {
@@ -148,13 +151,21 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
                 btnEmployeeIDActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 100, 90, 30));
+        getContentPane().add(btnEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 100, 100, 30));
 
         labelEmployeeID.setBackground(new java.awt.Color(255, 255, 255));
         labelEmployeeID.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelEmployeeID.setForeground(new java.awt.Color(255, 255, 255));
         labelEmployeeID.setText("Enter Employee ID:");
-        getContentPane().add(labelEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, -1, 30));
+        getContentPane().add(labelEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, -1, 30));
+
+        darkButton1.setText("Refresh");
+        darkButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                darkButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, -1, 30));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/OvertimeAdminBackground.png"))); // NOI18N
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -196,21 +207,21 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
             
             if(rs.next() == true){
                 model.addRow(new Object[]{
+                        rs.getString("status"),
+                        rs.getString("requestedDate"),
                         rs.getString("employeeID"),
                         rs.getString("employeeName"),
                         rs.getString("overtimeDate"),
                         rs.getString("startTime"),
                         rs.getString("endTime"),
                         rs.getString("totalHours"),
-                        rs.getString("reason"),
-                        rs.getString("status"),                        
+                        rs.getString("reason")                                               
                     });
                 con.close();
                 pst.close();
                 rs.close();
             } else{
-                    JOptionPane.showMessageDialog(this, "No employee requests found. Please verify the data or"
-                            + " check for any system issues.", "Information", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Employee ID cannot be empty. Please enter a valid Employee ID.", "Notification", JOptionPane.INFORMATION_MESSAGE);
             }
             
             
@@ -218,6 +229,11 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnEmployeeIDActionPerformed
+
+    private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
+        // Refresh the tblOvertimeRequest
+        fetchData();
+    }//GEN-LAST:event_darkButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +275,7 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
     private Button.Button btnDashboard;
     private Button.DarkButton btnEmployeeID;
     private Button.Button btnLogout;
+    private Button.DarkButton darkButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEmployeeID;
     private javax.swing.JTable tblOvertime;
