@@ -26,16 +26,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version> <!-- Use the latest version available -->
         </dependency>
-        <dependency>
-            <groupId>com.swingtimepicker</groupId>
-            <artifactId>timepicker</artifactId>
-            <version>1.0.0 OJKB</version>
-        </dependency>
-        <dependency>
-            <groupId>com.timingframework</groupId>
-            <artifactId>timingframework</artifactId>
-            <version>1.0.0 OJKB</version>
-        </dependency>
+        
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
