@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import Classes.db;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class OvertimeRequest extends javax.swing.JFrame {
     private String userID;
@@ -319,13 +321,15 @@ public class OvertimeRequest extends javax.swing.JFrame {
         String endTime = txtEndTime.getText();
         String totalHours = txtTotalHours.getText();
         String reason = txtReason.getText();
+        LocalDate currentDate = LocalDate.now(); // Get current date
+        Timestamp requestedDate = Timestamp.valueOf(LocalDateTime.now()); // Get current timestamp
         
         // SQL query to input data into overtime_requests database        
         try{
             
             Statement st = db.mycon().createStatement();
-            st.executeUpdate("INSERT INTO overtime_requests (employeeID,employeeName,overtimeDate,startTime,endTime,totalHours,reason,status)" 
-                    + "VALUES('"+employeeID+"','"+employeeName+"','"+overtimeDate+"','"+startTime+"','"+endTime+"','"+totalHours+"','"+reason+"', 'Pending')");
+            st.executeUpdate("INSERT INTO overtime_requests (employeeID,employeeName,overtimeDate,startTime,endTime,totalHours,reason,status,requestedDate)" 
+                    + "VALUES('"+employeeID+"','"+employeeName+"','"+overtimeDate+"','"+startTime+"','"+endTime+"','"+totalHours+"','"+reason+"', 'Pending','"+requestedDate+"')");
             
         // Show a confirmation message to notify the user when an overtime request is successful
             JOptionPane.showMessageDialog(this, "Request sent successfully. Wait for approval", "Overtime Request", JOptionPane.INFORMATION_MESSAGE);
