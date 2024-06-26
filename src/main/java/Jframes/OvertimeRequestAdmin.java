@@ -122,17 +122,18 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
             }
         });
         tblOvertime.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblOvertime.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblOvertime);
         if (tblOvertime.getColumnModel().getColumnCount() > 0) {
-            tblOvertime.getColumnModel().getColumn(0).setPreferredWidth(125);
-            tblOvertime.getColumnModel().getColumn(1).setPreferredWidth(150);
-            tblOvertime.getColumnModel().getColumn(2).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tblOvertime.getColumnModel().getColumn(1).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(2).setPreferredWidth(100);
             tblOvertime.getColumnModel().getColumn(3).setPreferredWidth(150);
             tblOvertime.getColumnModel().getColumn(4).setPreferredWidth(125);
-            tblOvertime.getColumnModel().getColumn(5).setPreferredWidth(125);
-            tblOvertime.getColumnModel().getColumn(6).setPreferredWidth(125);
+            tblOvertime.getColumnModel().getColumn(5).setPreferredWidth(100);
+            tblOvertime.getColumnModel().getColumn(6).setPreferredWidth(100);
             tblOvertime.getColumnModel().getColumn(7).setPreferredWidth(125);
-            tblOvertime.getColumnModel().getColumn(8).setPreferredWidth(250);
+            tblOvertime.getColumnModel().getColumn(8).setPreferredWidth(200);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 940, 390));
@@ -193,41 +194,56 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmployeeIDActionPerformed
 
     private void btnEmployeeIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeIDActionPerformed
-        // TODO add your handling code here:
-        try{
-            String employeeID = txtEmployeeID.getText();
-            
+        try {
+        String employeeID = txtEmployeeID.getText();
+        
+        // Check if the txtEmployeeID is not empty
+        if (employeeID.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "The Employee ID field cannot be left empty.", "Notification", 
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else if (!employeeID.matches("\\d+") || Integer.parseInt(employeeID) < 10001 || Integer.parseInt(employeeID) > 10040) {
+            JOptionPane.showMessageDialog(this, "Invalid input! Please enter a valid Employee ID.", "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
             Connection con = db.mycon();
             PreparedStatement pst = con.prepareStatement("SELECT * FROM overtime_requests WHERE employeeID=?");
             pst.setString(1, employeeID);
             ResultSet rs = pst.executeQuery();
             
             DefaultTableModel model = (DefaultTableModel) tblOvertime.getModel();
-            model.setRowCount(0);
+            model.setRowCount(0); // Clear existing data
             
-            if(rs.next() == true){
-                model.addRow(new Object[]{
-                        rs.getString("status"),
-                        rs.getString("requestedDate"),
-                        rs.getString("employeeID"),
-                        rs.getString("employeeName"),
-                        rs.getString("overtimeDate"),
-                        rs.getString("startTime"),
-                        rs.getString("endTime"),
-                        rs.getString("totalHours"),
-                        rs.getString("reason")                                               
+            boolean recordFound = false;
+            // Loop through all the rows in the result set
+            while (rs.next()) {
+                String retrievedEmployeeID = rs.getString("employeeID");
+                if (retrievedEmployeeID != null && !retrievedEmployeeID.isEmpty()) {
+                    model.addRow(new Object[]{
+                            rs.getString("status"),
+                            rs.getString("requestedDate"),
+                            rs.getString("employeeID"),
+                            rs.getString("employeeName"),
+                            rs.getString("overtimeDate"),
+                            rs.getString("startTime"),
+                            rs.getString("endTime"),
+                            rs.getString("totalHours"),
+                            rs.getString("reason")                                               
                     });
-                con.close();
-                pst.close();
-                rs.close();
-            } else{
-                    JOptionPane.showMessageDialog(this, "Employee ID cannot be empty. Please enter a valid Employee ID.", "Notification", JOptionPane.INFORMATION_MESSAGE);
+                    recordFound = true;
+                }
             }
             
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+            // If no rows were added, notify the user
+            if (!recordFound) {
+                JOptionPane.showMessageDialog(this, "No overtime request records for this user.", 
+                        "Notification", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        
+        } catch(Exception e) {
+        e.printStackTrace();
+            }
+
     }//GEN-LAST:event_btnEmployeeIDActionPerformed
 
     private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed

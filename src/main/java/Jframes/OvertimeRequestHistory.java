@@ -122,22 +122,24 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblOvertimeHistory.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblOvertimeHistory.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblOvertimeHistory);
         if (tblOvertimeHistory.getColumnModel().getColumnCount() > 0) {
-            tblOvertimeHistory.getColumnModel().getColumn(0).setPreferredWidth(125);
-            tblOvertimeHistory.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tblOvertimeHistory.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tblOvertimeHistory.getColumnModel().getColumn(1).setPreferredWidth(125);
             tblOvertimeHistory.getColumnModel().getColumn(2).setPreferredWidth(125);
-            tblOvertimeHistory.getColumnModel().getColumn(3).setPreferredWidth(125);
-            tblOvertimeHistory.getColumnModel().getColumn(4).setPreferredWidth(125);
+            tblOvertimeHistory.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tblOvertimeHistory.getColumnModel().getColumn(4).setPreferredWidth(100);
             tblOvertimeHistory.getColumnModel().getColumn(5).setPreferredWidth(125);
-            tblOvertimeHistory.getColumnModel().getColumn(6).setPreferredWidth(250);
+            tblOvertimeHistory.getColumnModel().getColumn(6).setPreferredWidth(300);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 940, 390));
