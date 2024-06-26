@@ -27,11 +27,22 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.0.33</version> <!-- Use the latest version available -->
         </dependency>
+        <dependency>
+            <groupId>swing-time-picker</groupId>
+            <artifactId>swing-time-picker</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>TimingFramework-0.55</groupId>
+            <artifactId>TimingFramework-0.55</artifactId>
+            <version>0.55</version>
+        </dependency>       
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>main.main</exec.mainClass>
+        
     </properties>
 </project>
