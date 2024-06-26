@@ -13,7 +13,8 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
     public OvertimeRequestAdmin(String userID) {
         this.userID = userID;
         initComponents();
-        fetchData();
+        fetchData(); // Call fetchData() to populate the table initially
+        setupMouseListener();
     }
     
     public void fetchData(){
@@ -59,10 +60,63 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
             }           
         } catch(Exception e){
             e.printStackTrace();
-        }
-        
-        
+        }  
     }
+    
+    private void updateStatus(String status, String employeeID, int rowIndex) {
+    try {
+        Connection con = db.mycon(); // Use db.java method to get connection
+        if (con != null) {
+            String updateQuery = "UPDATE overtime_requests SET status=? WHERE employeeID=? AND id=?";
+            PreparedStatement pst = con.prepareStatement(updateQuery);
+            pst.setString(1, status);
+            pst.setString(2, employeeID);
+            pst.setInt(3, rowIndex + 1); // Assuming id starts from 1
+
+            int rowsAffected = pst.executeUpdate();
+            System.out.println("Rows updated: " + rowsAffected); // Debug print
+
+            // Update UI if needed (assuming immediate update in UI)
+            DefaultTableModel model = (DefaultTableModel) tblOvertime.getModel();
+            model.setValueAt(status, rowIndex, 0); // Update status in UI for specific row
+
+            pst.close();
+            con.close();
+        } else {
+            System.out.println("Unable to get connection!");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Failed to update status: " + e.getMessage(),
+                "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+
+
+
+
+    private void setupMouseListener() {
+    tblOvertime.addMouseListener(new java.awt.event.MouseAdapter() {
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            int row = tblOvertime.rowAtPoint(evt.getPoint());
+            String employeeID = tblOvertime.getValueAt(row, 2).toString(); // Assuming employeeID is in the third column
+
+            int choice = JOptionPane.showOptionDialog(null, "Do you approve or deny this request?",
+                    "Request Status", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                    new String[]{"Approve", "Deny"}, "Approve");
+
+            if (choice == JOptionPane.YES_OPTION) {
+                updateStatus("Approved", employeeID, row); // Pass row index to updateStatus
+            } else if (choice == JOptionPane.NO_OPTION) {
+                updateStatus("Rejected", employeeID, row); // Pass row index to updateStatus
+            }
+        }
+    });
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,6 +176,7 @@ public class OvertimeRequestAdmin extends javax.swing.JFrame {
             }
         });
         tblOvertime.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblOvertime.setShowGrid(true);
         tblOvertime.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblOvertime);
         if (tblOvertime.getColumnModel().getColumnCount() > 0) {
