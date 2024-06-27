@@ -5,7 +5,7 @@
     <artifactId>mavenproject1</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-        
+
     <dependencies>
         <dependency>
             <groupId>org.jdatepicker</groupId>
@@ -25,9 +25,8 @@
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
-            <version>8.0.33</version> <!-- Use the latest version available -->
+            <version>8.0.33</version>
         </dependency>
-        <!-- Add dependencies without version and scope -->
         <dependency>
             <groupId>com.swingtimepicker</groupId>
             <artifactId>swing-time-picker</artifactId>
@@ -42,38 +41,37 @@
 
     <build>
         <plugins>
-            <!-- Maven Install Plugin -->
+            <!-- Maven Dependency Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>3.0.0-M1</version>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
                 <executions>
                     <execution>
                         <id>install-swing-time-picker</id>
-                        <phase>validate</phase>
+                        <phase>initialize</phase>
                         <goals>
-                            <goal>install-file</goal>
+                            <goal>unpack</goal>
                         </goals>
                         <configuration>
-                            <file>${project.basedir}/libs/swing-time-picker.jar</file>
-                            <groupId>com.swingtimepicker</groupId>
-                            <artifactId>swing-time-picker</artifactId>
-                            <version>1.0.0</version>
-                            <packaging>jar</packaging>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>install-timingframework</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/libs/TimingFramework-0.55.jar</file>
-                            <groupId>org.timingframework</groupId>
-                            <artifactId>timingframework</artifactId>
-                            <version>0.55</version>
-                            <packaging>jar</packaging>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.swingtimepicker</groupId>
+                                    <artifactId>swing-time-picker</artifactId>
+                                    <version>1.0.0</version>
+                                    <classifier></classifier>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.timingframework</groupId>
+                                    <artifactId>timingframework</artifactId>
+                                    <version>0.55</version>
+                                    <classifier></classifier>
+                                    <type>jar</type>
+                                    <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
                         </configuration>
                     </execution>
                 </executions>
