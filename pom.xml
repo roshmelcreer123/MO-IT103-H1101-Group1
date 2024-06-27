@@ -27,6 +27,7 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.0.33</version> <!-- Use the latest version available -->
         </dependency>
+        <!-- Add dependencies without version and scope -->
         <dependency>
             <groupId>com.swingtimepicker</groupId>
             <artifactId>swing-time-picker</artifactId>
@@ -41,14 +42,15 @@
 
     <build>
         <plugins>
+            <!-- Maven Install Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.2</version>
+                <version>3.0.0-M1</version>
                 <executions>
                     <execution>
-                        <id>install-external</id>
-                        <phase>initialize</phase>
+                        <id>install-swing-time-picker</id>
+                        <phase>validate</phase>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
@@ -62,7 +64,7 @@
                     </execution>
                     <execution>
                         <id>install-timingframework</id>
-                        <phase>initialize</phase>
+                        <phase>validate</phase>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
