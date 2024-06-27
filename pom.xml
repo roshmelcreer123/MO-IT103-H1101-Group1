@@ -28,21 +28,61 @@
             <version>8.0.33</version> <!-- Use the latest version available -->
         </dependency>
         <dependency>
-            <groupId>swing-time-picker</groupId>
+            <groupId>com.swingtimepicker</groupId>
             <artifactId>swing-time-picker</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
-            <groupId>TimingFramework-0.55</groupId>
-            <artifactId>TimingFramework-0.55</artifactId>
+            <groupId>org.timingframework</groupId>
+            <artifactId>timingframework</artifactId>
             <version>0.55</version>
-        </dependency>       
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>install-external</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.basedir}/libs/swing-time-picker.jar</file>
+                            <groupId>com.swingtimepicker</groupId>
+                            <artifactId>swing-time-picker</artifactId>
+                            <version>1.0.0</version>
+                            <packaging>jar</packaging>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>install-timingframework</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.basedir}/libs/TimingFramework-0.55.jar</file>
+                            <groupId>org.timingframework</groupId>
+                            <artifactId>timingframework</artifactId>
+                            <version>0.55</version>
+                            <packaging>jar</packaging>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>main.main</exec.mainClass>
-        
     </properties>
 </project>
