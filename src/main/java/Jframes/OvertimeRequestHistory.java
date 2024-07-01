@@ -1,21 +1,72 @@
-
 package Jframes;
 
-/**
- *
- * @author sheen
- */
+import Classes.db; // Import the db class
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+
 public class OvertimeRequestHistory extends javax.swing.JFrame {
     private String userID;
     
-    /**
-     * Creates new form OvertimeRequestHistory
-     */
     public OvertimeRequestHistory(String userID) {
         this.userID = userID;
         initComponents();
+        fetchData();
     }
-
+    
+    public void fetchData(){
+        try{
+            // Get the connection from db class
+            Connection con = db.mycon();
+            
+            // Check if the connection to db class is successful
+            if(con != null){
+                
+                // SQL query to join user_accounts and overtime_requests based on employeeID
+                String query = "SELECT orq.status, orq.requestedDate, orq.overtimeDate, orq.startTime, orq.endTime, orq.totalHours, orq.reason " +
+                               "FROM overtime_requests orq " +
+                               "JOIN user_accounts ua ON orq.employeeID = ua.employeeID " +
+                               "WHERE ua.userID = ?";
+                
+                // Create a prepared statement
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setString(1, this.userID); // Set the userID parameter
+                
+                // Execute the query
+                ResultSet rs = pst.executeQuery();
+                
+                // Get the table model from tblOvertimeHistory
+                DefaultTableModel model = (DefaultTableModel) tblOvertimeHistory.getModel();
+                model.setRowCount(0); // Clear existing data
+                
+                // Add rows of data to the table model
+                while(rs.next()){
+                    model.addRow(new Object[]{
+                        rs.getString("status"),
+                        rs.getString("requestedDate"),
+                        rs.getString("overtimeDate"),
+                        rs.getString("startTime"),
+                        rs.getString("endTime"),
+                        rs.getString("totalHours"),
+                        rs.getString("reason")                   
+                    });                  
+                }
+                    
+                // Close the operation
+                con.close();
+                pst.close();
+                rs.close();
+                
+            }
+                else{
+                JOptionPane.showMessageDialog(this, "No database found!", "Notification", JOptionPane.WARNING_MESSAGE);
+            } 
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,96 +76,103 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        darkButton1 = new Button.DarkButton();
-        otTitleLabel = new javax.swing.JLabel();
-        dataHistoryPanel = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        button2 = new Button.Button();
-        button1 = new Button.Button();
+        btnRequestOvertime = new Button.DarkButton();
+        btnDashboard = new Button.Button();
+        btnLogout = new Button.Button();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblOvertimeHistory = new javax.swing.JTable();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        darkButton1.setText("Request Overtime");
-        darkButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRequestOvertime.setText("Request Overtime");
+        btnRequestOvertime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                darkButton1ActionPerformed(evt);
+                btnRequestOvertimeActionPerformed(evt);
             }
         });
-        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, -1, -1));
+        getContentPane().add(btnRequestOvertime, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, -1, -1));
 
-        otTitleLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        otTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
-        otTitleLabel.setText("Overtime History");
-        getContentPane().add(otTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, -1, -1));
+        btnDashboard.setText("Dashboard");
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDashboardActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
-        jTable1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        tblOvertimeHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"May 3, 2024", "May 5, 2024", "Approved", "3 Hours", "John Doe", "May 4, 2024", null, "View, Edit, Delete."},
-                {"April 22, 2024", "April 23, 2024", "Declined", "2 Hours", "Jane Smith", "April 23, 2024", "Urgent deadline, declined due to staffing issues.", "View, Edit, Delete"},
-                {"April 15, 2024", "April 17, 2024", "Pending", "4 Hours", "Pending", "Pending", "Family emergency, awaiting approval.", "View, Edit, Delete."},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Request Date", "Overtime Date", "Status", "Hours Requested", "Approver", "Approval Date", "Comments", "Actions"
+                "Status", "Requested Date", "Date of Overtime", "Start Time", "End TIme", "Total Hour/s", "Reason"
             }
-        ));
-        dataHistoryPanel.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(200);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblOvertimeHistory.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblOvertimeHistory.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblOvertimeHistory);
+        if (tblOvertimeHistory.getColumnModel().getColumnCount() > 0) {
+            tblOvertimeHistory.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tblOvertimeHistory.getColumnModel().getColumn(1).setPreferredWidth(125);
+            tblOvertimeHistory.getColumnModel().getColumn(2).setPreferredWidth(125);
+            tblOvertimeHistory.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tblOvertimeHistory.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tblOvertimeHistory.getColumnModel().getColumn(5).setPreferredWidth(125);
+            tblOvertimeHistory.getColumnModel().getColumn(6).setPreferredWidth(300);
         }
 
-        getContentPane().add(dataHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 910, 380));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 940, 390));
 
-        button2.setText("Dashboard");
-        button2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
-
-        button1.setText("Logout");
-        button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
-
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/OvertimeHistoryBackground.png"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
+    private void btnRequestOvertimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestOvertimeActionPerformed
          // Create an instance of OvertimeRequest and display it
         OvertimeRequest overtimeRequest = new OvertimeRequest(userID);
         overtimeRequest.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_darkButton1ActionPerformed
+    }//GEN-LAST:event_btnRequestOvertimeActionPerformed
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
         // Create an instance of the Dashboard frame
         HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Overtime Request frame
         this.dispose(); // Assuming this is the Login frame
-    }//GEN-LAST:event_button2ActionPerformed
+    }//GEN-LAST:event_btnDashboardActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // Create an instance of LoginNew and display it
         LogInNew loginNew = new LogInNew();
         loginNew.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,11 +211,10 @@ public class OvertimeRequestHistory extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
-    private Button.Button button1;
-    private Button.Button button2;
-    private Button.DarkButton darkButton1;
-    private javax.swing.JScrollPane dataHistoryPanel;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JLabel otTitleLabel;
+    private Button.Button btnDashboard;
+    private Button.Button btnLogout;
+    private Button.DarkButton btnRequestOvertime;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblOvertimeHistory;
     // End of variables declaration//GEN-END:variables
 }

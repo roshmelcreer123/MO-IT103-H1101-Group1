@@ -1,25 +1,89 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Jframes;
-import org.jdatepicker.JDatePicker;
 
-/**
- *
- * @author User
- */
+import javax.swing.JOptionPane;
+import Classes.db;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+
 public class OvertimeRequest extends javax.swing.JFrame {
     private String userID;
 
-    /**
-     * Creates new form OvertimeRequest
-     */
     public OvertimeRequest(String userID) {
         this.userID = userID;
         initComponents();
+        fetchEmployeeDetails();
     }
 
+    private void fetchEmployeeDetails(){
+        try{
+            // Get the connection to the db database
+            Connection con = db.mycon();
+            
+            if(con != null){
+                
+                // Create a statement
+                Statement st = con.createStatement();
+                
+                // Execute a query to retrieve employee details based on userID
+                String query = "SELECT employeeID, CONCAT(firstName, ' ', lastName) as employeeName FROM user_accounts WHERE userID = '" + userID + "'";
+                ResultSet rs = st.executeQuery(query);
+                
+                // Set employeeName and userID in text field
+                if(rs.next()){
+                    txtEmployeeNumber.setText(rs.getString("employeeID"));
+                    txtEmployeeName.setText(rs.getString("employeeName"));
+                    }
+                // Close the connection
+                rs.close();
+                st.close();
+                con.close();
+                
+            }else{
+                System.out.println("Database connection failed!");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }
+    
+   private void updateTotalHours() {
+    Date startTime = (Date) txtStartTime.getValue();
+    Date endTime = (Date) txtEndTime.getValue();
+    
+    if (startTime != null && endTime != null) {
+        // Convert Date to Instant
+        Instant startInstant = startTime.toInstant();
+        Instant endInstant = endTime.toInstant();
+        
+        // Calculate the duration in seconds
+        long durationSeconds = Duration.between(startInstant, endInstant).getSeconds();
+        
+        if (durationSeconds < 0) {
+            txtTotalHours.setText("Invalid time range");
+        } else {
+            // Calculate hours and minutes from duration in seconds
+            long hours = durationSeconds / 3600;
+            long minutes = (durationSeconds % 3600) / 60; // Remaining minutes
+            
+            // Format the total hours as "(hours) hrs, (minutes) mins"
+            String totalHours = hours + " hrs, " + minutes + " mins";
+            txtTotalHours.setText(totalHours);
+        }
+    } else {
+        // Handle null values (optional based on your application logic)
+        txtTotalHours.setText("");
+    }
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,200 +93,290 @@ public class OvertimeRequest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        darkButton2 = new Button.DarkButton();
-        button1 = new Button.Button();
-        darkButton1 = new Button.DarkButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel11 = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jSpinner3 = new javax.swing.JSpinner();
-        jLabel14 = new javax.swing.JLabel();
-        jSpinner4 = new javax.swing.JSpinner();
-        jLabel15 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jLabel16 = new javax.swing.JLabel();
+        btnSubmit = new Button.DarkButton();
+        btnClear = new Button.Button();
+        btnGoBack = new Button.DarkButton();
+        labelOvertimeDate = new javax.swing.JLabel();
+        txtOvertimeDate = new com.toedter.calendar.JDateChooser();
+        labelStartTime = new javax.swing.JLabel();
+        labelEndTime = new javax.swing.JLabel();
+        labelTotalHours = new javax.swing.JLabel();
+        txtTotalHours = new javax.swing.JFormattedTextField();
+        labelReason = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
-        darkButton3 = new Button.DarkButton();
-        button2 = new Button.Button();
-        button3 = new Button.Button();
-        jLabel2 = new javax.swing.JLabel();
+        txtReason = new javax.swing.JTextArea();
+        btnAttachFile = new Button.DarkButton();
+        btnDashboard = new Button.Button();
+        btnLogout = new Button.Button();
+        labelEmployeeNumber = new javax.swing.JLabel();
+        txtEmployeeNumber = new javax.swing.JLabel();
+        labelEmployeeName = new javax.swing.JLabel();
+        txtEmployeeName = new javax.swing.JLabel();
+        // Initialize the start time spinner
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 16); // Set to 4 PM
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        Date startTime = calendar.getTime();
+
+        SpinnerDateModel smStart = new SpinnerDateModel(startTime, null, null, Calendar.HOUR_OF_DAY);
+        txtStartTime = new javax.swing.JSpinner(smStart);
+        calendar.set(Calendar.HOUR_OF_DAY, 16); // Reset calendar to 4 PM
+        Date endTime = calendar.getTime();
+        SpinnerDateModel smEnd = new SpinnerDateModel(endTime, null, null, Calendar.HOUR_OF_DAY);
+        txtEndTime = new javax.swing.JSpinner(smEnd);
+        Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1040, 590));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        darkButton2.setText("Submit");
-        darkButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                darkButton2ActionPerformed(evt);
+                btnSubmitActionPerformed(evt);
             }
         });
-        getContentPane().add(darkButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 500, -1, -1));
+        getContentPane().add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, 160, -1));
 
-        button1.setText("Cancel");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                btnClearActionPerformed(evt);
             }
         });
-        getContentPane().add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 500, -1, -1));
+        getContentPane().add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, 160, -1));
 
-        darkButton1.setText("Go Back");
-        darkButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGoBack.setText("Go Back");
+        btnGoBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                darkButton1ActionPerformed(evt);
+                btnGoBackActionPerformed(evt);
             }
         });
-        getContentPane().add(darkButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, -1, -1));
+        getContentPane().add(btnGoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 90, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel7.setText("Overtime Date:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
+        labelOvertimeDate.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelOvertimeDate.setText("Overtime Date:");
+        getContentPane().add(labelOvertimeDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, -1, 20));
+        getContentPane().add(txtOvertimeDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 260, -1));
 
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Request Overtime");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 85, -1, -1));
-        getContentPane().add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 290, -1));
+        labelStartTime.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelStartTime.setText("Start Time: ");
+        getContentPane().add(labelStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, 20));
 
-        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel9.setText("Start Time: ");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, -1, -1));
+        labelEndTime.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelEndTime.setText("End Time: ");
+        getContentPane().add(labelEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, -1, 20));
 
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 206, 209));
-        jLabel10.setText("HH:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+        labelTotalHours.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelTotalHours.setText("Total Time:");
+        getContentPane().add(labelTotalHours, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
-        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
-
-        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 206, 209));
-        jLabel11.setText("MM:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
-
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
-        getContentPane().add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, -1, -1));
-
-        jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel12.setText("End Time: ");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, -1));
-
-        jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 206, 209));
-        jLabel13.setText("HH:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, -1, -1));
-
-        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
-        getContentPane().add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
-
-        jLabel14.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 206, 209));
-        jLabel14.setText("MM:");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
-
-        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
-        getContentPane().add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, -1));
-
-        jLabel15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel15.setText("Total Hours:");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
-
-        jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jFormattedTextField1.setText("00.00");
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtTotalHours.setEditable(false);
+        txtTotalHours.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtTotalHours.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
+                txtTotalHoursActionPerformed(evt);
             }
         });
-        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 120, -1));
+        getContentPane().add(txtTotalHours, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 120, -1));
 
-        jLabel16.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel16.setText("Reason:");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
+        labelReason.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelReason.setText("Reason:");
+        getContentPane().add(labelReason, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, -1, -1));
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setForeground(new java.awt.Color(153, 153, 153));
-        jTextArea2.setRows(5);
-        jTextArea2.setText("Enter a reason for overtime here.");
-        jScrollPane2.setViewportView(jTextArea2);
+        txtReason.setColumns(20);
+        txtReason.setForeground(new java.awt.Color(153, 153, 153));
+        txtReason.setRows(5);
+        txtReason.setName(""); // NOI18N
+        jScrollPane2.setViewportView(txtReason);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 340, 310, 140));
-        getContentPane().add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 410, 300));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 310, 150));
 
-        darkButton3.setBackground(new java.awt.Color(120, 121, 123));
-        darkButton3.setForeground(new java.awt.Color(0, 0, 0));
-        darkButton3.setText("Attach File");
-        getContentPane().add(darkButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, -1, -1));
-
-        button2.setText("Dashboard");
-        button2.addActionListener(new java.awt.event.ActionListener() {
+        btnAttachFile.setBackground(new java.awt.Color(120, 121, 123));
+        btnAttachFile.setForeground(new java.awt.Color(0, 0, 0));
+        btnAttachFile.setText("Attach File");
+        btnAttachFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
+                btnAttachFileActionPerformed(evt);
             }
         });
-        getContentPane().add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
+        getContentPane().add(btnAttachFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 410, -1, -1));
 
-        button3.setText("Logout");
-        button3.addActionListener(new java.awt.event.ActionListener() {
+        btnDashboard.setText("Dashboard");
+        btnDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
+                btnDashboardActionPerformed(evt);
             }
         });
-        getContentPane().add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
+        getContentPane().add(btnDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, 30));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/For Other Pages.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 580));
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
+
+        labelEmployeeNumber.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelEmployeeNumber.setText("Employee No:");
+        getContentPane().add(labelEmployeeNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, -1, 20));
+
+        txtEmployeeNumber.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtEmployeeNumber.setText("Employee Number");
+        getContentPane().add(txtEmployeeNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+
+        labelEmployeeName.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        labelEmployeeName.setText("Employee Name:");
+        getContentPane().add(labelEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, 20));
+
+        txtEmployeeName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtEmployeeName.setText("Employee Name");
+        getContentPane().add(txtEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, -1));
+
+        JSpinner.DateEditor deStart = new JSpinner.DateEditor(txtStartTime, "HH:mm:ss");
+        txtStartTime.setEditor(deStart);
+        txtStartTime.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                updateTotalHours();
+            }
+        });
+        getContentPane().add(txtStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 260, -1));
+
+        JSpinner.DateEditor deEnd = new JSpinner.DateEditor(txtEndTime, "HH:mm:ss");
+        txtEndTime.setEditor(deEnd);
+        txtEndTime.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                updateTotalHours();
+            }
+        });
+        getContentPane().add(txtEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 260, -1));
+
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RequestOvertimeBackground.png"))); // NOI18N
+        getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+    private void txtTotalHoursActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalHoursActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+    }//GEN-LAST:event_txtTotalHoursActionPerformed
 
-    private void darkButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton1ActionPerformed
-
+    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
+        // TODO add your handling code here:
         OvertimeRequestHistory OvertimeRequest = new OvertimeRequestHistory(userID);
         OvertimeRequest.setVisible(true);
-        this.dispose(); 
-        
-    }//GEN-LAST:event_darkButton1ActionPerformed
+        this.dispose();     
+    }//GEN-LAST:event_btnGoBackActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button1ActionPerformed
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // Clear all inputs so that user won't manually clear each box and calendar.
+        txtOvertimeDate.setDate(null);
+        txtStartTime.setValue(new Date());
+        txtEndTime.setValue(new Date());
+        txtTotalHours.setText("");
+        txtReason.setText("");
+    }//GEN-LAST:event_btnClearActionPerformed
 
-    private void darkButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_darkButton2ActionPerformed
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+    // Getting the data from the form fields
+    String employeeID = txtEmployeeNumber.getText();
+    String employeeName = txtEmployeeName.getText();
+    
+    // Get the dates from the spinners
+    Date utilStartTime = (Date) txtStartTime.getValue();
+    Date utilEndTime = (Date) txtEndTime.getValue();
+    
+    // Format times for SQL TIME format
+    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+    String startTime = timeFormat.format(utilStartTime);
+    String endTime = timeFormat.format(utilEndTime);
+    
+    String totalHours = txtTotalHours.getText();
+    String reason = txtReason.getText();
+    LocalDate currentDate = LocalDate.now(); // Get current date
+    Timestamp requestedDate = Timestamp.valueOf(LocalDateTime.now()); // Get current timestamp
+    
+    // SQL query to input data into overtime_requests database        
+    try {
+        Statement st = db.mycon().createStatement();
+        st.executeUpdate("INSERT INTO overtime_requests (employeeID, employeeName, overtimeDate, startTime, endTime, totalHours, reason, status, requestedDate)" 
+                + " VALUES ('" + employeeID + "','" + employeeName + "', CURDATE(), '" + startTime + "', '" + endTime + "', '" + totalHours + "', '" + reason + "', 'Pending', '" + requestedDate + "')");
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // Show a confirmation message to notify the user when an overtime request is successful
+        JOptionPane.showMessageDialog(this, "Request sent successfully. Wait for approval", "Overtime Request", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+    
+    // Clear all inputs like clear button
+    txtOvertimeDate.setDate(null);
+    txtStartTime.setValue(new Date()); // Reset start time to current time
+    txtEndTime.setValue(new Date()); // Reset end time to current time
+    txtTotalHours.setText("");
+    txtReason.setText("");
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
         // Create an instance of the Dashboard frame
         HomeDashboard dashboard = new HomeDashboard(userID);
         // Set the visibility of the Dashboard frame to true
         dashboard.setVisible(true);
         // Close the Overtime Request frame
         this.dispose(); // Assuming this is the Login frame
-    }//GEN-LAST:event_button2ActionPerformed
+    }//GEN-LAST:event_btnDashboardActionPerformed
 
-    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // Create an instance of LoginNew and display it
         LogInNew loginNew = new LogInNew();
         loginNew.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_button3ActionPerformed
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void txtEndTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEndTimeActionPerformed
+
+    }//GEN-LAST:event_txtEndTimeActionPerformed
+
+    private void txtStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStartTimeActionPerformed
+
+    }//GEN-LAST:event_txtStartTimeActionPerformed
+
+    private void btnStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartTimeActionPerformed
+
+    }//GEN-LAST:event_btnStartTimeActionPerformed
+
+    private void btnEndTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTimeActionPerformed
+
+    }//GEN-LAST:event_btnEndTimeActionPerformed
+
+    private void btnAttachFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttachFileActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "File attached successfully.", "Attach File", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnAttachFileActionPerformed
+    
+    public void setStartTime(Date date) {
+        txtStartTime.setValue(date);
+    }
+
+    // Method to get start time
+    public Date getStartTime() {
+        return (Date) txtStartTime.getValue();
+    }
+
+    // Method to set end time
+    public void setEndTime(Date date) {
+        txtEndTime.setValue(date);
+    }
+
+    // Method to get end time
+    public Date getEndTime() {
+        return (Date) txtEndTime.getValue();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -253,37 +407,33 @@ public class OvertimeRequest extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+                new OvertimeRequest("userID").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Button.Button button1;
-    private Button.Button button2;
-    private Button.Button button3;
-    private Button.DarkButton darkButton1;
-    private Button.DarkButton darkButton2;
-    private Button.DarkButton darkButton3;
-    private com.toedter.calendar.JCalendar jCalendar1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel Background;
+    private Button.DarkButton btnAttachFile;
+    private Button.Button btnClear;
+    private Button.Button btnDashboard;
+    private Button.DarkButton btnGoBack;
+    private Button.Button btnLogout;
+    private Button.DarkButton btnSubmit;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JLabel labelEmployeeName;
+    private javax.swing.JLabel labelEmployeeNumber;
+    private javax.swing.JLabel labelEndTime;
+    private javax.swing.JLabel labelOvertimeDate;
+    private javax.swing.JLabel labelReason;
+    private javax.swing.JLabel labelStartTime;
+    private javax.swing.JLabel labelTotalHours;
+    private javax.swing.JLabel txtEmployeeName;
+    private javax.swing.JLabel txtEmployeeNumber;
+    private javax.swing.JSpinner txtEndTime;
+    private com.toedter.calendar.JDateChooser txtOvertimeDate;
+    private javax.swing.JTextArea txtReason;
+    private javax.swing.JSpinner txtStartTime;
+    private javax.swing.JFormattedTextField txtTotalHours;
     // End of variables declaration//GEN-END:variables
 }
