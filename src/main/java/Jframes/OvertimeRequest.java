@@ -1,17 +1,17 @@
 package Jframes;
 
-import com.raven.swing.TimePicker;
-import org.jdatepicker.JDatePicker;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.Duration;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import Classes.db;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 
 public class OvertimeRequest extends javax.swing.JFrame {
     private String userID;
@@ -19,51 +19,7 @@ public class OvertimeRequest extends javax.swing.JFrame {
     public OvertimeRequest(String userID) {
         this.userID = userID;
         initComponents();
-        addTimePickerListeners(); // Add event listeners after initializing components
         fetchEmployeeDetails();
-    }
-
-    private void calculateTimeDifference() {
-    try {
-        // Assuming clockStartTime and clockEndTime are the time picker components
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
-
-        // Retrieve start time and end time from time pickers
-        String startTimeStr = clockStartTime.getSelectedTime();
-        String endTimeStr = clockEndTime.getSelectedTime();
-
-        // Parse the times
-        LocalTime startTime = LocalTime.parse(startTimeStr, formatter);
-        LocalTime endTime = LocalTime.parse(endTimeStr, formatter);
-
-        // Calculate the difference
-        Duration duration = Duration.between(startTime, endTime);
-        long hours = duration.toHours();
-        long minutes = duration.toMinutes() % 60;
-
-        // Display the result in txtTotalHours
-        txtTotalHours.setText(String.format("%02d hrs, %02d mins", hours, minutes));
-    } catch (Exception e) {
-        e.printStackTrace();
-        txtTotalHours.setText("Invalid Time");
-        }
-    }
-    
-    private void addTimePickerListeners() {
-        // Add action listeners to the time picker components
-        clockStartTime.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                calculateTimeDifference();
-            }
-        });
-
-        clockEndTime.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                calculateTimeDifference();
-            }
-        });
     }
 
     private void fetchEmployeeDetails(){
@@ -99,6 +55,35 @@ public class OvertimeRequest extends javax.swing.JFrame {
         
     }
     
+   private void updateTotalHours() {
+    Date startTime = (Date) txtStartTime.getValue();
+    Date endTime = (Date) txtEndTime.getValue();
+    
+    if (startTime != null && endTime != null) {
+        // Convert Date to Instant
+        Instant startInstant = startTime.toInstant();
+        Instant endInstant = endTime.toInstant();
+        
+        // Calculate the duration in seconds
+        long durationSeconds = Duration.between(startInstant, endInstant).getSeconds();
+        
+        if (durationSeconds < 0) {
+            txtTotalHours.setText("Invalid time range");
+        } else {
+            // Calculate hours and minutes from duration in seconds
+            long hours = durationSeconds / 3600;
+            long minutes = (durationSeconds % 3600) / 60; // Remaining minutes
+            
+            // Format the total hours as "(hours) hrs, (minutes) mins"
+            String totalHours = hours + " hrs, " + minutes + " mins";
+            txtTotalHours.setText(totalHours);
+        }
+    } else {
+        // Handle null values (optional based on your application logic)
+        txtTotalHours.setText("");
+    }
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,8 +93,6 @@ public class OvertimeRequest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        clockStartTime = new com.raven.swing.TimePicker();
-        clockEndTime = new com.raven.swing.TimePicker();
         btnSubmit = new Button.DarkButton();
         btnClear = new Button.Button();
         btnGoBack = new Button.DarkButton();
@@ -125,21 +108,24 @@ public class OvertimeRequest extends javax.swing.JFrame {
         btnAttachFile = new Button.DarkButton();
         btnDashboard = new Button.Button();
         btnLogout = new Button.Button();
-        txtStartTime = new javax.swing.JTextField();
-        txtEndTime = new javax.swing.JTextField();
-        btnEndTime = new javax.swing.JButton();
-        btnStartTime = new javax.swing.JButton();
         labelEmployeeNumber = new javax.swing.JLabel();
         txtEmployeeNumber = new javax.swing.JLabel();
         labelEmployeeName = new javax.swing.JLabel();
         txtEmployeeName = new javax.swing.JLabel();
+        // Initialize the start time spinner
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 16); // Set to 4 PM
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        Date startTime = calendar.getTime();
+
+        SpinnerDateModel smStart = new SpinnerDateModel(startTime, null, null, Calendar.HOUR_OF_DAY);
+        txtStartTime = new javax.swing.JSpinner(smStart);
+        calendar.set(Calendar.HOUR_OF_DAY, 16); // Reset calendar to 4 PM
+        Date endTime = calendar.getTime();
+        SpinnerDateModel smEnd = new SpinnerDateModel(endTime, null, null, Calendar.HOUR_OF_DAY);
+        txtEndTime = new javax.swing.JSpinner(smEnd);
         Background = new javax.swing.JLabel();
-
-        clockStartTime.setForeground(new java.awt.Color(0, 153, 153));
-        clockStartTime.setDisplayText(txtStartTime);
-
-        clockEndTime.setForeground(new java.awt.Color(0, 153, 153));
-        clockEndTime.setDisplayText(txtEndTime);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1040, 590));
@@ -234,40 +220,6 @@ public class OvertimeRequest extends javax.swing.JFrame {
         });
         getContentPane().add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, -1, 30));
 
-        txtStartTime.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        txtStartTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStartTimeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 120, 20));
-
-        txtEndTime.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        txtEndTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEndTimeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 120, 20));
-
-        btnEndTime.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        btnEndTime.setText("Choose End Time");
-        btnEndTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEndTimeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, 130, -1));
-
-        btnStartTime.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        btnStartTime.setText("Choose Start Time");
-        btnStartTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStartTimeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, 130, -1));
-
         labelEmployeeNumber.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         labelEmployeeNumber.setText("Employee No:");
         getContentPane().add(labelEmployeeNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, -1, 20));
@@ -283,6 +235,24 @@ public class OvertimeRequest extends javax.swing.JFrame {
         txtEmployeeName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtEmployeeName.setText("Employee Name");
         getContentPane().add(txtEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, -1));
+
+        JSpinner.DateEditor deStart = new JSpinner.DateEditor(txtStartTime, "HH:mm:ss");
+        txtStartTime.setEditor(deStart);
+        txtStartTime.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                updateTotalHours();
+            }
+        });
+        getContentPane().add(txtStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 260, -1));
+
+        JSpinner.DateEditor deEnd = new JSpinner.DateEditor(txtEndTime, "HH:mm:ss");
+        txtEndTime.setEditor(deEnd);
+        txtEndTime.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                updateTotalHours();
+            }
+        });
+        getContentPane().add(txtEndTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 260, -1));
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RequestOvertimeBackground.png"))); // NOI18N
         getContentPane().add(Background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 590));
@@ -305,45 +275,50 @@ public class OvertimeRequest extends javax.swing.JFrame {
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // Clear all inputs so that user won't manually clear each box and calendar.
         txtOvertimeDate.setDate(null);
-        txtStartTime.setText("");
-        txtEndTime.setText("");
+        txtStartTime.setValue(new Date());
+        txtEndTime.setValue(new Date());
         txtTotalHours.setText("");
         txtReason.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        // Getting the data from the form fields
-        String employeeID = txtEmployeeNumber.getText();
-        String employeeName = txtEmployeeName.getText();
-        java.util.Date utilDate = txtOvertimeDate.getDate();
-        Date overtimeDate = new Date(utilDate.getTime());
-        String startTime = txtStartTime.getText();
-        String endTime = txtEndTime.getText();
-        String totalHours = txtTotalHours.getText();
-        String reason = txtReason.getText();
-        LocalDate currentDate = LocalDate.now(); // Get current date
-        Timestamp requestedDate = Timestamp.valueOf(LocalDateTime.now()); // Get current timestamp
-        
-        // SQL query to input data into overtime_requests database        
-        try{
-            
-            Statement st = db.mycon().createStatement();
-            st.executeUpdate("INSERT INTO overtime_requests (employeeID,employeeName,overtimeDate,startTime,endTime,totalHours,reason,status,requestedDate)" 
-                    + "VALUES('"+employeeID+"','"+employeeName+"','"+overtimeDate+"','"+startTime+"','"+endTime+"','"+totalHours+"','"+reason+"', 'Pending','"+requestedDate+"')");
-            
+    // Getting the data from the form fields
+    String employeeID = txtEmployeeNumber.getText();
+    String employeeName = txtEmployeeName.getText();
+    
+    // Get the dates from the spinners
+    Date utilStartTime = (Date) txtStartTime.getValue();
+    Date utilEndTime = (Date) txtEndTime.getValue();
+    
+    // Format times for SQL TIME format
+    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+    String startTime = timeFormat.format(utilStartTime);
+    String endTime = timeFormat.format(utilEndTime);
+    
+    String totalHours = txtTotalHours.getText();
+    String reason = txtReason.getText();
+    LocalDate currentDate = LocalDate.now(); // Get current date
+    Timestamp requestedDate = Timestamp.valueOf(LocalDateTime.now()); // Get current timestamp
+    
+    // SQL query to input data into overtime_requests database        
+    try {
+        Statement st = db.mycon().createStatement();
+        st.executeUpdate("INSERT INTO overtime_requests (employeeID, employeeName, overtimeDate, startTime, endTime, totalHours, reason, status, requestedDate)" 
+                + " VALUES ('" + employeeID + "','" + employeeName + "', CURDATE(), '" + startTime + "', '" + endTime + "', '" + totalHours + "', '" + reason + "', 'Pending', '" + requestedDate + "')");
+
         // Show a confirmation message to notify the user when an overtime request is successful
-            JOptionPane.showMessageDialog(this, "Request sent successfully. Wait for approval", "Overtime Request", JOptionPane.INFORMATION_MESSAGE);
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        // Clear all inputs like clear button
-        txtOvertimeDate.setDate(null);
-        txtStartTime.setText("");
-        txtEndTime.setText("");
-        txtTotalHours.setText("");
-        txtReason.setText("");
+        JOptionPane.showMessageDialog(this, "Request sent successfully. Wait for approval", "Overtime Request", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch(Exception e) {
+        e.printStackTrace();
+    }
+    
+    // Clear all inputs like clear button
+    txtOvertimeDate.setDate(null);
+    txtStartTime.setValue(new Date()); // Reset start time to current time
+    txtEndTime.setValue(new Date()); // Reset end time to current time
+    txtTotalHours.setText("");
+    txtReason.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDashboardActionPerformed
@@ -363,30 +338,45 @@ public class OvertimeRequest extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void txtEndTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEndTimeActionPerformed
-        // Call calculateTimeDifference when start time is set
-        calculateTimeDifference();
+
     }//GEN-LAST:event_txtEndTimeActionPerformed
 
     private void txtStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStartTimeActionPerformed
-        // Call calculateTimeDifference when start time is set
-        calculateTimeDifference();
+
     }//GEN-LAST:event_txtStartTimeActionPerformed
-   
+
     private void btnStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartTimeActionPerformed
-        // TODO add your handling code here:
-        clockStartTime.showPopup(this, 100, 100);
+
     }//GEN-LAST:event_btnStartTimeActionPerformed
 
     private void btnEndTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndTimeActionPerformed
-        // TODO add your handling code here:
-        clockEndTime.showPopup(this, 100, 100);
+
     }//GEN-LAST:event_btnEndTimeActionPerformed
 
     private void btnAttachFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttachFileActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "File attached successfully.", "Attach File", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAttachFileActionPerformed
+    
+    public void setStartTime(Date date) {
+        txtStartTime.setValue(date);
+    }
 
+    // Method to get start time
+    public Date getStartTime() {
+        return (Date) txtStartTime.getValue();
+    }
+
+    // Method to set end time
+    public void setEndTime(Date date) {
+        txtEndTime.setValue(date);
+    }
+
+    // Method to get end time
+    public Date getEndTime() {
+        return (Date) txtEndTime.getValue();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -427,13 +417,9 @@ public class OvertimeRequest extends javax.swing.JFrame {
     private Button.DarkButton btnAttachFile;
     private Button.Button btnClear;
     private Button.Button btnDashboard;
-    private javax.swing.JButton btnEndTime;
     private Button.DarkButton btnGoBack;
     private Button.Button btnLogout;
-    private javax.swing.JButton btnStartTime;
     private Button.DarkButton btnSubmit;
-    private com.raven.swing.TimePicker clockEndTime;
-    private com.raven.swing.TimePicker clockStartTime;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelEmployeeName;
     private javax.swing.JLabel labelEmployeeNumber;
@@ -444,10 +430,10 @@ public class OvertimeRequest extends javax.swing.JFrame {
     private javax.swing.JLabel labelTotalHours;
     private javax.swing.JLabel txtEmployeeName;
     private javax.swing.JLabel txtEmployeeNumber;
-    private javax.swing.JTextField txtEndTime;
+    private javax.swing.JSpinner txtEndTime;
     private com.toedter.calendar.JDateChooser txtOvertimeDate;
     private javax.swing.JTextArea txtReason;
-    private javax.swing.JTextField txtStartTime;
+    private javax.swing.JSpinner txtStartTime;
     private javax.swing.JFormattedTextField txtTotalHours;
     // End of variables declaration//GEN-END:variables
 }
